@@ -1,0 +1,21 @@
+# Whitelist .gitignore — only financial statement HTML files are tracked.
+# Everything else stays local (notes, portfolio, position, scripts, dashboard,
+# news, charts, _build artifacts, prompts, templates, README, etc.)
+
+# Default: ignore everything at every level
+/*
+
+# Allow config files at root
+!/.gitignore
+!/.nojekyll
+
+# Allow the tickers tree, but inside it only financials/html/*.html
+!/tickers/
+/tickers/*
+!/tickers/*/
+/tickers/*/*
+!/tickers/*/financials/
+/tickers/*/financials/*
+!/tickers/*/financials/html/
+/tickers/*/financials/html/*
+!/tickers/*/financials/html/*.html

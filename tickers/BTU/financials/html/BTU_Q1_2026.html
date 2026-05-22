@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peabody Energy (BTU) — 2026년 1분기 재무제표</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#f5efe0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#e4d9d5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#e4ded5;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#e0d5bc}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-badge">Form 8-K · May 5, 2026</div>
+  <h1><span>Peabody Energy</span> <span style="color:#a0937f;font-weight:400;">(NYSE: BTU)</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">2026년 1분기 재무제표 (Quarter Ended March 31, 2026)</h1>
+  <div class="subtitle">Centurion 1Mt 가이던스 컷 · Adj EBITDA $82.5M (-43% YoY) · 메트 segment 적자 전환 · 주가 -6.4%</div>
+</div>
+
+<!-- ============ TAB BAR ============ -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+  <button class="tab-btn" onclick="switchTab('seg', this)"><span class="tab-icon">⛏️</span>사업부별 실적</button>
+</div>
+
+<!-- ============ TAB: BALANCE SHEET ============ -->
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Balance Sheets</h2>
+    <div class="stmt-sub">As of March 31, 2026 and December 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Mar 31, 2026</th><th>Dec 31, 2025</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">자산 (Assets)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">Cash and Cash Equivalents</span></td><td>$ 492.5</td><td>$ 575.3</td><td class="neg-change">-14.4%</td></tr>
+      <tr class="indent"><td>Accounts Receivable, Net</td><td>309.5</td><td>314.9</td><td class="neg-change">-1.7%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="inventory">Inventories, Net</span></td><td>405.5</td><td>383.2</td><td class="pos-change">+5.8%</td></tr>
+      <tr class="indent"><td>Other Current Assets</td><td>303.8</td><td>285.4</td><td class="pos-change">+6.4%</td></tr>
+      <tr class="subtotal"><td>Total Current Assets</td><td>1,511.3</td><td>1,558.8</td><td class="neg-change">-3.0%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ppe">Property, Plant, Equipment and Mine Development, Net</span></td><td>3,129.9</td><td>3,153.3</td><td class="neg-change">-0.7%</td></tr>
+      <tr class="indent"><td>Operating Lease Right-of-Use Assets</td><td>128.9</td><td>121.2</td><td class="pos-change">+6.4%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="restricted">Restricted Cash and Collateral</span></td><td>811.3</td><td>844.1</td><td class="neg-change">-3.9%</td></tr>
+      <tr class="indent"><td>Investments and Other Assets</td><td>126.3</td><td>127.6</td><td class="neg-change">-1.0%</td></tr>
+      <tr class="indent"><td>Deferred Income Taxes</td><td>2.3</td><td>2.2</td><td class="pos-change">+4.5%</td></tr>
+      <tr class="grand-total"><td>Total Assets</td><td>$ 5,710.0</td><td>$ 5,807.2</td><td class="neg-change">-1.7%</td></tr>
+
+      <tr class="section-head"><td colspan="4">부채 (Liabilities)</td></tr>
+      <tr class="indent"><td>Current Portion of Long-Term Debt</td><td>$ 14.3</td><td>$ 15.2</td><td class="neg-change">-5.9%</td></tr>
+      <tr class="indent"><td>Accounts Payable and Accrued Expenses</td><td>795.6</td><td>827.0</td><td class="neg-change">-3.8%</td></tr>
+      <tr class="subtotal"><td>Total Current Liabilities</td><td>809.9</td><td>842.2</td><td class="neg-change">-3.8%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltdebt">Long-Term Debt, Less Current Portion</span></td><td>320.9</td><td>321.2</td><td class="neg-change">-0.1%</td></tr>
+      <tr class="indent"><td>Deferred Income Taxes</td><td>3.5</td><td>26.3</td><td class="neg-change">-86.7%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="aro">Asset Retirement Obligations, Less Current Portion</span></td><td>694.4</td><td>692.8</td><td class="pos-change">+0.2%</td></tr>
+      <tr class="indent"><td>Accrued Postretirement Benefit Costs</td><td>108.8</td><td>109.2</td><td class="neg-change">-0.4%</td></tr>
+      <tr class="indent"><td>Operating Lease Liabilities, Less Current Portion</td><td>94.4</td><td>87.5</td><td class="pos-change">+7.9%</td></tr>
+      <tr class="indent"><td>Other Noncurrent Liabilities</td><td>138.0</td><td>145.8</td><td class="neg-change">-5.4%</td></tr>
+      <tr class="subtotal"><td>Total Liabilities</td><td>2,169.9</td><td>2,225.0</td><td class="neg-change">-2.5%</td></tr>
+
+      <tr class="section-head"><td colspan="4">자본 (Stockholders' Equity)</td></tr>
+      <tr class="indent"><td>Common Stock</td><td>1.9</td><td>1.9</td><td>—</td></tr>
+      <tr class="indent"><td>Additional Paid-in Capital</td><td>4,010.3</td><td>4,004.8</td><td class="pos-change">+0.1%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="treasury">Treasury Stock</span></td><td class="neg">(1,930.6)</td><td class="neg">(1,927.3)</td><td>—</td></tr>
+      <tr class="indent"><td>Retained Earnings</td><td>1,314.2</td><td>1,355.9</td><td class="neg-change">-3.1%</td></tr>
+      <tr class="indent"><td>Accumulated Other Comprehensive Income</td><td>99.4</td><td>101.1</td><td class="neg-change">-1.7%</td></tr>
+      <tr class="subtotal"><td>Peabody Stockholders' Equity</td><td>3,495.2</td><td>3,536.4</td><td class="neg-change">-1.2%</td></tr>
+      <tr class="indent"><td>Noncontrolling Interests</td><td>44.9</td><td>45.8</td><td class="neg-change">-2.0%</td></tr>
+      <tr class="subtotal"><td>Total Stockholders' Equity</td><td>3,540.1</td><td>3,582.2</td><td class="neg-change">-1.2%</td></tr>
+      <tr class="grand-total"><td>Total Liabilities and Stockholders' Equity</td><td>$ 5,710.0</td><td>$ 5,807.2</td><td class="neg-change">-1.7%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.prnewswire.com/news-releases/peabody-reports-results-for-the-quarter-ended-march-31-2026-302761987.html" target="_blank">Peabody Energy Q1 2026 Press Release (May 5, 2026)</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📋</span>재무상태표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">Net Cash Position</div>
+    <div class="card-value">+$157M</div>
+    <div class="card-desc">현금 $492.5M에서 총부채 $335.2M(단기+장기)을 차감한 순현금. YE2025 +$239M 대비 $82M 감소 — Q1 동안 FCF $(55)M + 배당 $(9)M + JV 순효과 등으로 현금 소진. 여전히 동종 석탄사 대비 보수적이나 1분기 만에 추세 변화 시작.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Leverage (D/E)</div>
+    <div class="card-value">9.5%</div>
+    <div class="card-desc">총부채 $335.2M / 자기자본 $3,540M. 거의 변화 없음. 챕터 11 졸업 이후 디레버리징 기조 유지. CFO도 콜에서 "fortress balance sheet"를 강조하며 환원보다 재무건전성 우선을 명시.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:9.5%;background:var(--green-accent)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Working Capital</div>
+    <div class="card-value">$701.4M</div>
+    <div class="card-desc">유동자산 $1,511M − 유동부채 $810M. YE2025 $717M 대비 -2.1%. 현금 $83M 감소가 주된 요인이지만 재고는 +$22M (Centurion 운영 개시로 비축 증가).</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">ARO 부담</div>
+    <div class="card-value">$694.4M</div>
+    <div class="card-desc">광산 복구 의무. Q1에 $1.6M 증가. 총부채 ($335M)의 2배 수준 — 금융부채보다 훨씬 큰 진짜 부담. 자유 사용 현금 $492M으로 충당 가능하지만 장기 cash drag.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Restricted Cash $811M (감소)</strong><br>
+    YE2025 $844M에서 $33M 감소. 주로 호주 광산 복구 보증과 워크컴프 보험 담보로 묶여 있으며 자유 사용 불가. "현금흐름표 기말 현금 $1,168M"은 BS 현금 $492M + Restricted $811M 등을 합한 숫자 — 실제 활용 가능 현금은 $492M만.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 자사주 매입 4분기째 정지</strong><br>
+    Treasury Stock $1,931M (YE2025 $1,927M에서 $3M 증가는 직원 stock 세금원천 회수). FY2024 $183M → 2025-2026 $0. CEO James Grech: 단기 환원보다 Centurion ramp 후 환원 회복 우선.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: INCOME STATEMENT ============ -->
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Operations</h2>
+    <div class="stmt-sub">Quarter Ended March 31, 2026 vs March 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:54%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">수익 및 비용</td></tr>
+      <tr class="indent"><td><span class="term" data-term="revenue">Revenue</span></td><td>$ 973.3</td><td>$ 937.0</td><td class="pos-change">+3.9%</td></tr>
+      <tr class="indent"><td>Operating Costs and Expenses</td><td>864.7</td><td>770.2</td><td class="neg-change">+12.3%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="dda">Depreciation, Depletion and Amortization</span></td><td>109.5</td><td>92.1</td><td class="neg-change">+18.9%</td></tr>
+      <tr class="indent"><td>Asset Retirement Obligation Expenses</td><td>13.6</td><td>13.6</td><td>—</td></tr>
+      <tr class="indent"><td>Selling and Administrative Expenses</td><td>31.6</td><td>23.6</td><td class="neg-change">+33.9%</td></tr>
+      <tr class="indent"><td>Restructuring Charges</td><td>1.1</td><td>1.7</td><td class="pos-change">-35.3%</td></tr>
+      <tr class="indent"><td>Costs Related to Terminated Acquisition</td><td>3.0</td><td>2.4</td><td class="neg-change">+25.0%</td></tr>
+      <tr class="indent"><td>Net Gain on Disposals</td><td class="neg">(11.7)</td><td class="neg">(5.2)</td><td class="pos-change">+125%</td></tr>
+      <tr class="indent"><td>Loss from Equity Affiliates</td><td>5.7</td><td>6.7</td><td class="pos-change">-14.9%</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="opprofit">Operating Profit (Loss)</span></td><td class="neg">(44.2)</td><td>31.9</td><td class="neg-change">적자전환</td></tr>
+
+      <tr class="section-head"><td colspan="4">비영업 및 세금</td></tr>
+      <tr class="indent"><td>Interest Expense, Net</td><td>10.7</td><td>11.5</td><td class="pos-change">-7.0%</td></tr>
+      <tr class="indent"><td>Interest Income</td><td class="neg">(13.1)</td><td class="neg">(15.4)</td><td>—</td></tr>
+      <tr class="indent"><td>Net Periodic Benefit Credit</td><td class="neg">(0.4)</td><td class="neg">(7.4)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Income (Loss) Before Income Taxes</td><td class="neg">(41.4)</td><td>43.2</td><td class="neg-change">적자전환</td></tr>
+      <tr class="indent"><td>Income Tax (Benefit) Provision</td><td class="neg">(16.0)</td><td>4.9</td><td>—</td></tr>
+      <tr class="subtotal"><td>Income (Loss) from Continuing Operations</td><td class="neg">(25.4)</td><td>38.3</td><td class="neg-change">적자전환</td></tr>
+      <tr class="indent"><td>Income (Loss) from Discontinued Operations</td><td class="neg">(0.2)</td><td class="neg">(0.3)</td><td>—</td></tr>
+      <tr class="indent"><td>Net Income (Loss)</td><td class="neg">(25.6)</td><td>38.0</td><td class="neg-change">적자전환</td></tr>
+      <tr class="indent"><td>Less: Noncontrolling Interests</td><td>6.8</td><td>3.6</td><td class="neg-change">+89%</td></tr>
+      <tr class="grand-total"><td>Net Income (Loss) Attributable to Common</td><td class="neg">$ (32.4)</td><td>$ 34.4</td><td class="neg-change">적자전환</td></tr>
+
+      <tr class="section-head"><td colspan="4">주요 지표</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ebitda">Adjusted EBITDA</span></td><td>$ 82.5</td><td>$ 144.0</td><td class="neg-change">-42.7%</td></tr>
+      <tr class="indent"><td>Diluted EPS (계속영업)</td><td class="neg">$ (0.26)</td><td>$ 0.27</td><td class="neg-change">적자전환</td></tr>
+      <tr class="indent"><td>Diluted EPS (보통주주 귀속)</td><td class="neg">$ (0.27)</td><td>$ 0.27</td><td class="neg-change">적자전환</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.prnewswire.com/news-releases/peabody-reports-results-for-the-quarter-ended-march-31-2026-302761987.html" target="_blank">Peabody Energy Q1 2026 Press Release (May 5, 2026)</a> · 컨센서스: <a href="https://markets.financialcontent.com/stocks/article/stockstory-2026-5-5-peabody-energy-nysebtu-reports-q1-cy2026-in-line-with-expectations-but-stock-drops" target="_blank">StockStory</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">Q1 2026 Result</div>
+    <div class="card-value" style="color:#c0392b">−$32.4M</div>
+    <div class="card-desc">전분기 순손실 전환. Q1 2025 순이익 $34.4M 대비 $66.8M 악화. 매출은 +3.9% YoY beat했지만 Op Costs +12.3%·DD&A +18.9%·SG&A +33.9% 모두 증가하며 마진 훼손. EPS $(0.27) vs 컨센 +$0.08 large miss.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Adjusted EBITDA</div>
+    <div class="card-value">−42.7%</div>
+    <div class="card-desc">$144.0M → $82.5M. 컨센 $129.5M 대비 -49.6% miss — 시장 충격의 핵심. 메트 segment 적자 (-$7M) + Centurion 롱월 commissioning 비용 $80M이 직격탄.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:57.3%;background:var(--red-glow)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Operating Loss</div>
+    <div class="card-value" style="color:#c0392b">−$44.2M</div>
+    <div class="card-desc">Q1 2025 +$31.9M에서 적자전환. Anglo termination 잔여비용은 $3M으로 축소(2025 $79M)됐지만, Centurion 롱월 commissioning 비용 + DD&A 증가 + SG&A 상승이 동시 발생.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Tax Benefit</div>
+    <div class="card-value">−$16.0M</div>
+    <div class="card-desc">전세계 손실로 세금 benefit 전환 (Q1 2025 +$4.9M provision). 적자 폭을 일부 완화. Q1 2026 effective tax rate 38.6% — 일반적 수준.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 GAAP 적자 vs CFO $30.6M</strong><br>
+    Q1 GAAP 적자 $(25.6)M에도 CFO는 $30.6M (양). DD&A $109.5M 비현금비용이 +$84M 효과로 흡수. 단 Q1 2025 CFO $120.5M 대비 -75% 감소 — 메트 segment 적자가 가장 큰 cash drag.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 EBITDA 컨센 50% miss의 원인 분해</strong><br>
+    예상 $129.5M vs 실제 $82.5M — 차이 $47M. 분해: ① 메트 EBITDA $(7)M (예상은 +$15-20M 추정) → 약 $25M 차이 ② Centurion 비용 약 $20M 추가 부담. 합쳐서 $47M 갭의 대부분 설명. 즉 시장은 Centurion delay 폭을 과소평가했음.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: CASH FLOW ============ -->
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Cash Flows</h2>
+    <div class="stmt-sub">Quarter Ended March 31, 2026 vs March 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:54%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">영업활동 현금흐름</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cfo">Net Cash Provided by Continuing Operations</span></td><td>$ 30.6</td><td>$ 120.5</td><td class="neg-change">-74.6%</td></tr>
+      <tr class="indent"><td>Net Cash Used in Discontinued Operations</td><td class="neg">(0.6)</td><td class="neg">(0.6)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Net Cash Provided by Operating Activities</td><td>30.0</td><td>119.9</td><td class="neg-change">-75.0%</td></tr>
+
+      <tr class="section-head"><td colspan="4">투자활동 현금흐름</td></tr>
+      <tr class="indent"><td><span class="term" data-term="capex">Additions to PP&E and Mine Development</span></td><td class="neg">(85.4)</td><td class="neg">(70.4)</td><td class="neg-change">+21.3%</td></tr>
+      <tr class="indent"><td>Changes in Accrued Expenses Related to CapEx</td><td class="neg">(37.1)</td><td class="neg">(38.6)</td><td>—</td></tr>
+      <tr class="indent"><td>Proceeds from Disposal of Assets</td><td>5.4</td><td>7.2</td><td class="neg-change">-25.0%</td></tr>
+      <tr class="indent"><td>Contributions to Joint Ventures</td><td class="neg">(165.6)</td><td class="neg">(138.3)</td><td class="neg-change">+19.7%</td></tr>
+      <tr class="indent"><td>Distributions from Joint Ventures</td><td>160.2</td><td>150.8</td><td class="pos-change">+6.2%</td></tr>
+      <tr class="indent"><td>Other, Net</td><td class="neg">(1.0)</td><td class="neg">(0.3)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Net Cash Used in Investing Activities</td><td class="neg">(123.5)</td><td class="neg">(89.6)</td><td class="neg-change">+37.8%</td></tr>
+
+      <tr class="section-head"><td colspan="4">재무활동 현금흐름</td></tr>
+      <tr class="indent"><td>Repayments of Long-Term Debt</td><td class="neg">(2.4)</td><td class="neg">(2.8)</td><td>—</td></tr>
+      <tr class="indent"><td>Debt Issuance / Deferred Financing Costs</td><td>—</td><td class="neg">(1.7)</td><td>—</td></tr>
+      <tr class="indent"><td><span class="term" data-term="buyback">Common Stock Repurchases</span></td><td>—</td><td>—</td><td>—</td></tr>
+      <tr class="indent"><td>Tax Withholding on Employee Stock</td><td class="neg">(3.3)</td><td class="neg">(0.8)</td><td>—</td></tr>
+      <tr class="indent"><td>Dividends Paid</td><td class="neg">(9.2)</td><td class="neg">(9.1)</td><td>flat</td></tr>
+      <tr class="indent"><td>Distributions to Noncontrolling Interests</td><td class="neg">(7.7)</td><td class="neg">(14.7)</td><td class="pos-change">-47.6%</td></tr>
+      <tr class="subtotal"><td>Net Cash Used in Financing Activities</td><td class="neg">(22.6)</td><td class="neg">(29.1)</td><td>—</td></tr>
+
+      <tr class="grand-total"><td>Net Change in Cash, Equivalents & Restricted Cash</td><td class="neg">(116.1)</td><td>1.2</td><td class="neg-change">대폭 감소</td></tr>
+      <tr class="indent"><td>Cash at Beginning of Period</td><td>1,284.5</td><td>1,382.6</td><td class="neg-change">-7.1%</td></tr>
+      <tr class="indent"><td>Cash at End of Period</td><td>$ 1,168.4</td><td>$ 1,383.8</td><td class="neg-change">-15.6%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.prnewswire.com/news-releases/peabody-reports-results-for-the-quarter-ended-march-31-2026-302761987.html" target="_blank">Peabody Energy Q1 2026 Press Release (May 5, 2026)</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">Q1 2026 Free Cash Flow</div>
+    <div class="card-value" style="color:#c0392b">−$54.8M</div>
+    <div class="card-desc">CFO $30.6M − CapEx $85.4M = −$54.8M. Q1 2025 +$50M 대비 음전환. Centurion commissioning 비용이 자본집행 + 영업현금 양쪽 모두에 동시 타격. FY2026 CapEx 가이던스 $340M 유지 — 분기 평균 $85M으로 Q1 진척 정상.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CapEx Intensity</div>
+    <div class="card-value">8.8%</div>
+    <div class="card-desc">CapEx $85.4M / 매출 $973M. Q1 2025 7.5% 대비 +1.3%p 상승. 그러나 FY2025 10.7%보다는 낮음 — 정상화 국면 진입. Q2-Q4 평균 $85M 유지 시 FY $340M 가이던스 정확.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CFO -75% YoY</div>
+    <div class="card-value">$30.6M</div>
+    <div class="card-desc">Q1 2025 $120.5M에서 $30.6M으로 급감. 메트 segment 적자 (-$7M EBITDA) + working capital 변동 + Op Costs 12% 증가가 동시에 작용. DD&A $109.5M 비현금비용으로 적자 흡수했지만 cash 창출력 분명 약화.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">주주환원</div>
+    <div class="card-value">$9.2M</div>
+    <div class="card-desc">Q1 dividend $0.075/share만 유지. 자사주 매입 4분기째 정지. 환원 페이스 연간 $37M 수준 — FY2024 $221M (배당 $38M + 자사주 $183M)에 비하면 -83%. CFO Mark Spurbeck: "fortress balance sheet 우선".</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 JV 현금흐름 (Q1 2026)</strong><br>
+    JV 출자 $165.6M vs 분배 $160.2M = 순 $(5.4)M. Q1 2025 (-$12.5M) 대비 개선. Middlemount, R3(Wilpinjong) 등 호주 JV에서 발생하는 회계적 현금 순환. 실질 투자 지출은 미미.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 '현금' 구조 (Q1말)</strong><br>
+    현금흐름표 기말 $1,168.4M = BS 현금 $492.5M + Restricted Cash $811.3M + 기타 $(135.4)M (Restricted current 포함 추정). YE2025 $1,284.5M에서 $116M 감소. <strong>자유 사용 가능 현금 $492.5M만</strong> 실제 운영·환원·M&A에 활용 가능.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: SEGMENTS ============ -->
+<div class="tab-content" id="tab-seg">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Segment Performance Summary</h2>
+    <div class="stmt-sub">Quarter Ended March 31, 2026 vs Q4 2025 vs Q1 2025</div>
+    <div class="stmt-unit">Tons in millions · $ per ton · Adj. EBITDA in $M</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:46%"></th><th>Q1 2026</th><th>Q4 2025</th><th>Q1 2025</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="seathermal">Seaborne Thermal</span> (해상 열탄)</td></tr>
+      <tr class="indent"><td>Tons Sold (M)</td><td>3.0</td><td>3.3</td><td>4.4</td></tr>
+      <tr class="indent2"><td>Export tons</td><td>1.9</td><td>2.1</td><td>2.9</td></tr>
+      <tr class="indent2"><td>Domestic tons</td><td>1.1</td><td>1.2</td><td>1.5</td></tr>
+      <tr class="indent"><td>Revenue / ton (avg)</td><td>$ 66.61</td><td>$ 62.84</td><td>$ 60.64</td></tr>
+      <tr class="indent"><td>Export Realized Price / ton</td><td>$ 86.25</td><td>$ 81.80</td><td>$ 79.39</td></tr>
+      <tr class="indent"><td>Domestic Realized Price / ton</td><td>$ 32.62</td><td>$ 25.92</td><td>$ 24.95</td></tr>
+      <tr class="indent"><td>Costs / ton</td><td>50.26</td><td>43.43</td><td>41.37</td></tr>
+      <tr class="indent"><td>EBITDA Margin / ton</td><td>$ 16.35</td><td>$ 19.41</td><td>$ 19.27</td></tr>
+      <tr class="indent"><td>Adjusted EBITDA ($M)</td><td>$ 48.5</td><td>$ 63.5</td><td>$ 84.2</td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="seamet">Seaborne Metallurgical</span> (해상 점결탄)</td></tr>
+      <tr class="indent"><td>Tons Sold (M)</td><td>2.0</td><td>2.5</td><td>1.8</td></tr>
+      <tr class="indent"><td>Revenue / ton</td><td>$ 138.28</td><td>$ 122.84</td><td>$ 125.15</td></tr>
+      <tr class="indent"><td>Costs / ton</td><td>141.72</td><td>112.94</td><td>117.66</td></tr>
+      <tr class="indent"><td>EBITDA Margin / ton</td><td class="neg">$ (3.44)</td><td>$ 9.90</td><td>$ 7.49</td></tr>
+      <tr class="indent"><td>Adjusted EBITDA ($M)</td><td class="neg">$ (7.0)</td><td>$ 24.6</td><td>$ 13.2</td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="prb">Powder River Basin</span> (미국 PRB)</td></tr>
+      <tr class="indent"><td>Tons Sold (M)</td><td>21.2</td><td>22.3</td><td>19.6</td></tr>
+      <tr class="indent"><td>Revenue / ton</td><td>$ 13.65</td><td>$ 13.44</td><td>$ 14.02</td></tr>
+      <tr class="indent"><td>Costs / ton</td><td>12.53</td><td>11.44</td><td>12.18</td></tr>
+      <tr class="indent"><td>EBITDA Margin / ton</td><td>$ 1.12</td><td>$ 2.00</td><td>$ 1.84</td></tr>
+      <tr class="indent"><td>Adjusted EBITDA ($M)</td><td>$ 23.7</td><td>$ 44.8</td><td>$ 36.3</td></tr>
+
+      <tr class="section-head"><td colspan="4">Other U.S. Thermal</td></tr>
+      <tr class="indent"><td>Tons Sold (M)</td><td>3.3</td><td>3.7</td><td>3.1</td></tr>
+      <tr class="indent"><td>Revenue / ton</td><td>$ 55.79</td><td>$ 51.64</td><td>$ 54.32</td></tr>
+      <tr class="indent"><td>Costs / ton</td><td>44.37</td><td>46.77</td><td>43.71</td></tr>
+      <tr class="indent"><td>EBITDA Margin / ton</td><td>$ 11.42</td><td>$ 4.87</td><td>$ 10.61</td></tr>
+      <tr class="indent"><td>Adjusted EBITDA ($M)</td><td>$ 37.8</td><td>$ 18.1</td><td>$ 32.9</td></tr>
+
+      <tr class="grand-total"><td>Total Tons Sold (M)</td><td>29.5</td><td>31.8</td><td>28.9</td></tr>
+      <tr class="grand-total"><td>Segment Adjusted EBITDA Total ($M)</td><td>$ 103.0</td><td>$ 151.0</td><td>$ 166.6</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.prnewswire.com/news-releases/peabody-reports-results-for-the-quarter-ended-march-31-2026-302761987.html" target="_blank">Peabody Energy Q1 2026 Press Release (May 5, 2026)</a><br>
+    <em>주의: Segment EBITDA 합계 ($103M)에서 본사 비용 차감 후 Consolidated Adj EBITDA $82.5M이 산출됨.</em>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">⛏️</span>세그먼트 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">메트 segment 적자 전환</div>
+    <div class="card-value" style="color:#c0392b">−$7.0M</div>
+    <div class="card-desc">Q1 2025 +$13.2M → Q1 2026 $(7.0)M. 가격은 톤당 $125 → $138 회복했으나 <strong>원가가 $118 → $142로 +20% 폭증</strong> (Centurion 롱월 commissioning 비용). 메트 thesis 핵심 driver의 단기 적자 전환은 시장 충격 핵심.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:100%;background:var(--red-glow)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Other U.S. Thermal 강세</div>
+    <div class="card-value">+109% QoQ</div>
+    <div class="card-desc">Q4 2025 $18.1M → Q1 2026 $37.8M. 판매량 -11% (3.7→3.3Mt)이지만 가격 +8% ($51.64→$55.79) + 원가 -5% ($46.77→$44.37) 동시 개선. 톤당 마진 $4.87→$11.42. 미국 발전 수요 강세를 가장 직접 반영.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">PRB Q1 약세</div>
+    <div class="card-value">−47% QoQ</div>
+    <div class="card-desc">Q4 2025 $44.8M → Q1 2026 $23.7M. 통상 봄철 발전 수요 둔화 (heating 수요 ↓, cooling 수요 ↑ 본격화 전). 판매량 -5% (22.3→21.2Mt) + 원가 +9% ($11.44→$12.53). YoY 비교는 -35% (Q1 2025 $36.3M).</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Q1 포트폴리오 mix</div>
+    <div class="card-value">$103M</div>
+    <div class="card-desc">Q1 2026 segment EBITDA 구성: Seaborne Thermal 47% / Other US 37% / PRB 23% / Met -7%. <strong>"메트쿨 기업"이라는 thesis와 정반대 — Q1엔 메트가 EBITDA를 갉아먹는 상태</strong>. 본사 비용 차감 후 Consolidated EBITDA $82.5M.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Centurion 1Mt 컷의 충격</strong><br>
+    FY2026 Centurion 가이던스 <strong>3.5Mt → 2.5Mt</strong>. 롱월 이전 Q4 2026 → 2027 초로 연기. 사유: 롱월 commissioning 중 electrical/mechanical 이슈 + 루프 컨디션 문제. Q2 2026 Centurion 출하는 0.3Mt만 예상. 풀가동 4.7Mt/년 목표는 2028로 미뤄짐.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 메트 가격 회복 vs 원가 폭증</strong><br>
+    Premium HCC FOB Australia 톤당 $237.6 (4월 24일) — 회복세. Peabody 메트 실현가도 $138 (Q1 2026)로 Q4 $123 대비 +12.5%. 단 원가가 더 빨리 올라 마진은 적자. <strong>Centurion 정상 ramp 후 원가 정상화 시 가격 환경은 우호적</strong>.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: Peabody Energy Corporation · Form 8-K Exhibit 99.1 · Filed Feb 5, 2026 · Period ended Dec 31, 2025 · Educational use only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산. Peabody는 이와 별도로 광산 복구 보증용 Restricted Cash를 $844M 보유하고 있어 실제 유동성은 이보다 훨씬 크다.'},
+  inventory:{title:'Inventories (재고자산)', body:'채굴된 석탄 재고, 부품·소모품·연료 등. 석탄 기업의 재고는 시황에 따라 출하 지연/조기 출하로 변동이 크며, 가격 하락기에는 평가손실 리스크도 존재한다.'},
+  ppe:{title:'PP&E and Mine Development (유형자산 및 광산 개발비)', body:'광산 장비, 광권, 갱도 개발비 등 자본화된 지출. 총자산의 54%를 차지하는 Peabody의 최대 자산 항목. 2025년에 증가한 것은 Centurion 광산 개발 지출이 자산화된 효과다.'},
+  restricted:{title:'Restricted Cash and Collateral (사용 제한 현금·담보)', body:'광산 복구 보증금, 근로자 산재 보험 담보, 각종 계약 이행 담보로 묶여 있어 자유롭게 사용할 수 없는 현금. 미국·호주 규제당국이 self-bonding(자기보증) 대신 현금 예치를 요구한 결과로, 석탄 기업 특유의 구조적 항목이다.'},
+  ltdebt:{title:'Long-Term Debt (장기부채)', body:'Peabody의 장기 차입금. 챕터 11 졸업 이후 적극적 부채 상환으로 $321M까지 축소된 상태. 총자산 대비 5.5%에 불과해 극히 낮은 레버리지다.'},
+  aro:{title:'Asset Retirement Obligation (광산 복구 의무)', body:'광산 사용 종료 후 토지 복원·재식재·수질 관리 등에 들어갈 미래 비용의 현재가치. 할인율로 할인한 값이며 매년 "accretion"으로 늘어난다. 석탄 기업 부채의 30% 이상을 차지하는 구조적 항목.'},
+  treasury:{title:'Treasury Stock (자사주)', body:'회사가 매입해 보유 중인 자기 주식. Peabody는 2022~2024년에 $1.93B 규모의 적극적 자사주 매입을 진행했으나 2025년엔 Centurion 투자 우선순위로 매입을 중단했다.'},
+  revenue:{title:'Revenue (매출)', body:'석탄 판매 수익의 총합. Peabody는 해상 수출(호주)과 미국 내수(PRB·Illinois Basin) 두 축으로 나뉘며, 2025년 매출 감소의 대부분은 해상 가격 하락이 원인이다.'},
+  dda:{title:'Depreciation, Depletion and Amortization (감가상각 및 광산 감모)', body:'광산 기업 특유의 "Depletion(감모)"은 채굴한 석탄 매장량만큼 광권 자산을 비용화하는 항목. Peabody의 DD&A는 연 $384M으로, 영업비용의 10%를 넘는 주요 비현금 비용이다.'},
+  opprofit:{title:'Operating Profit (영업이익)', body:'매출에서 영업비용·DD&A·ARO·SG&A·구조조정비용 등을 차감한 값. 2025년 $(80)M 영업손실의 거의 전부는 Anglo American 인수 무산 관련 일회성 비용 $79M이 설명한다.'},
+  ebitda:{title:'Adjusted EBITDA (조정 EBITDA)', body:'영업이익에 DD&A, ARO 비용, 이자비용·이자수익, 그리고 경영진이 일회성으로 간주한 항목(인수 관련 비용, 구조조정 등)을 조정한 비GAAP 지표. Peabody는 이 지표를 세그먼트 성과의 주요 척도로 사용하며, 애널리스트도 같은 지표를 밸류에이션에 활용한다.'},
+  cfo:{title:'Cash Flow from Operations (영업활동현금흐름)', body:'본업에서 실제로 창출된 현금. 순손실 $(53)M에도 CFO가 $336M을 기록한 이유는 DD&A $384M이 비현금비용이기 때문. "quality of earnings"를 판단할 때 순이익보다 더 중요한 지표다.'},
+  capex:{title:'Capital Expenditures (설비투자)', body:'광산 장비 구입, 갱도 개발, 신광산 건설 등에 지출된 자금. 2025년 $411M 중 상당 부분은 Centurion 롱월 가동 준비에 집중 투입되었다. 2026년엔 $340M으로 감소 가이던스.'},
+  buyback:{title:'Common Stock Repurchases (자사주 매입)', body:'주주환원 수단. Peabody는 2024년 $183M을 매입했으나 2025년엔 Centurion 투자 우선으로 전면 중단했다. 대신 분기당 $0.075의 소규모 배당은 유지.'},
+  seathermal:{title:'Seaborne Thermal (해상 열탄)', body:'주로 호주 뉴사우스웨일스의 Wilpinjong·Wambo 등에서 생산해 아시아(한국·일본·인도 등)로 수출하는 발전용 석탄. 벤치마크는 Newcastle 지수이며 2022~2023년 폭등 후 2024~2025년에 정상화되었다.'},
+  seamet:{title:'Seaborne Metallurgical (해상 점결탄)', body:'제철소의 코크스 원료로 쓰이는 원료탄. Peabody는 호주 퀸즐랜드의 Metropolitan·Shoal Creek·Coppabella·Moorvale 등을 보유하며, 곧 가동될 Centurion이 포트폴리오의 품질을 프리미엄 하드코킹코울로 끌어올릴 예정이다.'},
+  prb:{title:'Powder River Basin (PRB, 파우더 리버 분지)', body:'미국 와이오밍·몬태나에 위치한 세계 최대 노천 저황 발전용 석탄 매장지. Peabody의 North Antelope Rochelle Mine(NARM)이 세계 최대 지상 탄광이다. 저마진($2/톤)이지만 대규모 볼륨(85Mt/년)으로 안정적 현금 창출의 기반이 되는 자산군.'},
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

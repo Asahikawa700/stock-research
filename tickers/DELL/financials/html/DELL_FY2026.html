@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dell Technologies (DELL) — FY2026 연간 재무제표 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#e8e0d0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#d4c9b5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#a0937f;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#c8bfa8}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-badge">SEC 8-K Exhibit 99.1 · Q4 &amp; FY 2026</div>
+  <h1><span>DELL TECHNOLOGIES</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">Fourth Quarter &amp; Full Year Fiscal 2026 Financial Results</h1>
+  <div class="subtitle">교육 목적 재무제표 정리 · fiscal year ended January 30, 2026 · announced Feb 26, 2026</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+  <button class="tab-btn" onclick="switchTab('seg', this)"><span class="tab-icon">🧩</span>세그먼트</button>
+</div>
+
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Financial Position</h2>
+    <div class="stmt-sub">As of January 30, 2026 vs January 31, 2025</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>JAN 2026</th><th>JAN 2025</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">ASSETS</td></tr>
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Current Assets</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">Cash and cash equivalents</span></td><td>11,528</td><td>3,633</td><td><span class="change-pill up">+217%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ar">Accounts receivable, net</span></td><td>17,585</td><td>10,298</td><td><span class="change-pill up">+71%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="finrecv">Financing receivables &amp; other</span></td><td>8,458</td><td>5,304</td><td><span class="change-pill up">+59%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="inventory">Inventory, net</span></td><td>10,437</td><td>6,716</td><td><span class="change-pill up">+55%</span></td></tr>
+      <tr class="indent"><td>Other current assets</td><td>9,594</td><td>10,278</td><td><span class="change-pill down">-7%</span></td></tr>
+      <tr class="subtotal indent"><td>Total current assets</td><td>57,602</td><td>36,229</td><td><span class="change-pill up">+59%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Non-Current Assets</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ppe">Property, plant &amp; equipment, net</span></td><td>6,676</td><td>6,336</td><td><span class="change-pill up">+5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="goodwill">Goodwill</span></td><td>19,547</td><td>19,120</td><td><span class="change-pill flat">+2%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="intangible">Intangible assets, net</span></td><td>4,533</td><td>4,988</td><td><span class="change-pill down">-9%</span></td></tr>
+      <tr class="indent"><td>Long-term investments</td><td>1,730</td><td>1,496</td><td><span class="change-pill up">+16%</span></td></tr>
+      <tr class="indent"><td>Other non-current assets</td><td>11,198</td><td>11,577</td><td><span class="change-pill flat">-3%</span></td></tr>
+      <tr class="subtotal indent"><td>Total non-current assets</td><td>43,684</td><td>43,517</td><td><span class="change-pill flat">0%</span></td></tr>
+      <tr class="grand-total"><td><span class="term" data-term="ta">Total Assets</span></td><td>101,286</td><td>79,746</td><td><span class="change-pill up">+27%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="padding-top:24px">LIABILITIES &amp; STOCKHOLDERS' DEFICIT</td></tr>
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Current Liabilities</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ap">Accounts payable</span></td><td>33,630</td><td>20,832</td><td><span class="change-pill up">+61%</span></td></tr>
+      <tr class="indent"><td>Accrued and other current</td><td>8,315</td><td>6,597</td><td><span class="change-pill up">+26%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="stdebt">Short-term debt</span></td><td>7,990</td><td>5,204</td><td><span class="change-pill up">+54%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="deferrev">Deferred (unearned) revenue, current</span></td><td>13,334</td><td>13,673</td><td><span class="change-pill flat">-2%</span></td></tr>
+      <tr class="indent"><td>Other current liabilities</td><td>—</td><td>221</td><td><span class="change-pill flat">—</span></td></tr>
+      <tr class="subtotal indent"><td>Total current liabilities</td><td>63,269</td><td>46,527</td><td><span class="change-pill up">+36%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Non-Current Liabilities</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltdebt">Long-term debt</span></td><td>23,513</td><td>19,363</td><td><span class="change-pill up">+21%</span></td></tr>
+      <tr class="indent"><td>Other non-current liabilities (LT deferred rev, tax, etc.)</td><td>16,974</td><td>15,243</td><td><span class="change-pill up">+11%</span></td></tr>
+      <tr class="subtotal indent"><td>Total non-current liabilities</td><td>40,487</td><td>34,606</td><td><span class="change-pill up">+17%</span></td></tr>
+      <tr class="subtotal indent"><td>Total liabilities</td><td>103,756</td><td>81,133</td><td><span class="change-pill up">+28%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:12px"><em>Stockholders' Equity (Deficit)</em></td></tr>
+      <tr class="indent"><td>Common stock &amp; additional paid-in capital</td><td>9,457</td><td>9,119</td><td><span class="change-pill up">+4%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="treasury">Treasury stock</span></td><td class="neg">(14,533)</td><td class="neg">(8,502)</td><td><span class="change-pill down">+71%</span></td></tr>
+      <tr class="indent"><td>Retained earnings</td><td>3,325</td><td class="neg">(1,160)</td><td><span class="change-pill up">흑전</span></td></tr>
+      <tr class="indent"><td>Accumulated OCI</td><td class="neg">(719)</td><td class="neg">(939)</td><td><span class="change-pill up">개선</span></td></tr>
+      <tr class="subtotal indent"><td><span class="term" data-term="negeq">Total stockholders' deficit</span></td><td class="neg">(2,470)</td><td class="neg">(1,482)</td><td><span class="change-pill down">악화</span></td></tr>
+      <tr class="grand-total"><td>Total Liab. + Equity</td><td>101,286</td><td>79,746</td><td><span class="change-pill up">+27%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source links:
+    <a href="https://www.sec.gov/Archives/edgar/data/1571996/000157199626000003/exhibit991earnings8kq4fy26.htm" target="_blank">SEC 8-K Exhibit 99.1 (Q4 FY26)</a> ·
+    <a href="https://investors.delltechnologies.com/news-releases/news-release-details/dell-technologies-delivers-fourth-quarter-and-full-year-fiscal-3" target="_blank">Dell IR Q4 FY26</a> ·
+    <a href="https://stockanalysis.com/stocks/dell/financials/balance-sheet/" target="_blank">Stock Analysis BS</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">🔍</span>재무상태표 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>재무상태표(Balance Sheet)</strong>는 특정 시점의 재무 스냅샷이다. Dell은 하드웨어 ODM 모델 + 캡티브 파이낸싱(DFS) 두 축이라, <strong>운전자본(재고·매출채권·매입채무)</strong>과 <strong>장기차입 + 자기주식</strong>을 같이 봐야 그림이 잡힌다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">현금 & 단기유동성</div>
+    <div class="card-value" style="color:#27ae60;">$11.5B</div>
+    <div class="card-desc">전년 $3.6B에서 +217% 폭증. AI 수요 폭발 + AP 점프($21B→$34B)로 운전자본이 비정상적으로 유리하게 돌아갔다. 단기 ST debt $8.0B를 충분히 커버.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">자산 점프</div>
+    <div class="card-value">$101.3B</div>
+    <div class="card-desc">총자산이 1년 새 +$21.5B (+27%). 거의 전부가 <strong>운전자본 부풀림</strong> — AR +$7.3B, 재고 +$3.7B, 현금 +$7.9B. AI 서버 빌드 사이클로 매출채권·재고가 동시 팽창 중.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:70%; background: linear-gradient(90deg, var(--gold), var(--gold-light))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">총부채</div>
+    <div class="card-value">$31.5B</div>
+    <div class="card-desc">단기 $8B + 장기 $23.5B. 1년 새 +$7.0B 증가했지만, 자산 증가 $21.5B 대비 절반 수준 — AP·운전자본이 차입 대신 자금조달 역할.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">자기자본 적자</div>
+    <div class="card-value" style="color:#c0392b;">-$2.5B</div>
+    <div class="card-desc">총 환원 $7.5B(자사주 $6.0B + 배당 $1.5B)이 순이익 $5.9B를 초과 → Treasury Stock 누적 $14.5B로 점프하면서 자본이 다시 적자권으로. <strong>이익 흑전(retained earnings)인데 자본은 마이너스</strong>인 구조의 정체.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 포인트:</strong><br>
+    Dell의 음(-)의 자본은 부실이 아니라 <strong>EMC 차입인수 + 공격적 환원</strong>의 결과다. 핵심은 ① CFO &gt; 차입금 갱신, ② 신용등급(투자등급 BBB) 유지, ③ AP-AR-Inventory 사이클 견고. 셋 다 FY26은 합격.
+  </div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Income</h2>
+    <div class="stmt-sub">Q4 FY26 vs Q4 FY25 &amp; FY26 vs FY25</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:36%"></th><th>Q4 FY26</th><th>Q4 FY25</th><th>FY26</th><th>FY25</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5">REVENUE</td></tr>
+      <tr class="indent"><td>Products</td><td>27,510</td><td>19,565</td><td>91,989</td><td>76,964</td></tr>
+      <tr class="indent"><td>Services</td><td>5,890</td><td>4,508</td><td>21,510</td><td>18,603</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="netrev">Net revenue</span></td><td>33,400</td><td>24,073</td><td>113,499</td><td>95,567</td></tr>
+
+      <tr class="section-head"><td colspan="5">COST &amp; EXPENSES</td></tr>
+      <tr class="indent"><td>Cost of net revenue</td><td>26,670</td><td>18,367</td><td>90,788</td><td>74,357</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="gp">Gross margin</span></td><td>6,730</td><td>5,706</td><td>22,711</td><td>21,210</td></tr>
+      <tr class="indent"><td>Selling, general &amp; administrative</td><td>2,856</td><td>2,672</td><td>11,449</td><td>11,892</td></tr>
+      <tr class="indent"><td><span class="term" data-term="rnd">Research &amp; development</span></td><td>781</td><td>871</td><td>3,108</td><td>3,135</td></tr>
+      <tr class="subtotal"><td>Total operating expenses</td><td>3,637</td><td>3,543</td><td>14,557</td><td>15,027</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="opinc">Operating income</span></td><td>3,093</td><td>2,163</td><td>8,154</td><td>6,183</td></tr>
+      <tr class="indent"><td><span class="term" data-term="intexp">Interest and other, net</span></td><td class="neg">(220)</td><td class="neg">(255)</td><td class="neg">(884)</td><td class="neg">(1,258)</td></tr>
+      <tr class="indent"><td>Income before income taxes</td><td>2,873</td><td>1,908</td><td>7,270</td><td>4,925</td></tr>
+      <tr class="indent"><td>Income tax provision</td><td>613</td><td>374</td><td>1,334</td><td>349</td></tr>
+      <tr class="grand-total"><td>Net Income</td><td>2,260</td><td>1,534</td><td>5,936</td><td>4,576</td></tr>
+
+      <tr class="section-head"><td colspan="5">EARNINGS PER SHARE</td></tr>
+      <tr class="indent"><td>Diluted EPS — GAAP ($)</td><td>3.37</td><td>2.15</td><td>8.68</td><td>6.38</td></tr>
+      <tr class="indent"><td><span class="term" data-term="adjearn">Diluted EPS — Non-GAAP ($)</span></td><td>3.89</td><td>2.68</td><td>10.30</td><td>8.11</td></tr>
+      <tr class="indent"><td>Weighted avg diluted shares (M)</td><td>671</td><td>713</td><td>684</td><td>717</td></tr>
+
+      <tr class="section-head"><td colspan="5">MARGINS</td></tr>
+      <tr class="indent"><td><span class="term" data-term="gm">Gross margin %</span></td><td>20.2%</td><td>23.7%</td><td>20.0%</td><td>22.2%</td></tr>
+      <tr class="indent"><td>GAAP operating margin %</td><td>9.3%</td><td>9.0%</td><td>7.2%</td><td>6.5%</td></tr>
+      <tr class="indent"><td>Non-GAAP operating margin %</td><td>10.6%</td><td>11.2%</td><td>8.8%</td><td>9.0%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: Dell 8-K Exhibit 99.1 (Feb 26, 2026). 매출 split(제품/서비스)은 회사 보충자료 기반 추정. <strong>주의:</strong> 매출은 +19%인데 GM%는 22.2%→20.0%로 -2.2%p 축소 — AI 서버가 매출은 키우지만 마진은 묽게 만드는 구조.
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>손익계산서(Income Statement)</strong>는 일정 기간의 성적표다. Dell은 <strong>"AI 서버 mix가 높을수록 매출 ↑, 마진 ↓"</strong>의 양면을 동시에 본다. 매출만 보면 환호, GM%만 보면 우려 — 둘 다 정상.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">1줄 요약</div>
+    <div class="card-value">Volume Up, Mix Down</div>
+    <div class="card-desc">매출 +19%, 영업이익(GAAP) +31%, EPS +36%. 그러나 GM% 22.2%→20.0%로 축소. AI 서버 폭증이 mix를 끌어내림.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">연간 EPS</div>
+    <div class="card-value" style="color:#27ae60;">$10.30</div>
+    <div class="card-desc">Non-GAAP 기준 +27% YoY. 절대치로도 <strong>역대 최고</strong>. 자사주 매입 +29M shares 효과로 EPS 부스트 ~3%p 추가.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:82%; background: linear-gradient(90deg, var(--green-ink), var(--green-accent))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">Gross Margin</div>
+    <div class="card-value" style="color:#c0392b;">20.0%</div>
+    <div class="card-desc">FY25 22.2% → FY26 20.0%. AI 서버는 GPU 패스스루 비중이 커서 마진이 묽다. 그러나 절대 마진 달러는 $21.2B→$22.7B로 +7% 증가. <strong>"margin compression이지만 dollar margin은 성장"</strong>.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">Q4 폭발</div>
+    <div class="card-value" style="color:#27ae60;">+57%</div>
+    <div class="card-desc">Q4 매출 $33.4B(+39%), GAAP EPS $3.37(+57%). 분기 단위 사상 최대. AI 서버 출하 $9B 한 분기 만에 — 이전 1년치 절반 수준.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 해석 팁:</strong><br>
+    Dell IS에서 "<strong>GM% 떨어지는데 OP$는 늘어난다</strong>"는 패턴은 AI 시대의 정상 행태다. 마진 % vs $ 둘 다 보고, 결국 <strong>EPS &amp; FCF가 늘어나면 합격</strong>.
+  </div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Cash Flows</h2>
+    <div class="stmt-sub">Full Year FY26 (ended Jan 30, 2026) vs FY25 (ended Jan 31, 2025)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:56%"></th><th>FY26</th><th>FY25</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cfo">Cash Flows from Operating Activities</span></td></tr>
+      <tr class="indent"><td>Net income</td><td>5,936</td><td>4,576</td><td><span class="change-pill up">+30%</span></td></tr>
+      <tr class="indent2"><td><span class="term" data-term="dda">Depreciation &amp; amortization</span></td><td>3,029</td><td>3,123</td><td><span class="change-pill flat">-3%</span></td></tr>
+      <tr class="indent2"><td>Stock-based compensation</td><td>723</td><td>785</td><td><span class="change-pill flat">-8%</span></td></tr>
+      <tr class="indent2"><td>Deferred taxes &amp; other</td><td>654</td><td>245</td><td><span class="change-pill up">+167%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:12px; padding-top:8px"><em>Working Capital Changes</em></td></tr>
+      <tr class="indent2"><td>(Increase) in accounts receivable</td><td class="neg">(9,762)</td><td class="neg">(2,246)</td><td><span class="change-pill down">대폭 악화</span></td></tr>
+      <tr class="indent2"><td>(Increase) in inventory</td><td class="neg">(3,987)</td><td class="neg">(3,515)</td><td><span class="change-pill down">+13%</span></td></tr>
+      <tr class="indent2"><td>Increase in accounts payable</td><td>12,665</td><td>1,703</td><td><span class="change-pill up">대폭 개선</span></td></tr>
+      <tr class="indent2"><td>(Decrease) in deferred revenue</td><td class="neg">(39)</td><td class="neg">(2,497)</td><td><span class="change-pill up">개선</span></td></tr>
+      <tr class="indent2"><td>Other operating, net</td><td>1,966</td><td>2,347</td><td><span class="change-pill flat">-16%</span></td></tr>
+      <tr class="subtotal"><td>Net cash provided by operating activities</td><td>11,185</td><td>4,521</td><td><span class="change-pill up">+147%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cfi">Cash Flows from Investing Activities</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="capex">Capital expenditures</span></td><td class="neg">(2,633)</td><td class="neg">(2,652)</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="indent"><td>Purchases of investments</td><td class="neg">(197)</td><td class="neg">(125)</td><td><span class="change-pill down">+58%</span></td></tr>
+      <tr class="indent"><td>Proceeds from investment sales</td><td>246</td><td>382</td><td><span class="change-pill down">-36%</span></td></tr>
+      <tr class="indent"><td>Acquisitions</td><td class="neg">(84)</td><td>—</td><td><span class="change-pill flat">—</span></td></tr>
+      <tr class="indent"><td>Divestitures</td><td>533</td><td>—</td><td><span class="change-pill up">신규</span></td></tr>
+      <tr class="indent"><td>Other investing</td><td>80</td><td>180</td><td><span class="change-pill down">-56%</span></td></tr>
+      <tr class="subtotal"><td>Net cash used in investing activities</td><td class="neg">(2,055)</td><td class="neg">(2,215)</td><td><span class="change-pill up">개선</span></td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cff">Cash Flows from Financing Activities</span></td></tr>
+      <tr class="indent"><td>Long-term debt issued</td><td>15,004</td><td>9,258</td><td><span class="change-pill up">+62%</span></td></tr>
+      <tr class="indent"><td>Long-term debt repaid</td><td class="neg">(8,522)</td><td class="neg">(10,570)</td><td><span class="change-pill down">-19%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="buyback">Repurchases of common stock</span></td><td class="neg">(6,404)</td><td class="neg">(3,165)</td><td><span class="change-pill up">+102%</span></td></tr>
+      <tr class="indent"><td>Dividends paid</td><td class="neg">(1,459)</td><td class="neg">(1,275)</td><td><span class="change-pill up">+14%</span></td></tr>
+      <tr class="indent"><td>Stock issuance / other</td><td class="neg">(83)</td><td class="neg">(63)</td><td><span class="change-pill flat">—</span></td></tr>
+      <tr class="subtotal"><td>Net cash used in financing activities</td><td class="neg">(1,464)</td><td class="neg">(5,815)</td><td><span class="change-pill up">대폭 개선</span></td></tr>
+
+      <tr class="indent"><td>Effect of exchange rate changes</td><td>221</td><td class="neg">(179)</td><td><span class="change-pill up">+</span></td></tr>
+      <tr class="subtotal"><td>Net increase (decrease) in cash</td><td>7,887</td><td class="neg">(3,688)</td><td><span class="change-pill up">흑전</span></td></tr>
+      <tr class="indent"><td>Cash at beginning of year</td><td>3,641</td><td>7,329</td><td><span class="change-pill down">-50%</span></td></tr>
+      <tr class="grand-total"><td>Cash at end of year</td><td>11,528</td><td>3,641</td><td><span class="change-pill up">+217%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">COMPANY-REPORTED METRICS</td></tr>
+      <tr class="indent"><td><span class="term" data-term="fcf">Free cash flow (CFO − CAPEX)</span></td><td>8,552</td><td>1,869</td><td><span class="change-pill up">+358%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="adjfcf">Adjusted free cash flow</span></td><td>11,510</td><td>3,090</td><td><span class="change-pill up">+272%</span></td></tr>
+      <tr class="indent"><td>Capital returned (buyback + div)</td><td>7,863</td><td>4,440</td><td><span class="change-pill up">+77%</span></td></tr>
+      <tr class="subtotal"><td>Capital return % of FCF</td><td>92%</td><td>237%</td><td><span class="change-pill flat">정상화</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: Dell 8-K Exhibit 99.1 · Stock Analysis 보충. 회사 발표 "Operating cash flow $11.2B, FCF $8.56B, Adjusted FCF $11.51B".
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>현금흐름표(Cash Flow Statement)</strong>는 회계이익과 별개로 실제 돈이 어떻게 움직였는지 보여준다. Dell은 운전자본 변동이 극단적으로 큰 회사라, <strong>"순이익보다 운전자본 변화"</strong>가 CFO를 결정한다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">영업현금흐름</div>
+    <div class="card-value" style="color:#27ae60;">$11.2B</div>
+    <div class="card-desc">전년 $4.5B에서 +147%. 순이익은 +30%만 증가했는데 CFO가 2.5배 점프 — <strong>AP +$12.7B</strong>(공급사 대금 결제 지연)이 결정타. AI 서버 빌드 사이클의 부산물.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">CAPEX</div>
+    <div class="card-value">$2.6B</div>
+    <div class="card-desc">매출의 2.3%. 하드웨어 OEM답게 자본집약도 낮음. 매출 +19% 늘었는데 CAPEX는 -1% — 영업레버리지 극대화.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:23%; background: linear-gradient(90deg, var(--gold), var(--gold-light))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">Free Cash Flow</div>
+    <div class="card-value" style="color:#27ae60;">$8.6B</div>
+    <div class="card-desc">전년 $1.9B → $8.6B로 +358%. Adjusted FCF는 $11.5B. CAPEX 감안해도 환원 여력 충분.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">주주환원</div>
+    <div class="card-value" style="color:#f5f0e8;">$7.9B</div>
+    <div class="card-desc">자사주 $6.4B + 배당 $1.5B. FY25 $4.4B 대비 +77% 확대. 추가로 <strong>$10B 매입 한도 증액 + 배당 20% 인상</strong> 동시 발표.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 Dell 현금흐름 보는 법:</strong><br>
+    <strong>① CFO vs Net Income</strong>(AP 효과로 운전자본 sloshing 크다) → <strong>② FCF Conversion</strong>(NI 대비 FCF&gt;1.4x 정상) → <strong>③ 환원 vs FCF</strong>(FY26은 92%). 셋 다 합격선.
+  </div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-seg">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Segment Results</h2>
+    <div class="stmt-sub">FY26 (Year ended Jan 30, 2026) — ISG vs CSG</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:44%"></th><th>FY26</th><th>FY25</th><th>YoY</th><th>Q4 FY26</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="isg">Infrastructure Solutions Group (ISG)</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="aiserver">AI-optimized servers</span></td><td>24,680</td><td>9,278</td><td><span class="change-pill up">+166%</span></td><td>8,950</td></tr>
+      <tr class="indent"><td>Traditional servers &amp; networking</td><td>19,510</td><td>17,899</td><td><span class="change-pill up">+9%</span></td><td>5,850</td></tr>
+      <tr class="indent"><td>Storage</td><td>16,630</td><td>16,463</td><td><span class="change-pill flat">+1%</span></td><td>4,800</td></tr>
+      <tr class="subtotal"><td>ISG total revenue</td><td>60,830</td><td>43,640</td><td><span class="change-pill up">+40%</span></td><td>19,600</td></tr>
+      <tr class="indent"><td>ISG operating income</td><td>7,110</td><td>5,599</td><td><span class="change-pill up">+27%</span></td><td>2,900</td></tr>
+      <tr class="indent"><td>ISG operating margin</td><td>11.7%</td><td>12.8%</td><td><span class="change-pill down">-1.1pp</span></td><td>14.8%</td></tr>
+
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="csg">Client Solutions Group (CSG)</span></td></tr>
+      <tr class="indent"><td>Commercial</td><td>44,060</td><td>40,796</td><td><span class="change-pill up">+8%</span></td><td>11,610</td></tr>
+      <tr class="indent"><td>Consumer</td><td>6,920</td><td>7,520</td><td><span class="change-pill down">-8%</span></td><td>1,880</td></tr>
+      <tr class="subtotal"><td>CSG total revenue</td><td>50,980</td><td>48,316</td><td><span class="change-pill up">+5%</span></td><td>13,490</td></tr>
+      <tr class="indent"><td>CSG operating income</td><td>2,830</td><td>2,978</td><td><span class="change-pill down">-5%</span></td><td>629</td></tr>
+      <tr class="indent"><td>CSG operating margin</td><td>5.6%</td><td>6.1%</td><td><span class="change-pill down">-0.5pp</span></td><td>4.7%</td></tr>
+
+      <tr class="section-head"><td colspan="5">CONSOLIDATED CHECK</td></tr>
+      <tr class="indent"><td>ISG + CSG revenue</td><td>111,810</td><td>91,956</td><td><span class="change-pill up">+22%</span></td><td>33,090</td></tr>
+      <tr class="indent"><td>"Other / corporate" (잔여)</td><td>1,689</td><td>3,611</td><td><span class="change-pill down">-53%</span></td><td>310</td></tr>
+      <tr class="grand-total"><td>Total net revenue</td><td>113,499</td><td>95,567</td><td><span class="change-pill up">+19%</span></td><td>33,400</td></tr>
+
+      <tr class="section-head"><td colspan="5">AI ORDERS &amp; BACKLOG (FY26)</td></tr>
+      <tr class="indent"><td>AI 서버 신규 주문 (FY26 누적)</td><td colspan="3">$64B+</td><td>—</td></tr>
+      <tr class="indent"><td>AI 서버 출하 (FY26 누적)</td><td colspan="3">$25B+</td><td>—</td></tr>
+      <tr class="indent"><td><span class="term" data-term="backlog">AI 백로그 (FY27 진입 시점)</span></td><td colspan="3">$43B (record)</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: Dell 8-K Exhibit 99.1 (Feb 26, 2026) · 회사 보충자료. ISG/CSG 외 "Other" 항목은 secureworks 분리, Boomi 매각 등 영향으로 변동.
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">🧩</span>세그먼트 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>Dell의 2개 코어 세그먼트</strong>:<br>
+    ① <strong>ISG</strong> (Infrastructure Solutions): 서버 + 스토리지 + 네트워킹. <strong>현재 성장 엔진.</strong><br>
+    ② <strong>CSG</strong> (Client Solutions): PC + 노트북. <strong>현금흐름 안정기여.</strong>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">AI 서버</div>
+    <div class="card-value" style="color:#27ae60;">+166%</div>
+    <div class="card-desc">FY25 $9.3B → FY26 $24.7B. Q4 단독 $8.95B(+342%). 회사 매출의 22%까지 비중 확대. <strong>NVIDIA H100/H200/B200 빌드.</strong></div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:88%; background: linear-gradient(90deg, var(--green-ink), var(--green-accent))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">백로그</div>
+    <div class="card-value">$43B</div>
+    <div class="card-desc">FY27 진입 시점 record. xAI(Colossus 2 / $5B 추정), CoreWeave, Meta, MS 등 hyperscaler · neocloud 주도. <strong>가시성 4~6개 분기.</strong></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">CSG 평탄</div>
+    <div class="card-value" style="color:#f5f0e8;">+5%</div>
+    <div class="card-desc">Commercial PC +8% (Win10 EOL + AI PC 리프레시), 그러나 Consumer -8%. CSG OP 마진 5.6%로 압박. <strong>"PC 회복 thesis"는 여전히 보류 중.</strong></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">ISG OP 마진</div>
+    <div class="card-value" style="color:#c0392b;">11.7%</div>
+    <div class="card-desc">12.8%→11.7%로 -1.1pp 압축. AI 서버 mix 증가로 마진 dilution. 회사 가이드: <strong>"FY27 마진 안정화 후 점진 반등"</strong> 약속, but 시장은 의심 중.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 세그먼트 보는 법:</strong><br>
+    Dell은 <strong>"ISG 매출 ↑ + 마진 ↓ vs CSG 안정"</strong>의 이중 구조다. AI thesis의 진짜 시험: <strong>① 백로그 변환률(orders→ship) ② ISG OP margin 11~12%대 유지 ③ CSG 5% 이상 유지</strong>. 셋 다 보면 된다.
+  </div>
+</div>
+</div>
+</div>
+
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: Dell Technologies 8-K Exhibit 99.1 · Q4 &amp; FY 2026 results · announced Feb 26, 2026 · Educational purposes only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융상품이다. Dell은 FY26에 AP 점프 효과로 현금이 +$7.9B 급증했다.'},
+  ar:{title:'Accounts Receivable (매출채권)', body:'고객에게 매출 인식했지만 아직 받지 못한 대금이다. Dell은 AI 서버 빌드로 대형 hyperscaler 매출이 늘면서 +$7.3B 급증.'},
+  finrecv:{title:'Financing Receivables (DFS 채권)', body:'Dell Financial Services를 통해 고객에게 장비 리스/할부 판매한 채권이다. DFS는 Dell의 캡티브 파이낸싱 사업이며, AR과 별도로 잡힌다.'},
+  inventory:{title:'Inventory, net (재고)', body:'제품, 부품, 작업진행 중 재고다. Dell은 AI 서버 GPU 확보를 위해 재고가 +$3.7B 증가. NVIDIA 칩 선구매 부담이 큰 항목.'},
+  ppe:{title:'Property, Plant and Equipment, net (유형자산)', body:'데이터센터, 제조설비, 사무공간 등. Dell은 자산경량(asset-light) 모델이라 PPE가 총자산의 6.6%에 불과 (vs Intel 같은 IDM은 40%+).'},
+  goodwill:{title:'Goodwill (영업권)', body:'기업 인수 시 순자산 공정가치 초과 지급분이다. Dell의 영업권 대부분은 2016년 EMC 인수($67B) 잔재. 정기 손상검토 대상.'},
+  intangible:{title:'Intangible Assets, net (무형자산)', body:'고객관계, 기술, 상표권 등 식별가능한 무형자산이다. EMC·VMware 분할 이후 점진 상각 중.'},
+  ta:{title:'Total Assets (총자산)', body:'회사가 보유한 모든 경제적 자원의 합. Dell은 FY26에 $80B→$101B로 점프 — 운전자본 sloshing이 주범.'},
+  ap:{title:'Accounts Payable (매입채무)', body:'NVIDIA 등 공급사에 아직 지급하지 않은 대금이다. Dell은 FY26에 AP가 $21B→$34B로 +$12.7B 증가. AI 서버 부품 대량 발주 → 결제 사이클 지연의 결과로, 사실상 공급사가 Dell에게 "외상 융자"해주는 효과.'},
+  stdebt:{title:'Short-term Debt (단기차입)', body:'1년 안에 만기 도래하는 차입금. Dell은 핵심 부채 외에 DFS 부채(고객 리스 매칭)도 포함된다.'},
+  deferrev:{title:'Deferred / Unearned Revenue (이연수익)', body:'고객에게 받았지만 아직 서비스 제공 전인 매출이다. Dell ProSupport/소프트웨어 구독 등 다년 계약의 미인식 부분. 미래 매출 가시성 지표.'},
+  ltdebt:{title:'Long-term Debt (장기차입)', body:'1년 초과 만기의 회사채/차입금. Dell은 EMC 인수 이후 ~$50B 부채를 점진 상환했으나, FY26에는 AI 투자 사이클로 +$4.2B 다시 증가.'},
+  treasury:{title:'Treasury Stock (자기주식)', body:'회사가 자사주 매입으로 보유 중인 자기 주식. Dell은 FY26 $6.4B 추가 매입으로 누적 $14.5B. 환원이 적극적일수록 음의 자본 심화.'},
+  negeq:{title:'Stockholders\' Deficit (음의 자본)', body:'자기자본이 마이너스인 상태. Dell은 누적 자사주($14.5B)가 retained earnings($3.3B)를 압도하며 음의 자본. <strong>부실이 아니라 환원 정책의 결과</strong>다. McDonald\'s, HP 등 동종 사례 다수.'},
+  netrev:{title:'Net Revenue (순매출)', body:'반품·할인 차감 후 순매출. Dell은 제품(서버·PC·스토리지) + 서비스(ProSupport·deployment·소프트웨어) 두 축.'},
+  gp:{title:'Gross Margin (매출총이익)', body:'매출 - 매출원가. Dell의 GM%는 20% 내외로 하드웨어 OEM 평균 수준. AI 서버 mix가 늘수록 GPU 패스스루 비중이 커져 GM%는 압박.'},
+  gm:{title:'Gross Margin Percentage (매출총이익률)', body:'매출 대비 매출총이익 비율. Dell FY26 20.0%, FY25 22.2%. AI 서버 비중↑→GM% ↓. 절대 dollar margin은 늘었다.'},
+  rnd:{title:'Research &amp; Development (연구개발비)', body:'신제품·신기술 개발 지출. Dell의 R&D 비율은 매출 대비 2.7%로 낮음 — NVIDIA·Intel·AMD 같은 칩 메이커가 핵심 R&D를 부담하기 때문.'},
+  opinc:{title:'Operating Income (영업이익)', body:'본업으로 벌어들인 이익(매출 - COGS - OPEX). Dell GAAP FY26 $8.15B, 영업이익률 7.2%.'},
+  intexp:{title:'Interest and Other, net (이자 및 기타순익)', body:'순이자비용 + 기타 영업외 손익. Dell은 부채 규모가 커서 분기당 ~$220M 이자 지출.'},
+  adjearn:{title:'Non-GAAP Diluted EPS (조정 EPS)', body:'스톡옵션 비용, 인수합병 비용, 무형자산 상각 등을 제외한 EPS다. Dell의 핵심 가이던스 지표.'},
+  isg:{title:'Infrastructure Solutions Group (ISG)', body:'서버·스토리지·네트워킹 사업부. PowerEdge 서버 + PowerStore 스토리지 + 네트워킹. AI 시대의 성장 엔진.'},
+  csg:{title:'Client Solutions Group (CSG)', body:'PC·노트북·주변기기 사업부. Latitude, OptiPlex, XPS, Alienware 브랜드. 안정적 현금흐름원이지만 성장은 평탄.'},
+  aiserver:{title:'AI-Optimized Servers (AI 서버)', body:'NVIDIA H100/H200/B200 GPU 탑재 PowerEdge XE 시리즈 + 액체냉각 인프라. xAI Colossus, CoreWeave 등이 주요 고객. FY26 매출의 22%까지 비중 확대.'},
+  backlog:{title:'AI Backlog (AI 백로그)', body:'고객이 발주했지만 아직 출하/매출 인식 전인 AI 서버 주문 잔고. FY27 진입 시점 $43B — 분기 매출 ~$10B 가정 시 4~5개 분기 분량 가시성.'},
+  cfo:{title:'Cash Flow from Operations (영업현금흐름)', body:'본업으로 벌어들인 실제 현금. Dell은 운전자본 변동이 극단적이라 (AR/AP/Inventory 수십억 sloshing) NI와 격차가 크다. FY26 CFO $11.2B vs NI $5.9B.'},
+  cfi:{title:'Cash Flow from Investing (투자활동 현금흐름)', body:'CAPEX, 인수, 자산매각 등 장기자산 관련 현금흐름. Dell은 자본경량 모델이라 CFI가 매출 대비 매우 작다 (2% 내외).'},
+  cff:{title:'Cash Flow from Financing (재무활동 현금흐름)', body:'차입·상환, 자사주매입, 배당. Dell은 FY26 채무 net +$6.5B를 새로 빌려서 환원과 운전자본 회전에 활용.'},
+  capex:{title:'Capital Expenditures (자본적 지출)', body:'PP&E와 캡티브 제조 설비 투자. Dell은 ODM(외주 제조) 비중이 높아 CAPEX가 낮다 — 매출의 2.3%.'},
+  fcf:{title:'Free Cash Flow (잉여현금흐름)', body:'CFO − CAPEX. 회사가 자유롭게 처분할 수 있는 현금. Dell FY26 FCF $8.6B, 시가총액 대비 5% 수준.'},
+  adjfcf:{title:'Adjusted Free Cash Flow (조정 FCF)', body:'GAAP FCF에서 DFS 채권 변동 등을 조정한 회사 자체 지표. Dell FY26 Adjusted FCF $11.5B로 GAAP FCF보다 +$3B 높음.'},
+  buyback:{title:'Share Repurchases (자사주 매입)', body:'회사가 자기 주식을 시장에서 사들이는 행위. Dell FY26 $6.4B 매입 + 추가 $10B 한도 증액 발표.'},
+  dda:{title:'Depreciation &amp; Amortization (감가상각)', body:'PP&E와 무형자산의 사용 기간에 따라 비용 처리하는 비현금 비용. Dell FY26 $3.0B.'}
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>에쓰-오일 (S-OIL · 010950) — 2026 1분기 재무제표 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#f5efe0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#e4d9d5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#e4ded5;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#e0d5bc}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+.warn-banner{background:rgba(192,57,43,.08);border:1px solid rgba(192,57,43,.3);color:var(--red-ink);padding:12px 16px;margin:16px 0;border-radius:6px;font-size:12.5px;line-height:1.65}
+.warn-banner strong{color:var(--red-glow)}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-badge">Q1 2026 Earnings Release</div>
+  <h1><span>에쓰-오일 S-OIL</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">2026년 1분기 연결 재무제표</h1>
+  <div class="subtitle">KOSPI · 010950 · 2026년 5월 11일 잠정 실적발표 기준</div>
+</div>
+
+<!-- ============ TAB BAR ============ -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('seg', this)"><span class="tab-icon">⚙️</span>사업부문별 실적</button>
+  <button class="tab-btn" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>자본지출·현황</button>
+</div>
+
+<!-- ============ TAB: INCOME STATEMENT ============ -->
+<div class="tab-content active" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Operations — Q1 2026</h2>
+    <div class="stmt-sub">2026년 1분기 손익실적 · 연결 기준</div>
+    <div class="stmt-unit">단위: 십억원 (KRW Billion)</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:42%"></th><th>Q1 2026</th><th>Q4 2025</th><th>Q1 2025</th><th>QoQ</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5">매출 및 영업손익 REVENUE & OPERATING</td></tr>
+      <tr class="grand-total"><td><span class="term" data-term="revenue">매출액</span></td><td>8,942.7</td><td>8,792.6</td><td>—<sup>1</sup></td><td><span class="change-pill up">+1.7%</span></td></tr>
+
+      <tr class="section-head"><td colspan="5">영업이익 — 사업부문별</td></tr>
+      <tr class="indent"><td><span class="term" data-term="refining">정유</span></td><td>1,039.0</td><td>225.3</td><td>—<sup>1</sup></td><td><span class="change-pill up">+361%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="petchem">석유화학</span></td><td>25.5</td><td class="neg">(7.8)</td><td>—<sup>1</sup></td><td><span class="change-pill up">흑자전환</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="lube">윤활</span></td><td>166.6<sup>2</sup></td><td>207.0</td><td>—<sup>1</sup></td><td><span class="change-pill down">−19.5%</span></td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="opinc">영업이익 (합계)</span></td><td>1,231.1</td><td>424.5</td><td>—<sup>1</sup></td><td><span class="change-pill up">+190%</span></td></tr>
+      <tr class="indent"><td>영업이익률 (OPM)</td><td>13.8%</td><td>4.8%</td><td>—</td><td><span class="change-pill up">+9.0%p</span></td></tr>
+
+      <tr class="section-head"><td colspan="5">영업이익 품질 분해 EARNINGS QUALITY</td></tr>
+      <tr class="indent"><td><span class="term" data-term="invgain">재고관련효과 (Inventory effect)</span></td><td>643.4</td><td colspan="3" style="text-align:right;font-style:italic;color:var(--ink-light)">영업이익의 52.3%</td></tr>
+      <tr class="indent"><td>영업이익 (재고효과 제외, 추정)</td><td>587.7</td><td colspan="3" style="text-align:right;font-style:italic;color:var(--ink-light)">QoQ 기준 약 +38%</td></tr>
+
+      <tr class="section-head"><td colspan="5">참고 SUPPLEMENTAL</td></tr>
+      <tr class="indent"><td><span class="term" data-term="netinc">당기순이익</span></td><td colspan="4" style="text-align:right;font-style:italic;color:var(--red-ink)">확인 실패 (잠정 발표문 미공개)</td></tr>
+      <tr class="indent"><td>YoY 영업이익</td><td colspan="4" style="text-align:right;font-style:italic;color:var(--ink-light)">흑자전환 (Q1 2025 영업적자, 정확값 확인 실패)</td></tr>
+    </tbody>
+  </table>
+  <div class="warn-banner">
+    <strong>⚠️ 영업이익의 절반이 inventory gain</strong> — 호르무즈 봉쇄로 두바이유가 급등하며 원유 매입~제품 판매 시점차에서 발생한 lagging 효과(6,434억원)가 Q1 영업이익의 52.3%를 차지. 유가 하락 사이클에서는 동일 메커니즘이 reverse(재고평가손실)되어 작용한다.
+  </div>
+  <div class="source-note">
+    <sup>1</sup> Q1 2025 비교치는 잠정발표문에 미수록 — DART 분기보고서(2026년 5월말 예정) 제출 시 확정.<br>
+    <sup>2</sup> 윤활 Q1 2026 영업이익은 합계(1,231.1) − 정유(1,039.0) − 석유화학(25.5) = 166.6 으로 추정. 회사 발표는 "윤활기유 영업이익 하락"만 명시 ([dpi1004](https://www.dpi1004.com/14200)).<br>
+    Source: <a href="https://www.dpi1004.com/14200" target="_blank">S-OIL 2026년 1분기 영업이익 1조2,311억원 — 장애인인식개선신문 (2026.05.11)</a> · <a href="https://en.sedaily.com/finance/2026/05/03/korean-refiners-brace-for-losses-despite-5-trillion-won-q1" target="_blank">Korean Refiners Q1 Profile — Seoul Economic Daily</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>Quick Take</h3>
+  <div class="edu-block">
+    <strong>BEAT, but quality is questionable</strong><br>
+    영업이익 1조 2,311억은 컨센(약 1.1조) 상회한 <strong>서프라이즈</strong>지만, 절반 이상이 유가 급등에 따른 <strong>일회성 inventory gain</strong>. 운영 마진(약 5,877억)도 견조하지만, 두바이유 하락 시 동일한 메커니즘이 reverse(재고평가손실)로 작용한다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">Q1 2026 OP</div>
+    <div class="card-value">₩1,231.1B</div>
+    <div class="card-desc">전분기 대비 <strong>+190%</strong> 급증. 정유(1,039) 단독으로 회사 전체 OP의 84% 기여. 호르무즈 봉쇄로 두바이유가 분기 평균 $86까지 급등하며 lagging effect가 극대화됐다.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">Inventory Gain</div>
+    <div class="card-value">₩643.4B</div>
+    <div class="card-desc">영업이익의 <strong>52.3%</strong>가 일회성 재고관련효과. 회사 자체 분류로, 두바이유 급등에 따른 lagging gain. <strong>Q2 유가 정상화 시 reversal</strong> 가능성을 사이드 차트에서 확인 필요.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">정제마진 — 2~3월 V자</div>
+    <div class="card-value">$3.22 → $16.5</div>
+    <div class="card-desc">싱가포르 복합 마진이 <strong>2월 20일 $3.22(BEP 미달)</strong>에서 <strong>3월 $16.5/배럴</strong>로 5배 급등. 미·이란 갈등이 직접적 트리거. 4월 이후 마진 안정화 여부가 Q2 실적의 핵심.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">YoY 흑자전환</div>
+    <div class="card-value">turnaround</div>
+    <div class="card-desc">Q1 2025 정유부문 적자에서 흑자전환. 정확한 YoY 변동률은 잠정발표에 미수록 — 5월말 분기보고서로 확정 예정.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 다음 분기 트리거:</strong><br>
+    ① 두바이유 평균 — $80 미만이면 inventory effect reversal 위험<br>
+    ② 정부 가격상한제 영업이익 직접 차감 여부 — 현재 누적 손실 3조원+<br>
+    ③ 샤힌 6월 기계적 완공 발표
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: SEGMENT ============ -->
+<div class="tab-content" id="tab-seg">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Segment Performance — Q1 2026</h2>
+    <div class="stmt-sub">정유 · 석유화학 · 윤활 — 분기별 영업이익 추이</div>
+    <div class="stmt-unit">단위: 십억원 (KRW Billion)</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:38%"></th><th>Q1 2026</th><th>Q4 2025</th><th>Q3 2025</th><th>FY 2025</th><th>FY 2024</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="6"><span class="term" data-term="refining">정유 부문 Refining</span></td></tr>
+      <tr class="indent"><td>영업이익</td><td>1,039.0</td><td>225.3</td><td>115.5</td><td class="neg">(157.1)</td><td class="neg">(273.4)</td></tr>
+      <tr class="indent"><td>QoQ 변동</td><td><span class="change-pill up">+361%</span></td><td>+95%</td><td>—</td><td>—</td><td>—</td></tr>
+
+      <tr class="section-head"><td colspan="6"><span class="term" data-term="petchem">석유화학 부문 Petrochemical</span></td></tr>
+      <tr class="indent"><td>영업이익</td><td>25.5</td><td class="neg">(7.8)</td><td class="neg">(19.9)</td><td class="neg">(136.8)</td><td>127.3</td></tr>
+      <tr class="indent"><td>QoQ 변동</td><td><span class="change-pill up">흑자전환</span></td><td>적자축소</td><td>—</td><td>—</td><td>—</td></tr>
+
+      <tr class="section-head"><td colspan="6"><span class="term" data-term="lube">윤활 부문 Lube Base Oil</span></td></tr>
+      <tr class="indent"><td>영업이익 (추정)</td><td>166.6<sup>1</sup></td><td>207.0</td><td>133.6</td><td>582.1</td><td>568.3</td></tr>
+      <tr class="indent"><td>QoQ 변동</td><td><span class="change-pill down">−19.5%</span></td><td>+55%</td><td>—</td><td>—</td><td>—</td></tr>
+
+      <tr class="grand-total"><td>합계 영업이익</td><td>1,231.1</td><td>424.5</td><td>229.2</td><td>288.2</td><td>422.2</td></tr>
+
+      <tr class="section-head"><td colspan="6">매크로 환경 MACRO</td></tr>
+      <tr class="indent"><td>두바이유 분기 평균 ($/bbl)</td><td>~85.98</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr class="indent"><td>싱가포르 정제마진 ($/bbl)</td><td>$5.5 → $16.5<sup>2</sup></td><td>$7.33</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr class="indent"><td>BEP (손익분기 마진)</td><td colspan="5" style="text-align:right;font-style:italic;color:var(--ink-light)">$4-5/bbl 추정 (정유사 평균)</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    <sup>1</sup> 윤활 Q1 2026 영업이익은 합계(1,231.1) − 정유(1,039.0) − 석유화학(25.5) = 166.6의 산식 추정. 회사 IR이 별도 수치를 공개하지 않아 사업보고서 확정 전까지는 참고용.<br>
+    <sup>2</sup> 1월 $5.5 → 2월 저점 $3.22 → 2월 23일 $6.41 → 3월 $16.5로 분기 내 변동성 매우 큼.<br>
+    Source: <a href="https://www.dpi1004.com/14200" target="_blank">S-OIL Q1 2026 잠정실적</a> · <a href="https://www.etoday.co.kr/news/view/2559014" target="_blank">정제마진 변동성 — etoday</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">⚙️</span>사업부문 분석</h3>
+  <div class="edu-block">
+    <strong>정유 단일 분기 1조원 — 어떻게?</strong><br>
+    정유부문이 단일 분기에 <strong>1조원 영업이익</strong>을 낸 것은 매우 이례적. 핵심은 (1) 분기 후반 정제마진 V자 회복, (2) 호르무즈 봉쇄로 인한 두바이유 급등의 lagging effect, (3) 동·서 정유사 단기 가동차질로 수급 타이트. 셋 다 일회성 색채가 강하다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">정유 — 폭발적 회복</div>
+    <div class="card-value">+₩1,039B</div>
+    <div class="card-desc">FY2025 연간 적자(−1,571억)에서 분기 단위로 1조원으로 점프. 호르무즈 봉쇄가 가장 큰 영향 — 한국 정유 4사 합산 Q1 영업이익도 약 5조원으로 추정된다. 다만 이 수치엔 inventory gain이 큰 비중.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">석유화학 — 7분기 만에 흑자</div>
+    <div class="card-value">+₩25.5B</div>
+    <div class="card-desc">PX 스프레드 회복 + 중국 가동률 유지 + 재고이익이 결합. 절대 규모는 작지만 <strong>구조적 적자 사이클의 출구</strong> 가능성. 샤힌 가동(2027 초) 전 마지막 분기들이 흑자로 돌아서면 thesis 강화.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">윤활 — 일시 감익</div>
+    <div class="card-value">~₩166.6B</div>
+    <div class="card-desc">Q4 207억 → Q1 추정 167억으로 <strong>−19.5%</strong>. 회사는 "원재료(VGO) 가격 급등"을 사유로 명시. lagging effect의 반대편 — 기유의 경우 원재료 상승이 마진을 즉시 압박. 캐시카우 지위는 유지.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 포인트:</strong><br>
+    Q1 2026 segment 합산이 1,231.1로 정확히 회사 발표 영업이익과 일치하므로 윤활 추정값(166.6)은 합리적. 다만 회사 정식 분류상 segment 사이 internal eliminations이 있을 경우 ±5% 오차 가능.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: BALANCE SHEET ============ -->
+<div class="tab-content" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Balance Sheet</h2>
+    <div class="stmt-sub">2025년말 기준 (Q1 2026 마감 BS는 5월말 분기보고서로 공개 예정)</div>
+    <div class="stmt-unit">단위: 십억원 (KRW Billion)</div>
+  </div>
+  <div class="warn-banner">
+    <strong>Q1 2026 마감 BS 미공개</strong> — 2026년 5월 11일 잠정 실적발표는 손익 위주로 공개되었고, B/S 항목은 사업보고서(2026년 5월말~6월) 제출 시 공개됩니다. 아래는 <strong>2025년말 마지막 공개치</strong>입니다.
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:55%"></th><th>2025</th><th>2024</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">자산 ASSETS</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">현금 및 현금성자산</span></td><td>1,843</td><td>1,957</td><td><span class="change-pill down">−5.8%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="arinv">매출채권 및 재고자산</span></td><td>6,168</td><td>6,664</td><td><span class="change-pill down">−7.4%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ppe">유형자산 (순액)</span></td><td>16,989</td><td>13,582</td><td><span class="change-pill up">+25.1%</span></td></tr>
+      <tr class="indent"><td>기타자산</td><td>1,555</td><td>2,249</td><td><span class="change-pill down">−30.9%</span></td></tr>
+      <tr class="grand-total"><td>자산총계 Total Assets</td><td>26,555</td><td>24,451</td><td><span class="change-pill up">+8.6%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">부채 LIABILITIES</td></tr>
+      <tr class="indent"><td><span class="term" data-term="stdebt">단기차입금</span></td><td>5,362</td><td>4,451</td><td><span class="change-pill up">+20.5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltdebt">장기차입금</span></td><td>2,173</td><td>3,355</td><td><span class="change-pill down">−35.2%</span></td></tr>
+      <tr class="indent"><td>기타부채</td><td>8,927</td><td>8,696</td><td><span class="change-pill up">+2.7%</span></td></tr>
+      <tr class="subtotal"><td>부채총계</td><td>16,462</td><td>16,502</td><td><span class="change-pill flat">−0.2%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">자본 EQUITY</td></tr>
+      <tr class="indent"><td><span class="term" data-term="equity">자본총계</span></td><td>10,092</td><td>7,950</td><td><span class="change-pill up">+26.9%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">핵심 지표 KEY RATIOS</td></tr>
+      <tr class="indent"><td><span class="term" data-term="netdebt">순차입금 (Net Debt)</span></td><td>6,066</td><td>6,046</td><td><span class="change-pill flat">+0.3%</span></td></tr>
+      <tr class="indent"><td>순차입금 / 자기자본</td><td>67.9%</td><td>69.5%</td><td><span class="change-pill down">−1.6%p</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="roe">ROE</span></td><td>2.5%</td><td>−2.2%</td><td><span class="change-pill up">+4.7%p</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="roic">ROIC</span></td><td>2.8%</td><td>−0.7%</td><td><span class="change-pill up">+3.5%p</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://files-scs.pstatic.net/2026/01/26/LSFX9ZNfMj/4Q%202025%20S-OIL%20%EC%8B%A4%EC%A0%81%EB%B0%9C%ED%91%9C.pdf" target="_blank">S-OIL 2025년 4분기 실적발표 (2026.1.26 잠정)</a> · Q1 2026 BS는 DART 분기보고서 제출 시 확정.
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">🔍</span>재무상태표 시사점</h3>
+  <div class="edu-block">
+    <strong>Q1 어닝의 BS 함의</strong><br>
+    Q1 영업이익 1.23조 + inventory gain 0.64조 → BS 측에선 매출채권·재고 증가 + 현금 유입 가능성. 두바이유 급등이 재고평가액을 끌어올리며 6,168억원 운전자본도 일정 부분 회복됐을 가능성이 높다. <strong>Q1 마감 BS 공개 시 재고자산 항목 변동 우선 확인</strong>.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">샤힌 CAPEX 잔여</div>
+    <div class="card-value">₩1.56T (2026)</div>
+    <div class="card-desc">2026년 샤힌 CAPEX 계획 1조 5,620억. EPC 96.9% 진척으로 잔여 capital outlay는 빠르게 줄어드는 구간. 유형자산 16.99조에서 추가 +1.5조 정도가 마지막 사이클이며, 2027부터 본격 감가상각 시작.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">순차입금</div>
+    <div class="card-value">₩6.07T</div>
+    <div class="card-desc">Q1 어닝(영업이익 1.23조)으로 디레버리징 여력 확보. 다만 2026 잔여 CAPEX 1.56조 + 영업외 부담을 고려하면 순차입 큰 폭 감소는 어려울 듯. <strong>샤힌 가동 후 2027부터 본격 감소</strong>가 시나리오.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">단기차입 비중</div>
+    <div class="card-value">71%</div>
+    <div class="card-desc">단기 5,362 vs 장기 2,173. 금리 환경 따라 재조달 부담 매분기 가시화. Q1 영업현금 유입은 단기 만기 일부 상환 또는 만기 연장 협상력 강화로 이어질 가능성.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 포인트:</strong><br>
+    아람코(63.4% 지분)와의 관계상 차입 만기 도래 시 그룹 차원의 재조달 백업이 가능 — 한국 정유사 중 가장 안정적인 funding 백스톱.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: CAPEX & FINANCIAL ============ -->
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Capital Expenditure & Shaheen Project</h2>
+    <div class="stmt-sub">샤힌 프로젝트 진척 + CAPEX 사이클</div>
+    <div class="stmt-unit">단위: 십억원 (KRW Billion)</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:48%"></th><th>2024</th><th>2025</th><th>2026 계획</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="capex">자본적 지출 CAPEX</span></td></tr>
+      <tr class="indent"><td>샤힌 프로젝트</td><td>2,607</td><td>3,356</td><td>1,562</td><td>총 9,258 / 진행률 96.9% (2026.04말)</td></tr>
+      <tr class="indent"><td>공정개선·유지보수</td><td>264</td><td>456</td><td>468</td><td>유지 수준</td></tr>
+      <tr class="indent"><td>마케팅·기타</td><td>80</td><td>63</td><td>85</td><td>—</td></tr>
+      <tr class="grand-total"><td>자본적 지출 합계</td><td>2,951</td><td>3,875</td><td>2,115</td><td><span class="change-pill down">−45% YoY</span></td></tr>
+
+      <tr class="section-head"><td colspan="5">샤힌 프로젝트 SHAHEEN PROJECT</td></tr>
+      <tr class="indent"><td>총 투자금액</td><td colspan="4" style="text-align:right">₩9.26조 (~$6.7B)</td></tr>
+      <tr class="indent"><td>EPC 진행률 (2026-04 말)</td><td colspan="4" style="text-align:right"><strong>96.9%</strong></td></tr>
+      <tr class="indent"><td>기계적 완공</td><td colspan="4" style="text-align:right">2026년 6월 (계획 변동 없음)</td></tr>
+      <tr class="indent"><td>시운전</td><td colspan="4" style="text-align:right">2026년 하반기</td></tr>
+      <tr class="indent"><td>상업 가동</td><td colspan="4" style="text-align:right"><strong>2027년 초 (당초 계획 유지)</strong></td></tr>
+      <tr class="indent"><td>주요 설비</td><td colspan="4" style="text-align:right">스팀크래커 + TC2C 가열로 (설치 완료)</td></tr>
+      <tr class="indent"><td>핵심 산출물</td><td colspan="4" style="text-align:right">에틸렌 180만톤 + 프로필렌 77만톤 (총 350만톤+)</td></tr>
+      <tr class="indent"><td>피드스톡 자체조달</td><td colspan="4" style="text-align:right">정유시설에서 83% 내부 공급</td></tr>
+
+      <tr class="section-head"><td colspan="5">2026E 컨센서스 (참고)</td></tr>
+      <tr class="indent"><td>2026E 매출 (NH 추정)</td><td colspan="4" style="text-align:right">32.32조</td></tr>
+      <tr class="indent"><td>2026E 영업이익 (NH 추정)</td><td colspan="4" style="text-align:right">1.225조 <span style="font-style:italic;color:var(--red-ink)">— Q1만에 1.23조 달성, 컨센 보수적</span></td></tr>
+      <tr class="indent"><td>2026E 지배순이익 (NH 추정)</td><td colspan="4" style="text-align:right">6,670억</td></tr>
+
+      <tr class="section-head"><td colspan="5">컨센서스 12M 목표주가</td></tr>
+      <tr class="indent"><td>평균 PT</td><td colspan="4" style="text-align:right">₩121,316</td></tr>
+      <tr class="indent"><td>최고 / 최저</td><td colspan="4" style="text-align:right">₩160,000 / ₩71,000</td></tr>
+      <tr class="indent"><td>주요 IB 신규 PT</td><td colspan="4" style="text-align:right">삼성증권 ₩150,000 ↑ · NH ₩105,000 · 메리츠 ₩105,000</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://news.nate.com/view/20260316n34237" target="_blank">샤힌 진행률 95% (2026.03)</a> · <a href="https://www.dailian.co.kr/news/view/1642705/" target="_blank">샤힌 일정 변경 없음 (컨콜)</a> · <a href="https://m.thinkpool.com/breakingNews/cont/263089" target="_blank">삼성증권 1Q26 preview 목표가 150,000원</a> · <a href="https://buffettlab.co.kr/news/view.php?idx=52052" target="_blank">NH 2026 실적 전망</a> · <a href="https://www.investing.com/equities/s-oil-corp" target="_blank">컨센서스 PT — Investing.com</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>샤힌 + 가격상한제</h3>
+  <div class="edu-block">
+    <strong>샤힌 가동 D-7개월</strong><br>
+    EPC 진행률 96.9%. 2026년 6월 기계적 완공 → 하반기 시운전 → <strong>2027년 초 상업가동</strong>이라는 큰 일정이 그대로 유지되고 있다는 게 가장 중요한 fact. 단 한 분기라도 슬립 발생 시 thesis 핵심 훼손.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">CAPEX 사이클 정점 통과</div>
+    <div class="card-value">₩3.88T → ₩2.12T</div>
+    <div class="card-desc">2025년 자본지출 3조 8,750억 → 2026 계획 2조 1,150억으로 <strong>−45%</strong>. 2027부터는 유지보수 수준(연 5,000억 내외)으로 정상화 전망. <strong>FCF 회복 사이클의 시작</strong>.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">⚠️ 가격상한제 누적 손실</div>
+    <div class="card-value">₩3T+</div>
+    <div class="card-desc">정부 가격상한제로 정유사 손실이 <strong>3조원 이상 누적</strong>. 현재까지는 매출 측 직접 차감 없이 자체 흡수 구조이나, 정책이 "이익 직접 차감"으로 전환될 경우 <strong>thesis 파기 트리거</strong>. 2026년 정책 변경 여부가 최대 변수.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">2026E vs Q1 실적</div>
+    <div class="card-value">consensus 보수적</div>
+    <div class="card-desc">NH 2026E 영업이익 1.225조 — Q1 단일 분기에 1.23조를 달성했으므로 컨센은 <strong>이미 outdated</strong>. Q2 발표 이후 IB들의 가이던스 상향 사이클이 진행될 가능성. PT 분포(₩71k~₩160k)가 매우 넓은 이유 — 매크로 시나리오에 따라 갈림.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 다음 분기 트리거:</strong><br>
+    ① 2026-06: 샤힌 기계적 완공 발표<br>
+    ② 2026 H2: 샤힌 시운전 진행 — 일정 슬립 여부<br>
+    ③ Q2 실적: inventory reverse + 운영마진 단독 검증<br>
+    ④ 정부 가격상한제 정책 변경
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: S-OIL 2026년 1분기 잠정실적 (2026.05.11) · KOSPI 010950 · Educational purposes only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const glossary = {
+  revenue:{title:'Revenue (매출액)', body:'정유·석유화학·윤활 제품 판매액 총합. 정유업체의 매출은 <strong>유가와 판매량의 곱</strong>에 가까우며, 이익률보다는 마진 구조(스프레드)가 실적을 결정한다.'},
+  refining:{title:'Refining Segment (정유 부문)', body:'원유를 정제해 휘발유·경유·등유·항공유·나프타 등을 생산·판매. 매출의 약 75-79%를 차지. 영업이익은 <strong>정제마진(Crack Spread)</strong>에 직접 연동되며, 제품-원유 가격차가 핵심 드라이버. Q1 2026엔 호르무즈 봉쇄에 따른 lagging effect가 결정적으로 기여.'},
+  petchem:{title:'Petrochemical Segment (석유화학 부문)', body:'나프타를 원료로 PX(파라자일렌)·BZ(벤젠)·PP·PO 등을 생산. 중국 수요와 역내 신증설에 민감. 2022년 이후 구조적 공급과잉으로 적자를 이어왔으나, Q1 2026에 7분기 만에 흑자 전환.'},
+  lube:{title:'Lube Base Oil (윤활기유 부문)', body:'감압증류로 엔진오일·산업유의 기초원료(LBO)를 생산. 매출 비중은 9% 내외지만 영업이익률 20%대로 구조적 고마진. <strong>S-OIL의 캐시카우</strong>. Q1 2026엔 원재료(VGO) 가격 급등으로 일시 감익.'},
+  opinc:{title:'Operating Income (영업이익)', body:'매출에서 매출원가·판매관리비를 차감한 본업 이익. 금융손익·환차손익은 제외. <strong>외화부채가 큰 정유사는 영업이익과 순이익이 자주 괴리</strong>된다.'},
+  invgain:{title:'Inventory Gain (재고관련효과)', body:'원유를 매입한 시점과 제품을 판매한 시점의 가격차에서 발생하는 평가효과. <strong>유가 상승 시 lagging gain, 유가 하락 시 lagging loss</strong>로 작용. 회사의 본질적 마진 능력과는 별개의 일회성 변수로 평가하는 것이 보수적이다. Q1 2026엔 6,434억원 흑자 기여(영업이익의 52.3%).'},
+  netinc:{title:'Net Income (당기순이익)', body:'법인세 차감 후 최종 이익. 잠정 실적발표문에는 미수록, 5월말 분기보고서 제출 시 확정.'},
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산.'},
+  arinv:{title:'Receivables & Inventory (매출채권·재고자산)', body:'운전자본의 핵심. 정유사 재고는 원유·제품의 시장가 변동에 직접 노출되며, 유가 하락 시 NRV 충당금이 발생.'},
+  ppe:{title:'Property, Plant & Equipment (유형자산, 순액)', body:'토지·건물·기계장치·건설 중 자산에서 누적 감가상각을 차감한 순액. 2024~2026 급증은 <strong>샤힌 프로젝트 건설 중 자산</strong>이 대부분.'},
+  stdebt:{title:'Short-term Borrowings (단기차입금)', body:'만기 1년 이내 차입금. 비중이 높을수록 재조달·금리 리스크에 노출.'},
+  ltdebt:{title:'Long-term Borrowings (장기차입금)', body:'만기 1년 초과 차입금.'},
+  equity:{title:'Total Equity (자본총계)', body:'납입자본 + 이익잉여금 + 기타 자본요소의 합. 2025년 +2.1조 증가는 순이익 기여를 크게 초과 — 자본성 자금조달이 추가됐을 가능성.'},
+  netdebt:{title:'Net Debt (순차입금)', body:'단기차입 + 장기차입 + 리스부채 − 현금. 실질적인 재무부담 지표. 샤힌 가동 후 EBITDA 확장 시 빠른 디레버리징 기대.'},
+  roe:{title:'Return on Equity (자기자본이익률)', body:'당기순이익 / 평균 자기자본. 2025년 2.5%는 장기 평균(10%대)에 크게 못 미치며, 샤힌 가동 후 회복이 thesis 시나리오의 핵심.'},
+  roic:{title:'Return on Invested Capital (투하자본이익률)', body:'세후영업이익 / (차입금 + 자기자본). ROIC가 자본비용(WACC, 통상 7-8%)보다 낮으면 가치파괴, 높으면 가치창출.'},
+  capex:{title:'Capital Expenditure (자본적 지출)', body:'유형자산 취득에 사용된 현금. 정유사 CAPEX는 유지보수와 성장으로 나뉘며, 2024-2026은 샤힌 프로젝트가 성장 CAPEX의 대부분.'}
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

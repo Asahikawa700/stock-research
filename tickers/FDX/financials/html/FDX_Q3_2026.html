@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FedEx (FDX) — FY2026 Q3 재무제표 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#f5efe0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#e4d9d5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#e4ded5;line-height:1.6;font-weight:300}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#e0d5bc}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Form 10-Q · Filed March 19, 2026</div>
+  <h1><span>FedEx Corporation</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">FY2026 3분기 (2025.12 ~ 2026.2) 재무제표</h1>
+  <div class="subtitle">Express 호조 속 Freight 분사 비용·MD-11 점검·관세 불확실성을 흡수한 분기</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+</div>
+
+<!-- ============ BALANCE SHEET ============ -->
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Balance Sheet</h2>
+    <div class="stmt-sub">As of February 28, 2026 vs. May 31, 2025 (fiscal year-end)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Feb 28, 2026</th><th>May 31, 2025</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">ASSETS — 자산</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">Cash and cash equivalents</span></td><td>8,008</td><td>5,502</td><td><span class="change-pill up">+45.5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="restricted">Restricted cash</span></td><td>3,680</td><td>—</td><td><span class="change-pill up">신규</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ar">Receivables (대손충당금 차감 후)</span></td><td>11,807</td><td>11,368</td><td><span class="change-pill up">+3.9%</span></td></tr>
+      <tr class="indent"><td>Spare parts, supplies, and fuel</td><td>631</td><td>602</td><td><span class="change-pill up">+4.8%</span></td></tr>
+      <tr class="indent"><td>Prepaid expenses and other</td><td>1,351</td><td>914</td><td><span class="change-pill up">+47.8%</span></td></tr>
+      <tr class="subtotal"><td>Total current assets — <span class="term" data-term="curasset">유동자산 합계</span></td><td>25,477</td><td>18,386</td><td><span class="change-pill up">+38.6%</span></td></tr>
+
+      <tr class="indent"><td><span class="term" data-term="ppe">Property and equipment, at cost</span></td><td>90,106</td><td>87,622</td><td><span class="change-pill up">+2.8%</span></td></tr>
+      <tr class="indent"><td>Less: accumulated depreciation</td><td class="neg">(48,567)</td><td class="neg">(45,980)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Net property and equipment</td><td>41,539</td><td>41,642</td><td><span class="change-pill flat">−0.2%</span></td></tr>
+
+      <tr class="indent"><td><span class="term" data-term="rou">Operating lease right-of-use assets</span></td><td>16,391</td><td>16,453</td><td><span class="change-pill flat">−0.4%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="goodwill">Goodwill</span></td><td>6,758</td><td>6,603</td><td><span class="change-pill up">+2.3%</span></td></tr>
+      <tr class="indent"><td>Other assets</td><td>4,568</td><td>4,543</td><td><span class="change-pill flat">+0.6%</span></td></tr>
+      <tr class="subtotal"><td>Total other long-term assets</td><td>27,717</td><td>27,599</td><td><span class="change-pill flat">+0.4%</span></td></tr>
+
+      <tr class="grand-total"><td>TOTAL ASSETS — 자산총계</td><td>94,733</td><td>87,627</td><td><span class="change-pill up">+8.1%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">LIABILITIES — 부채</td></tr>
+      <tr class="indent"><td>Current portion of long-term debt</td><td>2,422</td><td>1,428</td><td><span class="change-pill up">+69.6%</span></td></tr>
+      <tr class="indent"><td>Accrued salaries and employee benefits</td><td>3,079</td><td>2,731</td><td><span class="change-pill up">+12.7%</span></td></tr>
+      <tr class="indent"><td>Accounts payable</td><td>4,154</td><td>3,692</td><td><span class="change-pill up">+12.5%</span></td></tr>
+      <tr class="indent"><td>Operating lease liabilities (current)</td><td>2,624</td><td>2,565</td><td><span class="change-pill flat">+2.3%</span></td></tr>
+      <tr class="indent"><td>Accrued expenses</td><td>5,008</td><td>4,995</td><td><span class="change-pill flat">+0.3%</span></td></tr>
+      <tr class="subtotal"><td>Total current liabilities</td><td>17,287</td><td>15,411</td><td><span class="change-pill up">+12.2%</span></td></tr>
+
+      <tr class="indent"><td><span class="term" data-term="ltd">Long-term debt, less current portion</span></td><td>22,831</td><td>19,151</td><td><span class="change-pill up">+19.2%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="dtl">Deferred income taxes</span></td><td>3,841</td><td>4,205</td><td><span class="change-pill down">−8.7%</span></td></tr>
+      <tr class="indent"><td>Pension &amp; postretirement obligations</td><td>1,682</td><td>1,698</td><td><span class="change-pill flat">−0.9%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="selfins">Self-insurance accruals</span></td><td>4,320</td><td>4,033</td><td><span class="change-pill up">+7.1%</span></td></tr>
+      <tr class="indent"><td>Operating lease liabilities (long-term)</td><td>14,145</td><td>14,272</td><td><span class="change-pill flat">−0.9%</span></td></tr>
+      <tr class="indent"><td>Other liabilities</td><td>823</td><td>783</td><td><span class="change-pill up">+5.1%</span></td></tr>
+      <tr class="subtotal"><td>Total other long-term liabilities</td><td>24,811</td><td>24,991</td><td><span class="change-pill flat">−0.7%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">COMMON STOCKHOLDERS' INVESTMENT — 자본</td></tr>
+      <tr class="indent"><td>Common stock ($0.10 par)</td><td>32</td><td>32</td><td>—</td></tr>
+      <tr class="indent"><td><span class="term" data-term="apic">Additional paid-in capital</span></td><td>4,614</td><td>4,290</td><td><span class="change-pill up">+7.6%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="re">Retained earnings</span></td><td>42,864</td><td>41,402</td><td><span class="change-pill up">+3.5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="aocl">AOCL</span></td><td class="neg">(1,220)</td><td class="neg">(1,362)</td><td><span class="change-pill up">개선</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="treasury">Treasury stock, at cost</span></td><td class="neg">(16,486)</td><td class="neg">(16,288)</td><td><span class="change-pill down">−1.2%</span></td></tr>
+      <tr class="subtotal"><td>Total stockholders' investment — 자본총계</td><td>29,804</td><td>28,074</td><td><span class="change-pill up">+6.2%</span></td></tr>
+
+      <tr class="grand-total"><td>TOTAL LIABILITIES &amp; EQUITY — 부채·자본 총계</td><td>94,733</td><td>87,627</td><td><span class="change-pill up">+8.1%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/sec-filings/FDX/10-q-fedex-corp-quarterly-earnings-report-c9b5b59a6842.html" target="_blank">FedEx Corporation Form 10-Q for the quarterly period ended February 28, 2026</a> · Filed with the SEC on March 19, 2026
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📋</span>재무상태표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">현금 포지션 급증</div>
+    <div class="card-value">$11.7B</div>
+    <div class="card-desc">현금($8.0B) + 제한된 현금($3.7B). 9개월 만에 +$6.2B 증가했는데, 대부분은 FedEx Freight 분사 자금 조달용 채권 발행 수익금이 별도 계좌에 보관된 결과다.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Long-term Debt</div>
+    <div class="card-value">$22.8B</div>
+    <div class="card-desc">전기말 대비 +$3.7B. 2026년 2월 FedEx Freight Holding이 발행한 시니어 무담보 채권 $3.7B이 핵심 증가분이다. 분사 완료 시 신설 회사로 부채가 이전될 예정.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">자본총계</div>
+    <div class="card-value">$29.8B</div>
+    <div class="card-desc">9개월 누적 순이익 $2.84B − 배당 $1.37B − 자사주 매입 $0.78B 흐름으로 +$1.7B 증가. 이익 환원이 컸지만 이익 누적이 더 커서 자본은 늘었다.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Restricted cash가 뭐길래?</strong><br>
+    제한된 현금은 회사가 보유하지만 특정 목적 외에는 쓸 수 없는 현금이다. FedEx의 $3.68B는 Freight 분사 시 신설 회사로 이전될 자금으로 별도 계좌에 락인되어 있다. 일반 영업 현금흐름과 분리해서 봐야 한다.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Treasury stock(자기주식)이 마이너스인 이유</strong><br>
+    회사가 자사주를 매입하면 발행주식 수가 줄고 그만큼 자본에서 차감된다. FedEx는 누적 $16.5B의 자사주를 보유 중이며, 이는 EPS를 끌어올리는 효과가 있다.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ INCOME STATEMENT ============ -->
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Income</h2>
+    <div class="stmt-sub">Three Months Ended February 28, 2026 vs. February 28, 2025</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Q3 FY2026</th><th>Q3 FY2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="grand-total"><td><span class="term" data-term="rev">REVENUE — 매출</span></td><td>24,000</td><td>22,160</td><td><span class="change-pill up">+8.3%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">OPERATING EXPENSES — 영업비용</td></tr>
+      <tr class="indent"><td>Salaries and employee benefits</td><td>8,819</td><td>7,879</td><td><span class="change-pill down">+11.9%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="purch">Purchased transportation</span></td><td>6,084</td><td>5,634</td><td><span class="change-pill down">+8.0%</span></td></tr>
+      <tr class="indent"><td>Rentals and landing fees</td><td>1,235</td><td>1,178</td><td><span class="change-pill down">+4.8%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="da">Depreciation and amortization</span></td><td>1,112</td><td>1,066</td><td><span class="change-pill down">+4.3%</span></td></tr>
+      <tr class="indent"><td>Fuel</td><td>856</td><td>889</td><td><span class="change-pill up">−3.7%</span></td></tr>
+      <tr class="indent"><td>Maintenance and repairs</td><td>771</td><td>783</td><td><span class="change-pill up">−1.5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="separ">Separation and other costs</span></td><td>202</td><td>5</td><td><span class="change-pill down">+3940%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="bizopt">Business optimization costs</span></td><td>65</td><td>179</td><td><span class="change-pill up">−63.7%</span></td></tr>
+      <tr class="indent"><td>Other</td><td>3,508</td><td>3,255</td><td><span class="change-pill down">+7.8%</span></td></tr>
+      <tr class="subtotal"><td>Total operating expenses</td><td>22,652</td><td>20,868</td><td><span class="change-pill down">+8.5%</span></td></tr>
+
+      <tr class="grand-total"><td><span class="term" data-term="opinc">OPERATING INCOME — 영업이익</span></td><td>1,348</td><td>1,292</td><td><span class="change-pill up">+4.3%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">OTHER (EXPENSE) INCOME</td></tr>
+      <tr class="indent"><td>Interest, net</td><td class="neg">(138)</td><td class="neg">(116)</td><td><span class="change-pill down">+19.0%</span></td></tr>
+      <tr class="indent"><td>Other retirement plans, net</td><td>59</td><td>50</td><td><span class="change-pill up">+18.0%</span></td></tr>
+      <tr class="indent"><td>Other, net</td><td class="neg">(6)</td><td class="neg">(45)</td><td><span class="change-pill up">개선</span></td></tr>
+      <tr class="subtotal"><td>Total other expense</td><td class="neg">(85)</td><td class="neg">(111)</td><td><span class="change-pill up">개선</span></td></tr>
+
+      <tr class="indent"><td>Income before income taxes</td><td>1,263</td><td>1,181</td><td><span class="change-pill up">+6.9%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="tax">Provision for income taxes</span></td><td>207</td><td>272</td><td><span class="change-pill up">−23.9%</span></td></tr>
+      <tr class="grand-total"><td>NET INCOME — 순이익</td><td>1,056</td><td>909</td><td><span class="change-pill up">+16.2%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="eps">EARNINGS PER SHARE</span></td></tr>
+      <tr class="indent"><td>Basic EPS</td><td>$4.46</td><td>$3.79</td><td><span class="change-pill up">+17.7%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="depseps">Diluted EPS</span></td><td>$4.41</td><td>$3.76</td><td><span class="change-pill up">+17.3%</span></td></tr>
+      <tr class="indent"><td>Dividends declared per share</td><td>$1.45</td><td>$1.38</td><td><span class="change-pill up">+5.1%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/sec-filings/FDX/10-q-fedex-corp-quarterly-earnings-report-c9b5b59a6842.html" target="_blank">FedEx Corporation Form 10-Q · Q3 FY2026</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">매출 성장</div>
+    <div class="card-value">+8.3%</div>
+    <div class="card-desc">$22.2B → $24.0B. 미국 국내 및 국제 priority 패키지 yield 강세와 미국 패키지 물량 증가가 견인. 연료유 surcharge 하락은 역풍.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">영업이익률</div>
+    <div class="card-value">5.6%</div>
+    <div class="card-desc">전년 5.8%에서 소폭 하락. 영업이익 자체는 +4.3% 증가($1.29B→$1.35B)했지만, 인건비(+11.9%) 부담과 분사 관련 일회성 비용 $202M이 마진을 압박했다.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">분사·최적화 비용</div>
+    <div class="card-value">$267M</div>
+    <div class="card-desc">Separation $202M + Business optimization $65M. 전년동기 $184M 대비 +45%. Freight 분사 진행에 따른 자문 수수료와 인센티브 보상이 핵심.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">순이익 / Diluted EPS</div>
+    <div class="card-value">$1.06B / $4.41</div>
+    <div class="card-desc">실효세율이 23%→16.4%로 떨어진 효과로 순이익이 +16.2% 점프. 영업이익 성장률(+4.3%)보다 훨씬 높은 EPS 성장은 세금 효과와 자사주 매입 누적 영향이다.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Separation costs vs Business optimization</strong><br>
+    <strong>Separation</strong>은 FedEx Freight 분사라는 일회성 이벤트 비용(자문료·인센티브)이고, <strong>Business optimization</strong>은 Network 2.0, DRIVE, 유럽 인력 감축 등 다년간 진행되는 구조조정 비용이다. 둘 다 일회성으로 분류해 핵심 영업 성과에서 떼어내고 보는 게 일반적이다.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 세그먼트 격차</strong><br>
+    Federal Express(Express) 영업이익 $1.57B로 견조한 반면, FedEx Freight는 $8M으로 급락. LTL(소량 화물) 수요 부진과 매크로 약세가 Freight를 압박. 그래서 분사 결정의 정당성이 강화된다.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ CASH FLOW ============ -->
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Cash Flows</h2>
+    <div class="stmt-sub">Nine Months Ended February 28, 2026 vs. February 28, 2025</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>9M FY2026</th><th>9M FY2025</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cfo">OPERATING ACTIVITIES — 영업활동</span></td></tr>
+      <tr class="indent"><td>Net income</td><td>2,836</td><td>2,444</td><td><span class="change-pill up">+16.0%</span></td></tr>
+      <tr class="indent"><td>Depreciation and amortization</td><td>3,272</td><td>3,207</td><td><span class="change-pill flat">+2.0%</span></td></tr>
+      <tr class="indent"><td>Provision for uncollectible accounts</td><td>694</td><td>382</td><td><span class="change-pill up">+81.7%</span></td></tr>
+      <tr class="indent"><td>Other noncash items (leases, deferred tax)</td><td>2,197</td><td>2,353</td><td><span class="change-pill flat">−6.6%</span></td></tr>
+      <tr class="indent"><td>Stock-based compensation</td><td>136</td><td>116</td><td><span class="change-pill up">+17.2%</span></td></tr>
+      <tr class="indent"><td>Separation and other costs, net of payments</td><td>129</td><td>4</td><td><span class="change-pill up">대폭증</span></td></tr>
+      <tr class="indent"><td>Business optimization costs, net of payments</td><td class="neg">(129)</td><td>114</td><td><span class="change-pill down">반전</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="wc">Δ Receivables (운전자본)</span></td><td class="neg">(1,090)</td><td class="neg">(692)</td><td>—</td></tr>
+      <tr class="indent"><td>Δ Other assets</td><td class="neg">(241)</td><td class="neg">(68)</td><td>—</td></tr>
+      <tr class="indent"><td>Δ Accounts payable and other liabilities</td><td class="neg">(2,144)</td><td class="neg">(3,387)</td><td>—</td></tr>
+      <tr class="indent"><td>Other, net</td><td>—</td><td>44</td><td>—</td></tr>
+      <tr class="grand-total"><td>Cash provided by operating activities</td><td>5,660</td><td>4,517</td><td><span class="change-pill up">+25.3%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">INVESTING ACTIVITIES — 투자활동</td></tr>
+      <tr class="indent"><td><span class="term" data-term="capex">Capital expenditures (CAPEX)</span></td><td class="neg">(2,335)</td><td class="neg">(2,582)</td><td><span class="change-pill up">−9.6%</span></td></tr>
+      <tr class="indent"><td>Purchase of investments</td><td class="neg">(427)</td><td class="neg">(197)</td><td>—</td></tr>
+      <tr class="indent"><td>Proceeds from sale of investments</td><td>254</td><td>77</td><td>—</td></tr>
+      <tr class="indent"><td>Asset dispositions and other</td><td>73</td><td>42</td><td>—</td></tr>
+      <tr class="grand-total"><td>Cash used in investing activities</td><td class="neg">(2,435)</td><td class="neg">(2,660)</td><td><span class="change-pill up">개선</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">FINANCING ACTIVITIES — 재무활동</td></tr>
+      <tr class="indent"><td>Proceeds from debt issuances</td><td>4,689</td><td>—</td><td><span class="change-pill up">신규</span></td></tr>
+      <tr class="indent"><td>Principal payments on debt</td><td class="neg">(714)</td><td class="neg">(89)</td><td>—</td></tr>
+      <tr class="indent"><td>Proceeds from stock issuances</td><td>774</td><td>472</td><td><span class="change-pill up">+64.0%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="div">Dividends paid</span></td><td class="neg">(1,028)</td><td class="neg">(1,008)</td><td><span class="change-pill flat">+2.0%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="buyback">Purchases of common stock</span></td><td class="neg">(796)</td><td class="neg">(2,517)</td><td><span class="change-pill down">−68.4%</span></td></tr>
+      <tr class="indent"><td>Other</td><td class="neg">(49)</td><td class="neg">(30)</td><td>—</td></tr>
+      <tr class="grand-total"><td>Cash provided by (used in) financing</td><td>2,876</td><td class="neg">(3,172)</td><td><span class="change-pill up">반전</span></td></tr>
+
+      <tr class="indent"><td>Effect of exchange rate changes</td><td>85</td><td class="neg">(51)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Net increase (decrease) in cash</td><td>6,186</td><td class="neg">(1,366)</td><td>—</td></tr>
+      <tr class="indent"><td>Cash at beginning of period</td><td>5,502</td><td>6,501</td><td>—</td></tr>
+      <tr class="grand-total"><td>Cash at end of period (incl. restricted)</td><td>11,688</td><td>5,135</td><td><span class="change-pill up">+127.6%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/sec-filings/FDX/10-q-fedex-corp-quarterly-earnings-report-c9b5b59a6842.html" target="_blank">FedEx Corporation Form 10-Q · 9M FY2026</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">영업활동 현금흐름</div>
+    <div class="card-value">$5.66B</div>
+    <div class="card-desc">전년 동기 $4.52B 대비 +25%. 순이익 증가($2.44B→$2.84B)뿐 아니라 운전자본 부담 감소(매입채무 변동이 −$3.39B→−$2.14B로 완화)가 핵심. CFO/순이익 비율 ~2.0배는 높은 이익 품질을 의미한다.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">잉여현금흐름 (FCF)</div>
+    <div class="card-value">$3.32B</div>
+    <div class="card-desc">CFO $5.66B − CAPEX $2.34B. 전년 동기 FCF $1.94B 대비 +71% 증가. CAPEX는 의도적으로 줄이는 중(연 가이던스 $4.1B 이하).</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">주주 환원</div>
+    <div class="card-value">$1.82B</div>
+    <div class="card-desc">배당 $1.03B + 자사주 매입 $0.78B. 전년 동기 환원 $3.53B에서 큰 폭 감소했는데, 주로 자사주 매입을 줄였기 때문. Freight 분사를 앞두고 현금을 보존하는 전략으로 해석된다.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">신규 차입</div>
+    <div class="card-value">$4.69B</div>
+    <div class="card-desc">주로 FedEx Freight Holding의 시니어 무담보 채권 $3.7B 발행. 분사 후 신설 회사가 부담할 부채 구조를 미리 만든 것이며, 그래서 별도 계좌(restricted cash)에 보관 중.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 영업CF가 순이익보다 큰 게 왜 좋은가?</strong><br>
+    감가상각·이연세금 같은 비현금 비용은 손익계산서 이익을 줄이지만 실제 현금이 빠져나가지 않는다. 따라서 CFO가 순이익을 안정적으로 상회한다는 것은 회계 이익이 실제 현금으로 잘 전환되고 있다는 뜻이고, 이를 <strong>이익 품질(quality of earnings)</strong>이라 한다.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 이번 분기 현금증가 $6.2B의 정체</strong><br>
+    숫자만 보면 어마어마하지만, 이 중 $3.7B은 분사용으로 묶인 restricted cash다. 일반 영업·환원 가능한 현금 증가는 약 $2.5B 수준으로 보는 게 합리적이다.
+  </div>
+</div>
+</div>
+</div>
+
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: FedEx Corporation Form 10-Q · Quarterly Period Ended February 28, 2026 · Filed March 19, 2026 · Educational purposes only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산. 회사의 단기 지급능력을 보여주는 가장 직접적인 지표다.'},
+  restricted:{title:'Restricted Cash (제한된 현금)', body:'회사가 보유는 하지만 특정 목적(예: 분사, 담보, 보증금)을 위해 사용이 제한된 현금. FedEx의 $3.68B는 FedEx Freight 분사 시 신설 회사로 이전될 채권 발행 자금이다.'},
+  ar:{title:'Receivables (매출채권)', body:'고객에게 서비스 제공 후 아직 받지 못한 대금. 대손충당금(allowance)을 차감한 순액으로 표시한다. 매출채권이 매출보다 빨리 늘면 대금 회수가 늦어진다는 신호일 수 있다.'},
+  curasset:{title:'Current Assets (유동자산)', body:'1년 이내에 현금화될 것으로 기대되는 자산. 유동부채와 비교해 단기 유동성을 평가한다.'},
+  ppe:{title:'Property, Plant and Equipment (유형자산)', body:'항공기, 트럭, 분류시설, 토지·건물 등 1년 이상 사용하는 물리적 자산. FedEx 같은 물류 기업의 자본집약도를 보여주는 핵심 항목이다.'},
+  rou:{title:'Operating Lease Right-of-use Assets (운영리스 사용권자산)', body:'2019년 ASC 842 시행 이후 운영리스도 자산·부채로 인식한다. 임차한 항공기·시설을 사용할 권리를 자산으로 잡고, 임차료 지급 의무를 부채로 잡는다.'},
+  goodwill:{title:'Goodwill (영업권)', body:'기업 인수 시 인수가격이 피인수기업의 순자산 공정가치를 초과한 부분. 손상 검사(impairment test)를 매년 받으며, 손상 시 일시에 큰 손실이 잡힐 수 있다.'},
+  ltd:{title:'Long-term Debt (장기차입금)', body:'1년 이후 만기인 차입금·회사채. FedEx의 +$3.7B 증가분은 분사 예정인 FedEx Freight Holding이 발행한 시니어 무담보 채권이다.'},
+  dtl:{title:'Deferred Income Taxes (이연법인세부채)', body:'회계상 이익과 세무상 이익의 시점 차이로 미래에 내야 할 세금. 감가상각 가속이 대표적 원인이다.'},
+  selfins:{title:'Self-insurance Accruals (자가보험 충당금)', body:'대형 운송사는 차량 사고·작업자 부상 등 일상적 손실을 외부 보험에 들지 않고 직접 부담하는 경우가 많다. 미래에 지급할 보상금을 미리 부채로 잡아둔 금액.'},
+  apic:{title:'Additional Paid-in Capital (자본잉여금)', body:'주식을 액면가보다 비싸게 발행할 때 액면가 초과분이 쌓이는 계정. 직원 스톡옵션 행사·RSU 부여 시에도 늘어난다.'},
+  re:{title:'Retained Earnings (이익잉여금)', body:'창립 이래 누적 순이익 중 배당으로 빠져나가지 않고 회사 안에 남아있는 부분. 매분기 순이익이 더해지고 배당 선언액이 차감된다.'},
+  aocl:{title:'AOCL — Accumulated Other Comprehensive Loss (기타포괄손익누계액)', body:'외화환산조정·연금조정·파생상품 평가 등 손익계산서에는 잡히지 않지만 자본을 증감시키는 항목의 누적액. FedEx는 누적 손실 상태(괄호 표시).'},
+  treasury:{title:'Treasury Stock (자기주식)', body:'회사가 시장에서 다시 사들인 자기 주식. 자본에서 차감 표시되며, 발행주식 수를 줄여 EPS와 ROE를 끌어올리는 효과가 있다.'},
+  rev:{title:'Revenue (매출)', body:'배송·운송 서비스를 제공하고 고객으로부터 받기로 약정한 대가. FedEx는 패키지 배달 시점에 인식한다.'},
+  purch:{title:'Purchased Transportation (구매 운송비)', body:'FedEx가 직접 운송하지 않고 외부 협력사(트럭 운송업체, 컨트랙터 등)에 위탁할 때 지급하는 비용. 모델의 변동비 성격을 보여주는 핵심 항목.'},
+  da:{title:'Depreciation and Amortization (감가상각비)', body:'유형자산(항공기·시설)과 무형자산의 가치를 사용 기간에 걸쳐 비용으로 인식. 현금이 빠져나가지 않는 비용이라 영업CF에 가산된다.'},
+  separ:{title:'Separation and Other Costs (분리 관련 비용)', body:'FedEx Freight 분사와 회계연도 변경에 따른 일회성 비용. 자문료·법률 자문·임직원 인센티브 등이 포함된다. 9개월 누적 $460M.'},
+  bizopt:{title:'Business Optimization Costs (사업 최적화 비용)', body:'Network 2.0(미국·캐나다 네트워크 통합), DRIVE(원가 절감 프로그램), 유럽 인력 감축 등 다년간 구조조정에서 발생하는 퇴직금·자문료. 일회성으로 보는 게 일반적.'},
+  opinc:{title:'Operating Income (영업이익)', body:'매출에서 모든 영업비용을 뺀 이익. 본업 수익성을 보여주며, 이자·세금 효과는 제외된다.'},
+  tax:{title:'Provision for Income Taxes (법인세 비용)', body:'당기 손익에 부과되는 법인세. 세전이익으로 나누면 실효세율이 나오는데, FedEx의 이번 분기 실효세율은 약 16.4%로 미국 법정세율(21%)보다 낮다.'},
+  eps:{title:'EPS — Earnings Per Share (주당순이익)', body:'순이익을 발행주식 수로 나눈 값. 한 주가 벌어들인 이익을 나타내며, 주가와 함께 PER 산정의 핵심 입력값이다.'},
+  depseps:{title:'Diluted EPS (희석 주당순이익)', body:'스톡옵션·RSU·전환사채 등이 모두 보통주로 전환됐다고 가정한 EPS. 실제보다 약간 보수적으로 측정된 EPS이며, 보통 Basic EPS보다 작다.'},
+  cfo:{title:'Cash Flow from Operations (영업활동 현금흐름)', body:'본업에서 실제로 벌어들인 현금. 순이익에 비현금 항목을 가감하고 운전자본 변동을 반영해 계산한다. 이익 품질을 평가하는 핵심 지표.'},
+  wc:{title:'Working Capital Changes (운전자본 변동)', body:'매출채권·재고·매입채무 등 단기 영업 자산·부채의 변동. 매출채권이 늘면 현금이 묶여 CFO가 줄고, 매입채무가 늘면 지급 시점이 늦춰져 CFO가 는다.'},
+  capex:{title:'Capital Expenditures (자본적 지출, CAPEX)', body:'항공기·차량·분류시설 같은 장기 자산을 사거나 만드는 데 쓴 현금. FedEx 같은 자본집약 산업에선 CFO 대비 CAPEX 비율(자본 강도)이 핵심 효율 지표다.'},
+  div:{title:'Dividends Paid (배당 지급액)', body:'주주에게 실제로 지급한 현금배당. 손익계산서엔 안 잡히고 자본 차감 + 재무활동 현금유출로 나타난다.'},
+  buyback:{title:'Share Repurchases (자사주 매입)', body:'회사가 시장에서 자기 주식을 사들이는 행위. 발행주식 수를 줄여 EPS를 끌어올리는 효과가 있고, 이사회 승인 한도 내에서 이뤄진다. FedEx는 2024년 승인된 $5B 프로그램에서 진행 중.'}
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EQT Corporation (EQT) — Q1 2026 재무제표 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#f5efe0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#e4d9d5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#e4ded5;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#e0d5bc}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:24px}
+.kpi-box{background:rgba(255,255,255,.03);border:1px solid var(--paper-edge);padding:14px 16px;border-radius:4px}
+.kpi-box .kpi-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);margin-bottom:4px}
+.kpi-box .kpi-value{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink)}
+.kpi-box .kpi-sub{font-size:11px;color:var(--ink-faint);margin-top:2px}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-badge">Q1 2026 · 8-K Press Release</div>
+  <h1><span>EQT Corporation</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">2026년 1분기 실적 발표 — 2026-04-21</h1>
+  <div class="subtitle">기록적 FCF $1.83B · 순부채 한 분기에 $2B 감소 · Fitch BBB 상향</div>
+</div>
+
+<!-- ============ TAB BAR ============ -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+  <button class="tab-btn" onclick="switchTab('ops', this)"><span class="tab-icon">⛽</span>생산 & 운영</button>
+</div>
+
+<!-- ============ TAB: BALANCE SHEET ============ -->
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Balance Sheet</h2>
+    <div class="stmt-sub">As of March 31, 2026 (unaudited) vs December 31, 2025</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>2026-03-31</th><th>2025-12-31</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">자산 (ASSETS)</td></tr>
+      <tr><td><span class="term" data-term="cash">현금 및 현금성자산</span></td><td>327</td><td>111</td><td class="pos-change">+194%</td></tr>
+      <tr><td>매출채권</td><td>953</td><td>1,458</td><td class="neg-change">-35%</td></tr>
+      <tr><td><span class="term" data-term="deriv">파생상품 자산 (공정가치)</span></td><td>184</td><td>202</td><td class="neg-change">-9%</td></tr>
+      <tr><td>선급비용 및 기타</td><td>93</td><td>124</td><td class="neg-change">-25%</td></tr>
+      <tr class="subtotal"><td>유동자산 합계</td><td>1,557</td><td>1,895</td><td class="neg-change">-18%</td></tr>
+
+      <tr class="indent"><td><span class="term" data-term="ppe">유형자산 (총)</span></td><td>49,068</td><td>48,472</td><td class="pos-change">+1%</td></tr>
+      <tr class="indent2"><td>차감: <span class="term" data-term="dda">누적 감가상각·감모상각</span></td><td class="neg">(15,540)</td><td class="neg">(14,915)</td><td>—</td></tr>
+      <tr class="subtotal"><td>유형자산 순액</td><td>33,529</td><td>33,558</td><td class="flat">~flat</td></tr>
+      <tr><td>지분법 적용 투자지분 (MVP 등)</td><td>3,916</td><td>3,631</td><td class="pos-change">+8%</td></tr>
+      <tr><td>무형자산 순액</td><td>197</td><td>200</td><td>—</td></tr>
+      <tr><td>영업권 (Goodwill)</td><td>2,062</td><td>2,062</td><td>—</td></tr>
+      <tr><td>기타자산</td><td>432</td><td>446</td><td>—</td></tr>
+      <tr class="grand-total"><td>자산 총계</td><td>41,692</td><td>41,793</td><td class="flat">~flat</td></tr>
+
+      <tr class="section-head"><td colspan="4">부채 (LIABILITIES)</td></tr>
+      <tr><td>유동성 장기부채</td><td>508</td><td>507</td><td>—</td></tr>
+      <tr><td>매입채무</td><td>1,415</td><td>1,367</td><td class="pos-change">+4%</td></tr>
+      <tr><td>파생상품 부채 (공정가치)</td><td>64</td><td>137</td><td class="neg-change">-53%</td></tr>
+      <tr><td>미지급이자</td><td>88</td><td>138</td><td class="neg-change">-36%</td></tr>
+      <tr><td>기타 유동부채</td><td>292</td><td>335</td><td class="neg-change">-13%</td></tr>
+      <tr class="subtotal"><td>유동부채 합계</td><td>2,366</td><td>2,485</td><td class="neg-change">-5%</td></tr>
+
+      <tr><td><span class="term" data-term="revolver">리볼빙 신용한도 차입금</span></td><td>271</td><td>360</td><td class="neg-change">-25%</td></tr>
+      <tr><td><span class="term" data-term="seniornotes">시니어 노트 (장기)</span></td><td>5,214</td><td>6,933</td><td class="neg-change">-25%</td></tr>
+      <tr><td>이연법인세 부채</td><td>3,882</td><td>3,472</td><td class="pos-change">+12%</td></tr>
+      <tr><td><span class="term" data-term="aro">자산폐쇄의무 및 기타</span></td><td>1,172</td><td>1,183</td><td>—</td></tr>
+      <tr class="grand-total"><td>부채 총계</td><td>12,905</td><td>14,433</td><td class="neg-change">-11%</td></tr>
+
+      <tr class="section-head"><td colspan="4">자본 (EQUITY)</td></tr>
+      <tr><td>보통주 (무액면, 발행 625.5M주)</td><td>19,498</td><td>19,518</td><td>—</td></tr>
+      <tr><td>이익잉여금</td><td>5,623</td><td>4,237</td><td class="pos-change">+33%</td></tr>
+      <tr><td>기타포괄손익누계액</td><td class="neg">(2)</td><td class="neg">(2)</td><td>—</td></tr>
+      <tr class="subtotal"><td>EQT 귀속 자본</td><td>25,119</td><td>23,753</td><td class="pos-change">+6%</td></tr>
+      <tr><td><span class="term" data-term="nci">비지배지분</span></td><td>3,668</td><td>3,607</td><td class="pos-change">+2%</td></tr>
+      <tr class="grand-total"><td>자본 총계</td><td>28,787</td><td>27,360</td><td class="pos-change">+5%</td></tr>
+      <tr class="grand-total"><td>부채 및 자본 총계</td><td>41,692</td><td>41,793</td><td class="flat">~flat</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/EQT/eqt-reports-first-quarter-2026-4u469vcqs9e0.html" target="_blank">EQT Corporation Q1 2026 Press Release (8-K, 2026-04-21)</a> · 상세는 Form 10-Q 참조 예정
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📋</span>재무상태표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">DELEVERAGING</div>
+    <div class="card-value">-$1,808M</div>
+    <div class="card-desc">시니어 노트 <strong>$6.93B → $5.21B</strong> 한 분기에 -25%. 3월 텐더오퍼 $1.4B + FCF로 자연 상환 병행. 이자비용 -18% YoY 수반.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">TOTAL DEBT / NET DEBT</div>
+    <div class="card-value">$6.0B / $5.7B</div>
+    <div class="card-desc">YE2025 $7.8B/$7.7B 대비 <strong>한 분기에 -$2B</strong> 감소. 회사 공식 목표 <strong>YE2026 $5B 하회</strong>. $2.75/MMBtu 시나리오에서도 유효.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width: 88%; background: linear-gradient(90deg, var(--green-accent), var(--gold-light));"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CASH POSITION</div>
+    <div class="card-value">$327M</div>
+    <div class="card-desc">분기 초 $111M 대비 3배 증가. 리볼버 $3.5B 미사용. <strong>총 유동성 약 $3.8B</strong> 확보.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">EQT 귀속 자본</div>
+    <div class="card-value">$25.1B</div>
+    <div class="card-desc">이익잉여금 분기에 <strong>+$1.39B</strong> (Q1 순이익 $1.49B - 배당 $103M 지급). BPS ≈ $40.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 포인트: Equitrans 인수 후 부채 정상화</strong><br>
+    2024-07 Equitrans M&A 직후 순부채는 <strong>$13.6B</strong>까지 치솟았다. Q1 2026 종료 시 $5.7B로 <strong>약 58% 축소</strong>. 경영진이 제시한 장기 상한 $5B에 3.4분기 만에 근접 중.
+  </div>
+
+  <div class="edu-block">
+    <strong>🏦 IG 신용등급 3관왕</strong><br>
+    Fitch <strong>BBB</strong> (이번 분기 상향) · Moody's <strong>Baa3</strong> · S&P <strong>BBB-</strong> — 모두 stable. 향후 리파이낸싱 시 스프레드 추가 축소 여지.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: INCOME STATEMENT ============ -->
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Operations</h2>
+    <div class="stmt-sub">Three Months Ended March 31, 2026 vs 2025 (unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">영업수익 (Operating Revenues)</td></tr>
+      <tr><td>천연가스, NGL 및 원유 매출</td><td>3,440</td><td>2,245</td><td class="pos-change">+53%</td></tr>
+      <tr><td><span class="term" data-term="derivloss">파생상품 평가손실</span></td><td class="neg">(238)</td><td class="neg">(679)</td><td>—</td></tr>
+      <tr><td>파이프라인 및 기타</td><td>177</td><td>174</td><td class="flat">flat</td></tr>
+      <tr class="subtotal"><td>영업수익 합계</td><td>3,379</td><td>1,740</td><td class="pos-change">+94%</td></tr>
+
+      <tr class="section-head"><td colspan="4">영업비용 (Operating Expenses)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="gathering">수송·처리비 (Gathering/Transmission/Processing)</span></td><td>400</td><td>378</td><td class="pos-change">+6%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="loe">유정 운영비 (LOE)</span></td><td>115</td><td>88</td><td class="pos-change">+30%</td></tr>
+      <tr class="indent"><td>운영·유지보수 (O&M)</td><td>55</td><td>47</td><td class="pos-change">+16%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="expl">탐사비</span></td><td>0</td><td>1</td><td>—</td></tr>
+      <tr class="indent"><td>판매관리비 (SG&A)</td><td>96</td><td>91</td><td class="pos-change">+5%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="dda">감가상각·감모상각·무형자산상각 (DD&A)</span></td><td>655</td><td>621</td><td class="pos-change">+5%</td></tr>
+      <tr class="indent"><td>장기자산 매각·교환 손익</td><td>0</td><td>0</td><td>—</td></tr>
+      <tr class="indent"><td>리스 손상 및 소멸</td><td>4</td><td>3</td><td>—</td></tr>
+      <tr class="indent"><td>기타 영업비용</td><td>18</td><td>13</td><td class="pos-change">+31%</td></tr>
+      <tr class="subtotal"><td>영업비용 합계</td><td>1,343</td><td>1,244</td><td class="pos-change">+8%</td></tr>
+      <tr class="grand-total"><td>영업이익 (Operating Income)</td><td>2,036</td><td>496</td><td class="pos-change">+310%</td></tr>
+
+      <tr class="section-head"><td colspan="4">영업외 손익</td></tr>
+      <tr><td>지분법 투자이익</td><td>78</td><td>26</td><td class="pos-change">+196%</td></tr>
+      <tr><td>기타 수익</td><td>0</td><td>1</td><td>—</td></tr>
+      <tr><td>채무 상환 손실</td><td class="neg">(30)</td><td class="neg">(12)</td><td>—</td></tr>
+      <tr><td>이자비용 (순)</td><td class="neg">(97)</td><td class="neg">(118)</td><td class="pos-change">-18%</td></tr>
+      <tr class="subtotal"><td>세전이익</td><td>1,987</td><td>394</td><td class="pos-change">+404%</td></tr>
+      <tr><td>법인세 비용</td><td class="neg">(433)</td><td class="neg">(79)</td><td>—</td></tr>
+      <tr class="subtotal"><td>당기순이익</td><td>1,554</td><td>315</td><td class="pos-change">+393%</td></tr>
+      <tr><td class="indent"><span class="term" data-term="nci">비지배지분 귀속 순이익</span></td><td class="neg">(67)</td><td class="neg">(73)</td><td>—</td></tr>
+      <tr class="grand-total"><td><strong>EQT 귀속 순이익</strong></td><td>1,487</td><td>242</td><td class="pos-change">+514%</td></tr>
+
+      <tr class="section-head"><td colspan="4">주당 지표 (Per Share)</td></tr>
+      <tr><td>희석 EPS (GAAP)</td><td>$2.36</td><td>$0.40</td><td class="pos-change">+490%</td></tr>
+      <tr><td><span class="term" data-term="adjeps">조정 EPS (Non-GAAP)</span></td><td>$2.33</td><td>$1.18</td><td class="pos-change">+97%</td></tr>
+      <tr><td>희석 가중평균 주식수 (백만)</td><td>629.2</td><td>602.8</td><td class="pos-change">+4%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/EQT/eqt-reports-first-quarter-2026-4u469vcqs9e0.html" target="_blank">EQT Q1 2026 Press Release</a> · 컨센서스 (EPS $2.14 / 매출 $3.21B) 대비 EPS +$0.19 비트, 매출 +$170M 비트
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">AVG REALIZED PRICE</div>
+    <div class="card-value">$5.08</div>
+    <div class="card-desc">Mcfe당 실현가. Q1 2025 <strong>$3.77</strong> 대비 <strong>+34.7%</strong>. NYMEX 평균 $4.95 + basis $0.05 + Btu uplift $0.27 − hedge settlements $0.20 조합.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">REVENUE GROWTH</div>
+    <div class="card-value">+94% YoY</div>
+    <div class="card-desc">매출 $1.74B → $3.38B. <strong>가격 +35% × 볼륨 +8% × 헷지 드래그 축소</strong>의 3단 복합. 파생 평가손실 -$238M이 전년 -$679M 대비 크게 축소.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width: 94%; background: linear-gradient(90deg, var(--green-accent), var(--gold-light));"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">OPERATING LEVERAGE</div>
+    <div class="card-value">+310%</div>
+    <div class="card-desc">매출 +94%에 영업이익 +310% — <strong>비용은 +8%만 증가</strong>. 저비용 구조가 가격 회복기에 어떻게 작동하는지 교과서적. 영업이익률 <strong>60%</strong> (전년 29%).</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">GAAP vs ADJUSTED EPS</div>
+    <div class="card-value">$2.36 / $2.33</div>
+    <div class="card-desc">이례적으로 <strong>GAAP EPS가 Adj EPS보다 높음</strong>. 이유: 미정산 파생 평가손실을 제외해도 채무상환손실(-$30M) 등 일회성 비용 영향으로 Adj가 살짝 낮게 계산됨. 정상 분기에선 보통 Adj가 높음.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 포인트: DD&A가 FCF 머신의 핵심</strong><br>
+    DD&A $655M은 비현금 비용이다. 순이익 $1.55B에 DD&A를 더하면 <strong>~$2.2B의 현금 창출력</strong>이 나온다. 여기서 CAPEX $608M을 빼면 FCF로 전환. 가스 가격이 $5대를 유지하면 이 패턴은 2026 내내 반복 가능.
+  </div>
+
+  <div class="edu-block">
+    <strong>⚠️ 헷지 위치 주의</strong><br>
+    Q2~Q4 2026 헷지 콜 단축 평균 <strong>$4.94~$5.13</strong>, 풋 롱 평균 <strong>$3.50~$3.72</strong>. 현재 스팟 $2.70 환경에서 Q2~Q4 분기당 헷지 현금정산 <strong>+$90M~$100M</strong> 예상 → 실현가 방어 가능.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: CASH FLOW ============ -->
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Statements of Cash Flows</h2>
+    <div class="stmt-sub">Three Months Ended March 31, 2026 vs 2025 (unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">영업활동 현금흐름 (Operating Activities)</td></tr>
+      <tr><td>당기순이익</td><td>1,554</td><td>315</td><td class="pos-change">+393%</td></tr>
+      <tr class="indent"><td>이연법인세 비용</td><td>410</td><td>72</td><td>—</td></tr>
+      <tr class="indent"><td>DD&A (비현금)</td><td>655</td><td>621</td><td class="pos-change">+5%</td></tr>
+      <tr class="indent"><td>지분법 투자이익 (공제)</td><td class="neg">(78)</td><td class="neg">(26)</td><td>—</td></tr>
+      <tr class="indent"><td>채무 상환 손실 (비현금)</td><td>30</td><td>12</td><td>—</td></tr>
+      <tr class="indent"><td>주식기준보상비용</td><td>19</td><td>15</td><td>—</td></tr>
+      <tr class="indent"><td>지분법 투자 분배금 수령</td><td>47</td><td>67</td><td>—</td></tr>
+      <tr class="indent"><td>파생상품 평가손실 (비현금)</td><td>238</td><td>679</td><td>—</td></tr>
+      <tr class="indent"><td>파생상품 현금정산 (순)</td><td class="neg">(304)</td><td class="neg">(92)</td><td>—</td></tr>
+      <tr class="indent"><td>운전자본 변동 (순)</td><td>474</td><td>74</td><td class="pos-change">+540%</td></tr>
+      <tr class="indent2"><td>기타 조정</td><td>10</td><td>4</td><td>—</td></tr>
+      <tr class="grand-total"><td><span class="term" data-term="cfo">영업활동 현금흐름</span></td><td>3,055</td><td>1,741</td><td class="pos-change">+76%</td></tr>
+
+      <tr class="section-head"><td colspan="4">투자활동 현금흐름 (Investing Activities)</td></tr>
+      <tr><td><span class="term" data-term="capex">자본적지출 (CAPEX)</span></td><td class="neg">(599)</td><td class="neg">(500)</td><td class="neg-change">+20%</td></tr>
+      <tr><td>지분법 투자 출자</td><td class="neg">(28)</td><td class="neg">(18)</td><td>—</td></tr>
+      <tr><td>지분법 추가 지분 인수 (MVP)</td><td class="neg">(215)</td><td>—</td><td>—</td></tr>
+      <tr><td>자산 매각·교환 (순)</td><td>0</td><td class="neg">(6)</td><td>—</td></tr>
+      <tr><td>인수 (현금)</td><td>—</td><td class="neg">(10)</td><td>—</td></tr>
+      <tr class="grand-total"><td>투자활동 현금흐름</td><td class="neg">(842)</td><td class="neg">(534)</td><td class="neg-change">+58%</td></tr>
+
+      <tr class="section-head"><td colspan="4">재무활동 현금흐름 (Financing Activities)</td></tr>
+      <tr><td>리볼버 차입</td><td>950</td><td>1,424</td><td>—</td></tr>
+      <tr><td>리볼버 상환</td><td class="neg">(1,039)</td><td class="neg">(1,610)</td><td>—</td></tr>
+      <tr><td><strong>장기부채 상환 (텐더오퍼 포함)</strong></td><td class="neg">(1,730)</td><td class="neg">(740)</td><td class="neg-change">+134%</td></tr>
+      <tr><td>채무 상환 프리미엄</td><td class="neg">(21)</td><td class="neg">(10)</td><td>—</td></tr>
+      <tr><td>배당금 지급</td><td class="neg">(103)</td><td class="neg">(94)</td><td class="pos-change">+10%</td></tr>
+      <tr><td>비지배지분 출자</td><td>98</td><td>—</td><td>—</td></tr>
+      <tr><td>비지배지분 분배금</td><td class="neg">(104)</td><td class="neg">(45)</td><td>—</td></tr>
+      <tr><td>주식보상 순정산 세금</td><td class="neg">(46)</td><td class="neg">(50)</td><td>—</td></tr>
+      <tr class="grand-total"><td>재무활동 현금흐름</td><td class="neg">(1,997)</td><td class="neg">(1,127)</td><td class="neg-change">+77%</td></tr>
+
+      <tr class="grand-total"><td>현금 순증감</td><td>216</td><td>80</td><td class="pos-change">+170%</td></tr>
+
+      <tr class="section-head"><td colspan="4">Non-GAAP FCF 산출</td></tr>
+      <tr><td>영업활동 현금흐름</td><td>3,055</td><td>1,741</td><td>—</td></tr>
+      <tr class="indent"><td>차감: 운전자본 변동</td><td class="neg">(474)</td><td class="neg">(74)</td><td>—</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="adjocf">조정 영업현금흐름</span></td><td>2,581</td><td>1,667</td><td class="pos-change">+55%</td></tr>
+      <tr class="indent"><td>차감: CAPEX (발생기준)</td><td class="neg">(608)</td><td class="neg">(497)</td><td>—</td></tr>
+      <tr class="indent"><td>차감: 지분법 투자 출자</td><td class="neg">(28)</td><td class="neg">(18)</td><td>—</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="fcf">Free Cash Flow (연결 전체)</span></td><td>1,945</td><td>1,151</td><td class="pos-change">+69%</td></tr>
+      <tr class="indent"><td>차감: 비지배지분 귀속분 조정</td><td class="neg">(114)</td><td class="neg">(116)</td><td>—</td></tr>
+      <tr class="grand-total"><td><strong>FCF Attributable to EQT (기록)</strong></td><td>1,832</td><td>1,036</td><td class="pos-change">+77%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/EQT/eqt-reports-first-quarter-2026-4u469vcqs9e0.html" target="_blank">EQT Q1 2026 Press Release, Non-GAAP Reconciliation</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">FREE CASH FLOW (EQT 귀속)</div>
+    <div class="card-value">$1,832M</div>
+    <div class="card-desc"><strong>역대 분기 최고치.</strong> 전년 동기 $1,036M 대비 +77%. 회사 자체 차트 기준: 이 한 분기가 <strong>2022년 연간 FCF와 맞먹음</strong>.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width: 100%; background: linear-gradient(90deg, var(--gold-light), var(--green-accent));"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CFO vs NET INCOME</div>
+    <div class="card-value">1.97x</div>
+    <div class="card-desc">CFO $3,055M ÷ 순이익 $1,554M = 이익의 질(quality of earnings) 매우 높음. DD&A $655M + 운전자본 환입 $474M이 주동력.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">DEBT REPAYMENT</div>
+    <div class="card-value">$1,730M</div>
+    <div class="card-desc">장기부채를 <strong>한 분기에 $1.73B</strong> 상환 (텐더오퍼 $1.4B + 예정 만기 분). 배당 $103M, 자사주매입 $0. <strong>FCF의 94%를 부채 상환에 투입.</strong></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CAPEX INTENSITY</div>
+    <div class="card-value">19.9%</div>
+    <div class="card-desc">CAPEX $608M ÷ CFO $3,055M. 업계 평균(30~40%) 대비 낮음. Q2는 capex 피크($735~830M) 예상되나 <strong>연간 $2.65~2.85B</strong>로 여전히 FCF $3.5B 가이드 하회.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 포인트: FCF 기계의 구조</strong><br>
+    Q1 CFO $3,055M 중 <strong>운전자본 환입 $474M</strong>은 Q4 2025 매출채권 회수 타이밍 효과 — 일회성. 이를 제외한 "조정 영업현금흐름" $2,581M이 지속 가능한 분기 런레이트. 여기서 CAPEX를 빼면 <strong>분기당 ~$2B의 recurring FCF 생성력</strong> 확인.
+  </div>
+
+  <div class="edu-block">
+    <strong>🎯 주주환원 전환점 임박</strong><br>
+    Q1엔 주주환원 <strong>배당 $103M만</strong>. 자사주매입 $0. 회사 공식 입장: <strong>순부채 $5B 도달 이후 매입 재개</strong>. 현재 $5.7B에서 남은 FCF 잉여만으로 2~3분기 내 도달 가능 → <strong>H2 2026 자사주매입 재개 시나리오</strong>가 thesis의 마지막 reflexive 트리거.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: PRODUCTION & OPERATIONS ============ -->
+<div class="tab-content" id="tab-ops">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Production, Unit Metrics & 2026 Guidance</h2>
+    <div class="stmt-sub">E&P 업종 필수 지표 + 회사 공식 가이던스</div>
+    <div class="stmt-unit">Bcfe, $/Mcfe, 기타 단위 혼합</div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <div class="kpi-label">Sales Volume</div>
+      <div class="kpi-value">618 <span style="font-size:12px;color:var(--ink-light)">Bcfe</span></div>
+      <div class="kpi-sub">가이던스 상단 초과. Q1 2025: 571</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Realized Price</div>
+      <div class="kpi-value">$5.08 <span style="font-size:12px;color:var(--ink-light)">/Mcfe</span></div>
+      <div class="kpi-sub">헷지 포함. YoY +34.7%</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Unit Operating Cost</div>
+      <div class="kpi-value">$1.09 <span style="font-size:12px;color:var(--ink-light)">/Mcfe</span></div>
+      <div class="kpi-sub">가이던스 하단 -2%</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Unlevered FCF Breakeven</div>
+      <div class="kpi-value">~$2.00 <span style="font-size:12px;color:var(--ink-light)">/MMBtu</span></div>
+      <div class="kpi-sub">북미 최저 수준</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:16px;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--paper-edge)">단위당 운영비용 내역 ($/Mcfe)</h3>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%">비용 항목</th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="term" data-term="gathering">Gathering (수집배관)</span></td><td>$0.09</td><td>$0.08</td><td class="neg-change">+$0.01</td></tr>
+      <tr><td>Transmission (송출)</td><td>$0.43</td><td>$0.44</td><td class="pos-change">-$0.01</td></tr>
+      <tr><td>Processing (처리)</td><td>$0.13</td><td>$0.14</td><td class="pos-change">-$0.01</td></tr>
+      <tr><td><span class="term" data-term="loe">LOE (유정운영비)</span></td><td>$0.09</td><td>$0.07</td><td class="neg-change">+$0.02</td></tr>
+      <tr><td>Production Taxes (생산세)</td><td>$0.10</td><td>$0.08</td><td class="neg-change">+$0.02</td></tr>
+      <tr><td>O&M</td><td>$0.09</td><td>$0.08</td><td class="neg-change">+$0.01</td></tr>
+      <tr><td>SG&A</td><td>$0.16</td><td>$0.16</td><td class="flat">flat</td></tr>
+      <tr class="grand-total"><td>Total Operating Costs</td><td>$1.09</td><td>$1.05</td><td class="neg-change">+$0.04</td></tr>
+      <tr><td><span class="term" data-term="depletion">Production Depletion (감모)</span></td><td>$0.92</td><td>$0.95</td><td class="pos-change">-$0.03</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:16px;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--paper-edge)">실현가격 구성요소 ($/Mcf · 천연가스 only)</h3>
+  <table class="fin-table">
+    <thead><tr><th style="width:52%"></th><th>Q1 2026</th><th>Q1 2025</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><span class="term" data-term="henryhub">NYMEX Henry Hub 평균</span></td><td>$4.95</td><td>$3.65</td><td class="pos-change">+36%</td></tr>
+      <tr><td>Btu uplift</td><td>$0.27</td><td>$0.18</td><td>—</td></tr>
+      <tr class="subtotal"><td>천연가스 가격 ($/Mcf)</td><td>$5.22</td><td>$3.83</td><td class="pos-change">+36%</td></tr>
+      <tr><td><span class="term" data-term="basis">Basis ($/Mcf)</span></td><td>$0.38</td><td>$(0.01)</td><td>—</td></tr>
+      <tr><td>Basis 헷지 정산</td><td>$(0.33)</td><td>$(0.08)</td><td>—</td></tr>
+      <tr class="subtotal"><td>평균 조정가격</td><td>$5.27</td><td>$3.74</td><td class="pos-change">+41%</td></tr>
+      <tr><td>NYMEX 헷지 현금정산</td><td>$(0.20)</td><td>$(0.08)</td><td>—</td></tr>
+      <tr class="grand-total"><td><strong>평균 실현가 (헷지 포함)</strong></td><td><strong>$5.07</strong></td><td><strong>$3.66</strong></td><td class="pos-change">+39%</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:16px;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--paper-edge)">2026 가이던스 (회사 공식)</h3>
+  <table class="fin-table">
+    <thead><tr><th style="width:52%">항목</th><th>Q2 2026E</th><th>FY 2026E</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>총 판매량 (Bcfe)</td><td>570 – 620</td><td>2,275 – 2,375</td><td style="font-size:10px;color:var(--ink-light)">Q2 curtailment 10-15 Bcfe 포함</td></tr>
+      <tr><td>평균 디퍼렌셜 ($/Mcf)</td><td>$(0.75) – $(0.65)</td><td>$(0.55) – $(0.35)</td><td>—</td></tr>
+      <tr><td>Maintenance CAPEX ($M)</td><td>525 – 595</td><td>2,070 – 2,210</td><td>—</td></tr>
+      <tr><td>Growth CAPEX ($M)</td><td>210 – 235</td><td>580 – 640</td><td style="font-size:10px;color:var(--ink-light)">Q2 피크, H2 감소</td></tr>
+      <tr><td>Total CAPEX ($M)</td><td>735 – 830</td><td>2,650 – 2,850</td><td>—</td></tr>
+      <tr><td>단위 운영비 ($/Mcfe)</td><td>$1.03 – $1.17</td><td>$1.07 – $1.21</td><td>—</td></tr>
+      <tr><td>현금 세금 ($M, $3.50 NYMEX)</td><td>—</td><td>$0 – $100</td><td>—</td></tr>
+      <tr><td>현금 세금 ($M, $4.50 NYMEX)</td><td>—</td><td>$250 – $350</td><td>—</td></tr>
+      <tr class="subtotal"><td><strong>Adj EBITDA (att. EQT, 자체 가이드)</strong></td><td>—</td><td><strong>~$6.5B</strong></td><td>—</td></tr>
+      <tr class="grand-total"><td><strong>FCF (att. EQT, 자체 가이드)</strong></td><td>—</td><td><strong>~$3.5B</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/EQT/eqt-reports-first-quarter-2026-4u469vcqs9e0.html" target="_blank">EQT Q1 2026 Press Release + Investor Presentation (2026-04-21)</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">⛽</span>운영·전략 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">GUIDANCE EXECUTION</div>
+    <div class="card-value">3/3 BEAT</div>
+    <div class="card-desc">판매량 <strong>가이드 상단 초과</strong>, CAPEX <strong>하단 -4%</strong>, 단위비용 <strong>하단 -2%</strong>. Winter Storm Fern 덕분도 있지만 system pressure optimization 기여가 큼.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Q1 FCF vs FY GUIDE</div>
+    <div class="card-value">52%</div>
+    <div class="card-desc">Q1 FCF $1.83B = 연간 가이드 $3.5B의 <strong>52%를 한 분기에 완료</strong>. 남은 9개월 바가 낮음. Q2 curtailment 10-15 Bcfe 감안해도 가이드 여유.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width: 52%; background: linear-gradient(90deg, var(--gold-light), var(--green-accent));"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">LNG PORTFOLIO</div>
+    <div class="card-value">6.0 MTPA</div>
+    <div class="card-desc">Port Arthur 2.0 (FID✅), Rio Grande 1.5 (FID✅), Commonwealth 2.0, Texas LNG 0.5. <strong>독립 E&P 중 1위</strong>. 2030-31 가동 시작, "오늘 가동 중이었다면 $2.5B/년 추가 FCF".</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">MVP BOOST</div>
+    <div class="card-value">+20%</div>
+    <div class="card-desc">파이프라인 용량 500 → <strong>600 MDth/d</strong> 업사이즈. 오픈시즌 오버서브스크라이브 → <strong>데이터센터 demand pull이 이미 가격에 반영 중</strong>. 빌드 멀티플 <strong>~3.0x EBITDA</strong>.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 LOE 상승의 배경</strong><br>
+    LOE Mcfe당 $0.07 → $0.09로 +28%. 원인은 (1) <strong>Olympus Energy 자산 (2025-07 인수)</strong> 통합 후 자산 믹스 변화, (2) water handling 비용 증가, (3) 겨울 maintenance. 구조적 비용 증가는 아님.
+  </div>
+
+  <div class="edu-block">
+    <strong>⛽ Strategic Curtailment = 규율</strong><br>
+    Q2 2026에 <strong>10-15 Bcfe 의도적 감산</strong>. 이유: shoulder season 낮은 가격에 팔지 않고 여름/LNG pull 시즌으로 볼륨 이연. 회사가 "가격 받고 싶을 때만 판다"는 <strong>가격 규율 증거</strong>. 주가 민감형 E&P와 달리 수량 게임 안 함.
+  </div>
+
+  <div class="edu-block">
+    <strong>🎯 5년 누적 FCF 시나리오</strong><br>
+    2026E-2030E 누적 FCF 가이드:<br>
+    · $2.75/MMBtu: <strong>~$11B</strong><br>
+    · $3.50/MMBtu: <strong>~$17B</strong> (현 strip)<br>
+    · $5.00/MMBtu: <strong>~$29B</strong><br>
+    현 시총 $35.6B 대비 <strong>31~82%</strong>를 5년 FCF로 회수.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: EQT Corporation 8-K · Q1 2026 · Press release dated 2026-04-21 · Educational purposes only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산. EQT는 분기 중 $111M → $327M으로 3배 증가.'},
+  deriv:{title:'Derivative Instruments (파생상품, 공정가치)', body:'천연가스 가격 헷지를 위한 NYMEX 선물·옵션 포지션의 시가평가 금액. 가격이 strike 위로 움직이면 short call 포지션의 부채가 커진다. 미정산 부분이므로 손익은 실현되지 않음.'},
+  ppe:{title:'Property, Plant and Equipment (유형자산)', body:'유전 개발자산, 파이프라인, 설비 등 장기 실물자산의 취득원가 총액. E&P에서는 감모(depletion) 누적분을 차감해 순액으로 평가.'},
+  dda:{title:'Depreciation, Depletion and Amortization (DD&A, 감가·감모·무형자산상각)', body:'E&P에서 D들 중 두 번째 D가 핵심. 천연가스를 생산할수록 매장량이 줄어드는 "감모(depletion)"는 비현금 비용으로 회계처리되지만 실제 현금 지출은 없다. EQT Q1: $655M.'},
+  revolver:{title:'Revolving Credit Facility (리볼빙 신용한도)', body:'약정한도 내에서 필요시 인출·상환이 가능한 회전 대출. EQT는 $3.5B 리볼버 중 $271M만 사용 중 (Eureka 자회사). 유동성 버퍼 역할.'},
+  seniornotes:{title:'Senior Notes (시니어 무담보 회사채)', body:'기업의 장기 무담보 회사채. 파산 시 변제 우선순위가 주식보다 앞. EQT는 Q1에 텐더오퍼로 $1.4B 조기 상환 → 시니어 노트 잔액 $6.93B → $5.21B (-25%).'},
+  aro:{title:'Asset Retirement Obligations (자산폐쇄의무)', body:'유정·파이프라인을 가동 종료 후 복구·철거할 법적 의무의 현재가치. 매년 "accretion"으로 증가하는 비현금 비용이 발생.'},
+  nci:{title:'Noncontrolling Interest (비지배지분)', body:'EQT가 연결하지만 100% 소유하지 않는 자회사의 타인 지분. Midstream JV (EQT 40% Class A) + Eureka Holdings (EQT 60%) 관련. Q1 비지배지분 귀속 순이익 $67M.'},
+  derivloss:{title:'Loss on Derivatives (파생상품 평가손실)', body:'미정산 헷지 포지션의 공정가치 변동. 가격이 short call strike ($4.94) 위로 움직일 때 평가손실 발생 — 다만 **미실현** 손실이므로 현금 유출 아님. Adj EPS 계산 시 제외.'},
+  gathering:{title:'Gathering/Transmission/Processing (수집·송출·처리비)', body:'유정에서 생산된 가스를 소비지까지 운송하는 중간 과정의 비용. EQT는 수직통합 구조로 내부 마진을 내재화 → 경쟁사 대비 단위비용 우위.'},
+  loe:{title:'Lease Operating Expense (LOE, 유정 운영비)', body:'개별 유정 운영에 직접 관련된 비용 — 노동, water handling, 화학첨가제, 전기 등. E&P의 "직접 생산원가"에 해당. EQT Q1: Mcfe당 $0.09.'},
+  expl:{title:'Exploration Expenses (탐사비)', body:'시추 실패 (dry hole) 비용과 lease 소멸 비용. 성공한 well은 자본화되고, 실패만 비용처리됨 (Successful Efforts 회계).'},
+  adjeps:{title:'Adjusted EPS (조정 주당순이익)', body:'GAAP EPS에서 미정산 파생 평가손익, 일회성 자산매각 손익, 채무상환 손실 등을 제외한 값. E&P에서는 GAAP보다 Adj가 "실제 영업성과"를 더 잘 반영. Q1 2026: Adj $2.33 vs GAAP $2.36.'},
+  cfo:{title:'Cash Flow from Operations (영업활동 현금흐름)', body:'핵심 영업에서 창출된 현금. EQT Q1: $3.06B. 순이익에 DD&A 같은 비현금비용을 더하고 운전자본 변동을 반영해 계산.'},
+  capex:{title:'Capital Expenditures (자본적지출)', body:'유전 개발·파이프라인 건설·장비 구매 등 장기자산 취득. E&P에서는 maintenance (생산유지) vs growth (성장) 구분이 중요. EQT 2026 가이드: maintenance $2.07~2.21B + growth $0.58~0.64B.'},
+  adjocf:{title:'Adjusted Operating Cash Flow (조정 영업현금흐름)', body:'CFO에서 운전자본 변동을 제외해 순수 영업성과만 남긴 지표. 분기별 변동성이 큰 매출채권/매입채무 영향을 제거 → 지속가능한 현금 창출력 파악용.'},
+  fcf:{title:'Free Cash Flow (잉여현금흐름)', body:'조정 영업현금흐름 − CAPEX − 지분법 출자. 주주환원 및 부채 상환 가용 현금. EQT Q1 2026: 연결 $1.95B, 비지배지분 조정 후 EQT 귀속 $1.83B (역대 분기 최고).'},
+  henryhub:{title:'Henry Hub (NYMEX 기준가격)', body:'미국 루이지애나 Henry Hub의 천연가스 현물·선물 벤치마크. 북미 가스 가격의 기준점. EQT Q1 2026 평균 NYMEX $4.95/MMBtu (스팟 4월 말 현재 $2.70 수준).'},
+  basis:{title:'Basis Differential (베이시스 디퍼렌셜)', body:'지역 delivery point 가격과 NYMEX Henry Hub 가격의 차이. Appalachia는 일반적으로 NYMEX 대비 -$0.50~-$1.00 낮음. Q1은 오히려 +$0.38로 역전 — 따뜻한 겨울 + 타이트한 지역 수급 영향.'},
+  depletion:{title:'Production Depletion (생산감모)', body:'E&P 고유 개념. 매장량을 생산할수록 자산가치가 줄어드는 것을 비용으로 인식. 비현금. 매장량 1 Mcfe를 생산할 때마다 자산에서 $0.92 (Q1 2026)가 비용처리됨.'},
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

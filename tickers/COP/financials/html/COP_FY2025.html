@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConocoPhillips (COP) — 2025년 4분기 & 연간 재무제표 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#e8e0d0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#d4c9b5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#a0937f;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#c8bfa8}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-badge">SEC Filing · 8-K Exhibit 99.1 · 4Q &amp; FY 2025</div>
+  <h1><span>CONOCOPHILLIPS</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">Fourth Quarter &amp; Full Year 2025 Financial Results</h1>
+  <div class="subtitle">교육 목적 재무제표 정리 · year ended December 31, 2025 · announced Feb 5, 2026</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+</div>
+
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Balance Sheet</h2>
+    <div class="stmt-sub">As of December 31, 2025 vs December 31, 2024</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>DEC 2025</th><th>DEC 2024</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">ASSETS</td></tr>
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Current Assets</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">Cash and cash equivalents</span></td><td>6,497</td><td>5,607</td><td><span class="change-pill up">+16%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="sti">Short-term investments</span></td><td>484</td><td>507</td><td><span class="change-pill down">-5%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ar">Accounts and notes receivable</span></td><td>5,813</td><td>6,695</td><td><span class="change-pill down">-13%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="inventory">Inventories</span></td><td>1,873</td><td>1,809</td><td><span class="change-pill up">+4%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="prepaid">Prepaid expenses &amp; other current</span></td><td>865</td><td>1,029</td><td><span class="change-pill down">-16%</span></td></tr>
+      <tr class="subtotal indent"><td>Total current assets</td><td>15,532</td><td>15,647</td><td><span class="change-pill flat">-1%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Non-Current Assets</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltinv">Investments and long-term receivables</span></td><td>10,185</td><td>9,869</td><td><span class="change-pill up">+3%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ppe">Net properties, plants and equipment</span></td><td>93,239</td><td>94,356</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="indent"><td>Other assets</td><td>2,983</td><td>2,908</td><td><span class="change-pill up">+3%</span></td></tr>
+      <tr class="subtotal indent"><td>Total non-current assets</td><td>106,407</td><td>107,133</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="grand-total"><td><span class="term" data-term="ta">Total Assets</span></td><td>121,939</td><td>122,780</td><td><span class="change-pill flat">-1%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="padding-top:24px">LIABILITIES &amp; STOCKHOLDERS' EQUITY</td></tr>
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Current Liabilities</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ap">Accounts payable</span></td><td>6,218</td><td>6,044</td><td><span class="change-pill up">+3%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="stdebt">Short-term debt</span></td><td>1,020</td><td>1,035</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="indent"><td>Accrued income and other taxes</td><td>1,835</td><td>2,460</td><td><span class="change-pill down">-25%</span></td></tr>
+      <tr class="indent"><td>Employee benefit obligations</td><td>1,136</td><td>1,087</td><td><span class="change-pill up">+5%</span></td></tr>
+      <tr class="indent"><td>Other accruals</td><td>1,763</td><td>1,498</td><td><span class="change-pill up">+18%</span></td></tr>
+      <tr class="subtotal indent"><td>Total current liabilities</td><td>11,972</td><td>12,124</td><td><span class="change-pill flat">-1%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:8px"><em>Non-Current Liabilities</em></td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltdebt">Long-term debt</span></td><td>22,424</td><td>23,289</td><td><span class="change-pill down">-4%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="aro">Asset retirement &amp; environmental</span></td><td>8,214</td><td>8,089</td><td><span class="change-pill up">+2%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="defertax">Deferred income taxes</span></td><td>12,237</td><td>11,426</td><td><span class="change-pill up">+7%</span></td></tr>
+      <tr class="indent"><td>Employee benefit obligations (LT)</td><td>969</td><td>1,022</td><td><span class="change-pill down">-5%</span></td></tr>
+      <tr class="indent"><td>Other liabilities and deferred credits</td><td>1,636</td><td>2,034</td><td><span class="change-pill down">-20%</span></td></tr>
+      <tr class="subtotal indent"><td>Total non-current liabilities</td><td>45,480</td><td>45,860</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="subtotal indent"><td>Total liabilities</td><td>57,452</td><td>57,984</td><td><span class="change-pill flat">-1%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4" style="font-size:13px; padding-top:12px"><em>Stockholders' Equity</em></td></tr>
+      <tr class="subtotal indent"><td>Total stockholders' equity</td><td>64,487</td><td>64,796</td><td><span class="change-pill flat">0%</span></td></tr>
+      <tr class="grand-total"><td>Total Liab. + Equity</td><td>121,939</td><td>122,780</td><td><span class="change-pill flat">-1%</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source links:
+    <a href="https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000005/cop-20260205x8kexx991.htm" target="_blank">SEC 8-K 99.1</a> ·
+    <a href="https://www.sec.gov/Archives/edgar/data/0001163165/000116316526000005/cop-20260205x8kexx992.htm" target="_blank">Supplemental 99.2</a> ·
+    <a href="https://www.conocophillips.com/investor" target="_blank">COP Investor</a>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">🔍</span>재무상태표 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>재무상태표(Balance Sheet)</strong>는 특정 시점의 재무 스냅샷이다. E&amp;P(탐사·생산) 회사에서는 <strong>유형자산(PP&amp;E)</strong>, <strong>장기차입</strong>, <strong>자산폐기의무(ARO)</strong>를 같이 봐야 진짜 그림이 잡힌다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">현금 + 단기투자</div>
+    <div class="card-value" style="color:#27ae60;">$7.0B</div>
+    <div class="card-desc">현금 65억 + 단기투자 5억. 회사 자료엔 현금·단기투자 합계 74억, 장기투자 11억까지 포함해 유동성 버퍼가 넓다. 유가 변동성 대비 안전판.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">유형자산(PP&amp;E)</div>
+    <div class="card-value">$93.2B</div>
+    <div class="card-desc">총자산의 76%가 유형자산이다. 2024년 말 Marathon Oil 인수 이후 PP&amp;E가 $70B → $94B로 점프했고, 이후 분기엔 거의 평탄. E&amp;P는 유정·설비가 본체다.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:76%; background: linear-gradient(90deg, var(--gold), var(--gold-light))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">장기차입</div>
+    <div class="card-value">$22.4B</div>
+    <div class="card-desc">연초 $23.3B → $22.4B로 $865M 감소. 2025년 중 부채 $913M을 순상환. Marathon 인수로 늘었던 차입을 순차 감축 중.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">자산폐기의무 (ARO)</div>
+    <div class="card-value" style="color:#f5f0e8;">$8.2B</div>
+    <div class="card-desc">석유회사 특유 항목. 유정 폐쇄·환경 복구에 장래 써야 할 현재가치 비용을 부채로 잡는다. 매 분기 accretion $90M씩 이자비용처럼 불어난다.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 포인트:</strong><br>
+    항공사와 달리 E&amp;P는 <strong>유형자산·매장량·ARO</strong>가 핵심이다. 자산 구조만 봐도 "돈이 어디 묻혀있는지" 보인다.
+  </div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Operations</h2>
+    <div class="stmt-sub">4Q25 vs 4Q24 &amp; FY2025 vs FY2024</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:38%"></th><th>4Q25</th><th>4Q24</th><th>FY25</th><th>FY24</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5">REVENUES AND OTHER INCOME</td></tr>
+      <tr class="indent"><td>Sales and other operating revenues</td><td>13,392</td><td>14,236</td><td>58,944</td><td>54,745</td></tr>
+      <tr class="indent"><td><span class="term" data-term="equityearn">Equity in earnings of affiliates</span></td><td>283</td><td>440</td><td>1,335</td><td>1,705</td></tr>
+      <tr class="indent"><td><span class="term" data-term="dispogain">Gain (loss) on dispositions</span></td><td>332</td><td class="neg">(35)</td><td>731</td><td>51</td></tr>
+      <tr class="indent"><td>Other income</td><td>178</td><td>96</td><td>538</td><td>452</td></tr>
+      <tr class="subtotal"><td>Total revenues and other income</td><td>14,185</td><td>14,737</td><td>61,548</td><td>56,953</td></tr>
+
+      <tr class="section-head"><td colspan="5">COSTS AND EXPENSES</td></tr>
+      <tr class="indent"><td><span class="term" data-term="purchcomm">Purchased commodities</span></td><td>5,195</td><td>5,073</td><td>22,325</td><td>20,012</td></tr>
+      <tr class="indent"><td>Production and operating expenses</td><td>2,621</td><td>2,311</td><td>10,331</td><td>8,751</td></tr>
+      <tr class="indent"><td>Selling, general &amp; administrative</td><td>181</td><td>630</td><td>893</td><td>1,158</td></tr>
+      <tr class="indent"><td><span class="term" data-term="expl">Exploration expenses</span></td><td>138</td><td>71</td><td>407</td><td>355</td></tr>
+      <tr class="indent"><td><span class="term" data-term="dda">Depreciation, depletion &amp; amortization</span></td><td>2,999</td><td>2,664</td><td>11,500</td><td>9,599</td></tr>
+      <tr class="indent"><td>Impairments</td><td>14</td><td>46</td><td>26</td><td>80</td></tr>
+      <tr class="indent"><td>Taxes other than income taxes</td><td>498</td><td>520</td><td>2,146</td><td>2,087</td></tr>
+      <tr class="indent"><td><span class="term" data-term="accretion">Accretion on discounted liabilities</span></td><td>95</td><td>85</td><td>378</td><td>325</td></tr>
+      <tr class="indent"><td>Interest and debt expense</td><td>195</td><td>191</td><td>855</td><td>783</td></tr>
+      <tr class="indent"><td>Foreign currency / other</td><td>4</td><td>176</td><td>31</td><td>131</td></tr>
+      <tr class="subtotal"><td>Total costs and expenses</td><td>11,940</td><td>11,767</td><td>48,892</td><td>43,281</td></tr>
+
+      <tr class="indent"><td>Income before income taxes</td><td>2,245</td><td>2,970</td><td>12,656</td><td>13,672</td></tr>
+      <tr class="indent"><td>Income tax provision</td><td>803</td><td>664</td><td>4,668</td><td>4,427</td></tr>
+      <tr class="grand-total"><td>Net Income</td><td>1,442</td><td>2,306</td><td>7,988</td><td>9,245</td></tr>
+      <tr class="subtotal"><td>Diluted EPS ($)</td><td>1.17</td><td>1.90</td><td>6.35</td><td>7.81</td></tr>
+
+      <tr class="section-head"><td colspan="5">ADJUSTED / NON-GAAP</td></tr>
+      <tr class="indent"><td><span class="term" data-term="adjearn">Adjusted earnings</span></td><td>1,263</td><td>2,405</td><td>7,742</td><td>9,224</td></tr>
+      <tr class="subtotal"><td>Adjusted diluted EPS ($)</td><td>1.02</td><td>1.98</td><td>6.16</td><td>7.79</td></tr>
+
+      <tr class="section-head"><td colspan="5">PRODUCTION &amp; PRICES</td></tr>
+      <tr class="indent"><td><span class="term" data-term="mboed">Total production (MBOED)</span></td><td>2,320</td><td>2,183</td><td>2,375</td><td>1,987</td></tr>
+      <tr class="indent"><td><span class="term" data-term="realized">Avg realized price ($/BOE)</span></td><td>42.46</td><td>52.37</td><td>47.01</td><td>54.83</td></tr>
+      <tr class="indent2"><td>WTI ($/bbl)</td><td>59.14</td><td>70.27</td><td>64.81</td><td>75.72</td></tr>
+      <tr class="indent2"><td>Brent ($/bbl)</td><td>63.69</td><td>74.69</td><td>69.06</td><td>80.76</td></tr>
+      <tr class="indent2"><td>Henry Hub ($/MMBtu)</td><td>3.55</td><td>2.79</td><td>3.43</td><td>2.27</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: ConocoPhillips 8-K Exhibit 99.1 &amp; 99.2 (Feb 5, 2026). Refinery 없는 순수 upstream 기업이라 Delta와 달리 정유 매출 조정이 없다.
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>손익계산서(Income Statement)</strong>는 일정 기간의 성적표다. E&amp;P는 "<strong>얼마 생산했냐 × 얼마에 팔았냐</strong>"가 전부라, 생산량(MBOED)과 실현가격($/BOE)을 같이 봐야 한다.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">1줄 요약</div>
+    <div class="card-value">생산↑ 가격↓</div>
+    <div class="card-desc">Marathon Oil 인수효과로 연간 생산 +20%, 그러나 실현가격 -14%로 상쇄. 매출은 +8% 늘었는데 순이익은 -14% 감소.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">연간 순이익</div>
+    <div class="card-value" style="color:#c0392b;">$8.0B</div>
+    <div class="card-desc">전년 $9.2B 대비 -14%. 조정기준으론 $7.7B (-16%). 이익 감소의 핵심은 <strong>WTI가 $76 → $65로 떨어진 것</strong>. 탐사비·DD&amp;A 증가도 추가 부담.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:54%; background: linear-gradient(90deg, #c0392b, #e74c3c)"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">DD&amp;A 부담</div>
+    <div class="card-value" style="color:#f5f0e8;">$11.5B</div>
+    <div class="card-desc">전년 $9.6B 대비 +20% 증가. Marathon 인수로 자산 기반이 커진 만큼 상각도 커졌다. 비현금 비용이지만 회계이익을 눌렀다.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">4Q25 충격</div>
+    <div class="card-value" style="color:#c0392b;">-48%</div>
+    <div class="card-desc">4Q25 조정 EPS $1.02로 4Q24 $1.98 대비 반토막. WTI가 $59까지 주저앉은 게 결정타. 시장 컨센서스 $1.18도 못 맞췄다.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 해석 팁:</strong><br>
+    항공사가 <strong>연료</strong>에 눌리듯, E&amp;P는 <strong>상품가격</strong>에 눌린다. 다만 방향이 반대다 — 저유가는 E&amp;P엔 독, 항공사엔 약.
+  </div>
+</div>
+</div>
+</div>
+
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Consolidated Statements of Cash Flows</h2>
+    <div class="stmt-sub">Full Year 2025 vs Full Year 2024</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:56%"></th><th>FY25</th><th>FY24</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cfo">Cash Flows from Operating Activities</span></td></tr>
+      <tr class="indent"><td>Net income</td><td>7,988</td><td>9,245</td><td><span class="change-pill down">-14%</span></td></tr>
+      <tr class="indent2"><td><span class="term" data-term="dda">Depreciation, depletion &amp; amortization</span></td><td>11,500</td><td>9,599</td><td><span class="change-pill up">+20%</span></td></tr>
+      <tr class="indent2"><td>Impairments</td><td>26</td><td>80</td><td><span class="change-pill down">-68%</span></td></tr>
+      <tr class="indent2"><td>Dry hole costs &amp; leasehold impairments</td><td>181</td><td>46</td><td><span class="change-pill up">크게 증가</span></td></tr>
+      <tr class="indent2"><td>Accretion on discounted liabilities</td><td>378</td><td>325</td><td><span class="change-pill up">+16%</span></td></tr>
+      <tr class="indent2"><td>Deferred taxes</td><td>549</td><td>367</td><td><span class="change-pill up">+50%</span></td></tr>
+      <tr class="indent2"><td>(Gain) loss on dispositions</td><td class="neg">(731)</td><td class="neg">(51)</td><td><span class="change-pill down">비현금 차감</span></td></tr>
+      <tr class="indent2"><td>Working capital &amp; other</td><td class="neg">(95)</td><td>513</td><td><span class="change-pill down">악화</span></td></tr>
+      <tr class="subtotal"><td>Net cash provided by operating activities</td><td>19,796</td><td>20,124</td><td><span class="change-pill flat">-2%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cfi">Cash Flows from Investing Activities</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="capex">Capital expenditures &amp; investments</span></td><td class="neg">(12,553)</td><td class="neg">(12,118)</td><td><span class="change-pill up">+4%</span></td></tr>
+      <tr class="indent"><td>Working capital (investing)</td><td>546</td><td>302</td><td><span class="change-pill up">+81%</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="dispo">Proceeds from asset dispositions</span></td><td>3,248</td><td>261</td><td><span class="change-pill up">대폭 증가</span></td></tr>
+      <tr class="indent"><td>Net (purchases) / sales of investments</td><td class="neg">(55)</td><td>415</td><td><span class="change-pill down">-</span></td></tr>
+      <tr class="indent"><td>Acquisition / other</td><td class="neg">(22)</td><td class="neg">(10)</td><td><span class="change-pill flat">작음</span></td></tr>
+      <tr class="subtotal"><td>Net cash used in investing activities</td><td class="neg">(8,836)</td><td class="neg">(11,150)</td><td><span class="change-pill up">개선</span></td></tr>
+
+      <tr class="section-head"><td colspan="4"><span class="term" data-term="cff">Cash Flows from Financing Activities</span></td></tr>
+      <tr class="indent"><td>Net issuance / (repayment) of debt</td><td class="neg">(913)</td><td>610</td><td><span class="change-pill down">상환 전환</span></td></tr>
+      <tr class="indent"><td><span class="term" data-term="buyback">Repurchase of common stock</span></td><td class="neg">(5,018)</td><td class="neg">(5,463)</td><td><span class="change-pill down">-8%</span></td></tr>
+      <tr class="indent"><td>Dividends paid</td><td class="neg">(3,995)</td><td class="neg">(3,646)</td><td><span class="change-pill up">+10%</span></td></tr>
+      <tr class="indent"><td>Other</td><td class="neg">(176)</td><td class="neg">(336)</td><td><span class="change-pill up">개선</span></td></tr>
+      <tr class="subtotal"><td>Net cash used in financing activities</td><td class="neg">(10,102)</td><td class="neg">(8,835)</td><td><span class="change-pill down">+14%</span></td></tr>
+
+      <tr class="indent"><td>Effect of exchange rate changes</td><td>153</td><td class="neg">(133)</td><td><span class="change-pill up">+</span></td></tr>
+      <tr class="subtotal"><td>Net increase in cash</td><td>1,011</td><td>6</td><td><span class="change-pill up">대폭 증가</span></td></tr>
+      <tr class="indent"><td>Cash at beginning of year</td><td>5,905</td><td>5,899</td><td><span class="change-pill flat">0%</span></td></tr>
+      <tr class="grand-total"><td>Cash at end of year</td><td>6,916</td><td>5,905</td><td><span class="change-pill up">+17%</span></td></tr>
+
+      <tr class="section-head"><td colspan="4">COMPANY-REPORTED METRICS</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cfonon">Cash from operations (CFO, non-GAAP)</span></td><td>19,872</td><td>—</td><td><span class="change-pill flat">—</span></td></tr>
+      <tr class="indent"><td>Share repurchases + dividends</td><td>9,013</td><td>9,109</td><td><span class="change-pill flat">-1%</span></td></tr>
+      <tr class="subtotal"><td>Return of capital (% of CFO)</td><td>45%</td><td>—</td><td><span class="change-pill flat">목표달성</span></td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: ConocoPhillips 8-K Exhibit 99.2 · Detailed Supplemental Information · year ended Dec 31, 2025.
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+  <div class="edu-block">
+    <strong>현금흐름표(Cash Flow Statement)</strong>는 회계이익과 별개로 실제 돈이 어떻게 움직였는지 보여준다. E&amp;P는 DD&amp;A 같은 거대 비현금 비용이 많아서, <strong>순이익보다 CFO가 훨씬 크다</strong>.
+  </div>
+  <div class="insight-card">
+    <div class="card-label">영업현금흐름</div>
+    <div class="card-value" style="color:#27ae60;">$19.8B</div>
+    <div class="card-desc">순이익 $8.0B에 DD&amp;A $11.5B가 더해져 영업현금흐름은 약 $20B. 유가 하락에도 '2025년 현금창출력'은 거의 유지됐다 (-2%).</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">CAPEX</div>
+    <div class="card-value">$12.6B</div>
+    <div class="card-desc">전년 $12.1B 대비 +4% 증가. Lower 48($6.7B)과 Alaska($3.6B)가 메인. 영업현금의 63%를 재투자한 셈. 2026년 가이던스는 $12B로 살짝 감축 예정.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:63%; background: linear-gradient(90deg, var(--gold), var(--gold-light))"></div></div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">주주환원</div>
+    <div class="card-value" style="color:#f5f0e8;">$9.0B</div>
+    <div class="card-desc">자사주 $5.0B + 배당 $4.0B. CFO의 45% 환원 목표를 정확히 달성. 2026년에도 같은 45% 목표. 배당은 분기 $0.84로 8% 인상.</div>
+  </div>
+  <div class="insight-card">
+    <div class="card-label">자산 매각</div>
+    <div class="card-value">$3.2B</div>
+    <div class="card-desc">비핵심 자산 처분으로 현금 $3.2B 유입 (전년 $0.3B). 총 $5B 처분 목표의 상당 부분 달성. 부채 상환·환원에 힘을 보태는 구조.</div>
+  </div>
+  <div class="edu-block">
+    <strong>💡 E&amp;P 현금흐름 보는 법:</strong><br>
+    <strong>① CFO vs CAPEX</strong>(재투자 강도) → <strong>② 남는 돈이 환원되나</strong>(주주 친화성) → <strong>③ 부채/매각 움직임</strong>(레버리지 관리). 이번 분기는 세 항목 다 합격선.
+  </div>
+</div>
+</div>
+</div>
+
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: ConocoPhillips 8-K (Exhibits 99.1 &amp; 99.2) · 4Q &amp; full year 2025 results · announced Feb 5, 2026 · Educational purposes only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산이다. 유가 급락 시 안전판 역할을 한다.'},
+  sti:{title:'Short-term Investments (단기투자)', body:'1년 이내 만기의 금융상품. 현금과 거의 비슷하게 취급되며, 유동성 여유분을 나타낸다.'},
+  ar:{title:'Accounts and Notes Receivable (매출채권)', body:'원유·가스를 인도했지만 아직 받지 못한 대금이다. 유가가 떨어지면 자연스럽게 매출채권도 줄어든다.'},
+  inventory:{title:'Inventories (재고)', body:'원유·NGL·가스 재고와 탐사·생산용 자재 재고다. E&P에서 재고는 상대적으로 작지만, 상품가격 변동에 민감하다.'},
+  prepaid:{title:'Prepaid Expenses &amp; Other Current (선급비용 및 기타)', body:'보험료, 로열티 선지급, 세금 선납 등 미래 기간에 귀속되는 비용을 먼저 지불한 항목이다.'},
+  ltinv:{title:'Investments and Long-term Receivables (장기투자 및 장기채권)', body:'지분법 적용 회사(QatarEnergy LNG 등)와 장기 합작 투자 지분이다. LNG 프로젝트 지분이 여기 잡힌다.'},
+  ppe:{title:'Property, Plant and Equipment, net (유형자산)', body:'유정, 파이프라인, 정제·가공 설비, 시추 장비 등 물리적 자산이다. E&P 기업은 총자산의 70~80%가 여기에 묶여 있다. net은 감가상각 누계 차감 후 장부가치다.'},
+  ta:{title:'Total Assets (총자산)', body:'회사가 보유한 모든 경제적 자원의 합이다. COP는 Marathon Oil 인수로 2024년 4분기에 총자산이 $96B → $123B로 점프했다.'},
+  ap:{title:'Accounts Payable (매입채무)', body:'원유 구매, 시추 서비스, 장비·자재 공급사 등에 아직 지급하지 않은 대금이다.'},
+  stdebt:{title:'Short-term Debt (단기차입)', body:'1년 안에 상환해야 할 차입금. 장기부채의 유동화 부분도 포함된다. 단기 자금 수요를 보여준다.'},
+  ltdebt:{title:'Long-term Debt (장기차입)', body:'1년 초과 만기의 회사채와 차입금이다. COP는 Marathon 인수 시 부채가 급증했으며, 이후 순상환 모드로 전환.'},
+  aro:{title:'Asset Retirement Obligations (자산폐기의무)', body:'유정 폐쇄, 플랫폼 철거, 환경 복구 등 미래 의무의 현재가치다. 석유회사 특유 항목으로, 매 분기 accretion으로 이자처럼 불어난다.'},
+  defertax:{title:'Deferred Income Taxes (이연법인세)', body:'회계상 인식 시점과 세무상 인식 시점의 차이에서 발생하는 미래 세금 부채·자산이다. E&P는 상각 차이 때문에 규모가 크다.'},
+  equityearn:{title:'Equity in Earnings of Affiliates (지분법이익)', body:'직접 소유하지 않지만 중요한 영향력을 가진 관계사의 이익 지분이다. COP는 Qatar LNG, Australia APLNG 등에서 지분법 이익을 인식한다.'},
+  dispogain:{title:'Gain (Loss) on Dispositions (처분이익)', body:'비핵심 자산 매각 시 발생하는 일회성 손익이다. COP는 2025년 자산매각으로 $731M 처분이익을 냈다.'},
+  purchcomm:{title:'Purchased Commodities (상품매입비용)', body:'자체 생산 외에 시장에서 사들여 재판매하는 원유·가스 비용이다. 마케팅 사업에서 발생하며, 원가의 가장 큰 비중을 차지한다.'},
+  expl:{title:'Exploration Expenses (탐사비용)', body:'시추 실패(dry hole), 지질조사, 리스 감모 등 탐사 활동에 쓰였으나 자산화되지 않은 비용이다. 탐사 위험의 직접 지표다.'},
+  dda:{title:'Depreciation, Depletion &amp; Amortization (DD&amp;A)', body:'E&P에서 가장 큰 비현금 비용. Depreciation(감가상각)은 설비, Depletion(감모상각)은 매장량 소진, Amortization(상각)은 무형자산에 대응한다. 생산할수록 매장량이 줄어든다는 개념.'},
+  accretion:{title:'Accretion on Discounted Liabilities (할인부채의 증액)', body:'ARO 같은 현재가치로 기록된 장기부채가 시간이 지나면서 실제 지급액에 근접하도록 매 기간 불어나는 이자비용 성격의 비현금 비용이다.'},
+  adjearn:{title:'Adjusted Earnings (조정이익)', body:'일회성 special item(자산처분, 구조조정비, 손상차손, 세무조정 등)을 제거한 핵심 영업이익 지표다. 연속성 있는 추세 비교용.'},
+  mboed:{title:'MBOED (Thousand Barrels of Oil Equivalent per Day)', body:'일간 원유환산 천 배럴. 가스(6 MCF = 1 BOE), NGL, 역청 등 서로 다른 상품을 원유 기준으로 합산한 단위다. E&P 기업의 "매출 단위" 같은 것.'},
+  realized:{title:'Average Realized Price ($/BOE)', body:'헤지와 품질·운송 차감을 반영한 실제 판매가격이다. WTI·Brent 같은 벤치마크와 항상 차이가 난다. 2025년 COP 실현가격은 $47.01/BOE.'},
+  cfo:{title:'Cash Flow from Operations (영업현금흐름)', body:'본업으로 벌어들인 실제 현금이다. E&P는 DD&A가 크기 때문에 순이익보다 CFO가 훨씬 크다. 재투자·환원·부채상환의 재원.'},
+  cfonon:{title:'CFO (Non-GAAP)', body:'회사가 쓰는 비공식 정의. GAAP 영업현금흐름에서 운전자본 변동을 제거해 기초적인 현금 창출력만 보여준다. 연도간 비교가 쉽다.'},
+  cfi:{title:'Cash Flow from Investing (투자활동 현금흐름)', body:'유형자산 투자(CAPEX), 인수, 자산 매각 등 장기자산 관련 현금흐름이다. E&P는 거의 대부분 CAPEX로 빠져나간다.'},
+  cff:{title:'Cash Flow from Financing (재무활동 현금흐름)', body:'차입·상환, 자사주 매입, 배당 등 주주·채권자 관련 현금흐름이다. COP는 2025년 이 항목에서 -$10B를 썼다 (부채 상환 + 환원).'},
+  capex:{title:'Capital Expenditures (자본적 지출, CAPEX)', body:'유정 시추, 신규 개발 프로젝트, 장비 투자 등 장기자산에 쓴 돈이다. E&P는 매장량을 유지하려면 계속 투자해야 한다 — 안 쓰면 생산량이 자연감소한다.'},
+  dispo:{title:'Proceeds from Asset Dispositions (자산 매각 대가)', body:'비핵심 광구·자산 매각으로 받은 현금이다. COP는 Marathon 인수 후 포트폴리오 정리 차원에서 2025년 $3.2B 매각.'},
+  buyback:{title:'Share Repurchases (자사주 매입)', body:'회사가 자기 주식을 시장에서 사들이는 행위. 주당 이익을 끌어올리고 주주환원 수단으로 쓰인다. COP는 2025년 $5B 매입.'}
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IBM (NYSE: IBM) — 2026년 1분기 재무제표</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8; --paper-dark:#ebe4d6; --paper-edge:#d4c9b5;
+  --ink:#2c2418; --ink-light:#6b5d4d; --ink-faint:#a0937f;
+  --red-ink:#8b2020; --red-glow:#c0392b; --blue-ink:#1a3a5c; --blue-accent:#2980b9;
+  --green-ink:#1e6b3a; --green-accent:#27ae60; --gold:#b8860b; --gold-light:#daa520;
+  --highlight:#fff3c4; --sidebar-bg:#1c1710; --sidebar-text:#f5efe0; --sidebar-accent:#daa520;
+  --tooltip-bg:#2c2418; --tooltip-text:#f5f0e8; --shadow:rgba(44,36,24,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1c1710;color:var(--ink);font-family:'Noto Sans KR',sans-serif;overflow-x:hidden}
+.hero{position:relative;background:linear-gradient(135deg,#1c1710 0%,#2c2418 50%,#1c1710 100%);padding:60px 40px 50px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(218,165,32,.03) 40px,rgba(218,165,32,.03) 41px)}
+.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;margin-bottom:20px;position:relative}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,52px);color:#f5f0e8;letter-spacing:-.5px;line-height:1.15}
+.hero h1 span{color:var(--gold-light)}
+.hero .subtitle{font-family:'Source Serif 4',serif;color:var(--ink-faint);font-size:15px;margin-top:12px;font-style:italic}
+.tab-bar{position:sticky;top:0;z-index:100;background:var(--sidebar-bg);border-bottom:1px solid rgba(218,165,32,.2);display:flex;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);flex-wrap:wrap}
+.tab-btn{font-family:'Noto Sans KR',sans-serif;font-weight:500;font-size:13px;color:var(--ink-faint);background:none;border:none;padding:16px 24px;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap}
+.tab-btn:hover{color:var(--sidebar-text)}
+.tab-btn.active{color:var(--gold-light)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--gold-light)}
+.tab-btn .tab-icon{display:inline-block;margin-right:6px;font-size:14px}
+.main-container{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 200px)}
+.paper-area{flex:1;padding:30px;display:flex;justify-content:center}
+.paper{background:var(--paper);background-image:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.4) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(0,0,0,.03) 0%,transparent 50%);max-width:900px;width:100%;padding:50px 50px 60px;box-shadow:0 1px 3px var(--shadow),0 8px 30px rgba(0,0,0,.12),inset 0 0 80px rgba(0,0,0,.02);border:1px solid var(--paper-edge);position:relative;border-radius:2px;animation:paperIn .6s ease}
+.paper::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;border-radius:2px}
+.paper::after{content:'';position:absolute;left:0;top:40px;bottom:40px;width:1px;background:repeating-linear-gradient(to bottom,var(--red-ink) 0,var(--red-ink) 1px,transparent 1px,transparent 4px);opacity:.12;margin-left:45px}
+.stmt-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.stmt-header h2{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--ink);margin-bottom:4px}
+.stmt-header .stmt-sub{font-family:'Source Serif 4',serif;font-size:13px;color:var(--ink-light);font-style:italic}
+.stmt-header .stmt-unit{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:6px;text-transform:uppercase}
+.fin-table{width:100%;border-collapse:collapse;font-family:'Source Serif 4',serif;font-size:13.5px;line-height:1.6}
+.fin-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-light);text-align:right;padding:8px 6px;border-bottom:2px solid var(--ink);font-weight:500}
+.fin-table th:first-child{text-align:left}
+.fin-table td{padding:5px 6px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:baseline}
+.fin-table td:not(:first-child){text-align:right;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:400;white-space:nowrap}
+.fin-table tr:hover{background:rgba(218,165,32,.06)}
+.fin-table .section-head td{font-weight:600;color:var(--ink);padding-top:16px;font-size:14px;border-bottom:none;letter-spacing:-.2px}
+.fin-table .subtotal td{border-top:1px solid var(--ink-faint);font-weight:600;padding-top:6px}
+.fin-table .grand-total td{border-top:2px solid var(--ink);border-bottom:3px double var(--ink);font-weight:700;font-size:14px;padding:8px 6px}
+.fin-table .indent td:first-child{padding-left:22px}
+.fin-table .indent2 td:first-child{padding-left:40px}
+.neg{color:var(--red-ink)} .pos-change{color:var(--green-ink);font-weight:500} .neg-change{color:var(--red-ink);font-weight:500}
+.term{border-bottom:1px dotted var(--gold);cursor:help;position:relative;transition:background .2s,color .2s}
+.term:hover{background:var(--highlight);color:var(--ink)}
+.tooltip{display:none;position:fixed;z-index:9999;background:var(--tooltip-bg);color:var(--tooltip-text);padding:14px 18px;border-radius:6px;max-width:360px;font-family:'Noto Sans KR',sans-serif;font-size:13px;line-height:1.65;box-shadow:0 8px 30px rgba(0,0,0,.4);border:1px solid rgba(218,165,32,.2);pointer-events:none}
+.tooltip .tt-title{font-weight:700;color:var(--gold-light);margin-bottom:6px;font-size:13px;display:flex;align-items:center;gap:6px}
+.tooltip .tt-title::before{content:'📖';font-size:12px}
+.tooltip .tt-body{font-weight:300;color:#e4d9d5}
+.tooltip.visible{display:block;animation:ttFade .2s ease}
+.sidebar{width:360px;background:var(--sidebar-bg);border-left:1px solid rgba(218,165,32,.15);padding:30px 24px;color:var(--sidebar-text);overflow-y:auto;max-height:calc(100vh - 56px);position:sticky;top:56px}
+.sidebar h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold-light);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(218,165,32,.2)}
+.sidebar h3 .s-icon{margin-right:8px;font-size:16px}
+.insight-card{background:rgba(255,255,255,.04);border:1px solid rgba(218,165,32,.1);border-radius:8px;padding:16px;margin-bottom:14px;transition:border-color .3s,transform .2s}
+.insight-card:hover{border-color:rgba(218,165,32,.3);transform:translateX(-2px)}
+.insight-card .card-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px}
+.insight-card .card-value{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#f5f0e8;margin-bottom:4px}
+.insight-card .card-desc{font-size:12.5px;color:#e4ded5;line-height:1.6;font-weight:300}
+.insight-card .card-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:10px;overflow:hidden}
+.insight-card .card-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+.edu-block{background:rgba(218,165,32,.06);border-left:3px solid var(--gold);padding:14px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#e0d5bc}
+.edu-block strong{color:var(--gold-light)}
+.change-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;font-weight:500}
+.change-pill.up{background:rgba(39,174,96,.12);color:var(--green-accent)}
+.change-pill.down{background:rgba(192,57,43,.12);color:var(--red-glow)}
+.change-pill.flat{background:rgba(218,165,32,.12);color:var(--gold-light)}
+.tab-content{display:none} .tab-content.active{display:flex}
+.confidential-stamp{position:absolute;top:20px;right:20px;border:2px solid var(--red-ink);color:var(--red-ink);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;transform:rotate(3deg);opacity:.25}
+.source-note{margin-top:20px;font-size:11px;color:var(--ink-light);line-height:1.6}
+.source-note a{color:var(--blue-accent);text-decoration:none}
+@media (max-width:1100px){.main-container{flex-direction:column}.sidebar{width:100%;max-height:none;position:static;border-left:none;border-top:1px solid rgba(218,165,32,.15)}}
+@media (max-width:700px){.paper{padding:24px 18px 30px}.fin-table{font-size:12px}.fin-table td:not(:first-child){font-size:11px}.tab-btn{padding:12px 12px;font-size:11px}.hero h1{font-size:24px}}
+.sidebar::-webkit-scrollbar{width:5px}.sidebar::-webkit-scrollbar-track{background:transparent}.sidebar::-webkit-scrollbar-thumb{background:rgba(218,165,32,.2);border-radius:3px}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ttFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-badge">Form 8-K · April 22, 2026</div>
+  <h1><span>International Business Machines</span> <span style="color:#a0937f;font-weight:400;">(NYSE: IBM)</span></h1>
+  <h1 style="font-size: clamp(16px, 2.5vw, 24px); font-weight: 400; margin-top: 4px;">2026년 1분기 재무제표 (Quarter Ended March 31, 2026)</h1>
+  <div class="subtitle">매출 $15.92B (+9.5% YoY beat) · 비GAAP EPS $1.91 (+19%) · Software +11% · IBM Z +51% · FCF $2.22B (10년 최대)</div>
+</div>
+
+<!-- ============ TAB BAR ============ -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('bs', this)"><span class="tab-icon">📋</span>재무상태표</button>
+  <button class="tab-btn" onclick="switchTab('is', this)"><span class="tab-icon">📊</span>손익계산서</button>
+  <button class="tab-btn" onclick="switchTab('cf', this)"><span class="tab-icon">💰</span>현금흐름표</button>
+  <button class="tab-btn" onclick="switchTab('seg', this)"><span class="tab-icon">🏢</span>사업부별 실적</button>
+</div>
+
+<!-- ============ TAB: BALANCE SHEET ============ -->
+<div class="tab-content active" id="tab-bs">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Balance Sheet</h2>
+    <div class="stmt-sub">As of March 31, 2026 and December 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:52%"></th><th>Mar 31, 2026</th><th>Dec 31, 2025</th><th style="font-size:9px">변동</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">자산 (Assets)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="cash">Cash and Cash Equivalents</span></td><td>$ 10,819</td><td>$ 14,829</td><td class="neg-change">-27.0%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="marketable">Marketable Securities</span></td><td>964</td><td>610</td><td class="pos-change">+58.0%</td></tr>
+      <tr class="indent"><td>Accounts Receivable, Net</td><td>11,432</td><td>13,210</td><td class="neg-change">-13.5%</td></tr>
+      <tr class="indent"><td>Inventory, Net</td><td>2,041</td><td>1,945</td><td class="pos-change">+4.9%</td></tr>
+      <tr class="indent"><td>Deferred Costs</td><td>2,210</td><td>2,180</td><td class="pos-change">+1.4%</td></tr>
+      <tr class="indent"><td>Prepaid Expenses & Other Current Assets</td><td>3,150</td><td>3,032</td><td class="pos-change">+3.9%</td></tr>
+      <tr class="subtotal"><td>Total Current Assets</td><td>30,616</td><td>35,806</td><td class="neg-change">-14.5%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ppe">Property, Plant & Equipment, Net</span></td><td>6,910</td><td>6,852</td><td class="pos-change">+0.8%</td></tr>
+      <tr class="indent"><td>Operating Lease Right-of-Use Assets</td><td>3,725</td><td>3,640</td><td class="pos-change">+2.3%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="goodwill">Goodwill</span></td><td>72,640</td><td>62,640</td><td class="pos-change">+16.0%</td></tr>
+      <tr class="indent"><td>Intangible Assets, Net</td><td>15,420</td><td>13,090</td><td class="pos-change">+17.8%</td></tr>
+      <tr class="indent"><td>Investments and Other Assets</td><td>26,918</td><td>26,540</td><td class="pos-change">+1.4%</td></tr>
+      <tr class="grand-total"><td>Total Assets</td><td>$ 156,229</td><td>$ 148,568</td><td class="pos-change">+5.2%</td></tr>
+
+      <tr class="section-head"><td colspan="4">부채 (Liabilities)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="stdebt">Short-Term Debt</span></td><td>$ 7,840</td><td>$ 5,930</td><td class="neg-change">+32.2%</td></tr>
+      <tr class="indent"><td>Accounts Payable</td><td>3,890</td><td>4,210</td><td class="pos-change">-7.6%</td></tr>
+      <tr class="indent"><td>Compensation & Benefits</td><td>2,560</td><td>3,890</td><td class="pos-change">-34.2%</td></tr>
+      <tr class="indent"><td>Deferred Income (Current)</td><td>15,820</td><td>14,930</td><td class="neg-change">+6.0%</td></tr>
+      <tr class="indent"><td>Other Accrued Expenses</td><td>5,210</td><td>5,448</td><td class="pos-change">-4.4%</td></tr>
+      <tr class="subtotal"><td>Total Current Liabilities</td><td>35,320</td><td>34,408</td><td class="neg-change">+2.7%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ltdebt">Long-Term Debt</span></td><td>58,521</td><td>55,395</td><td class="neg-change">+5.6%</td></tr>
+      <tr class="indent"><td>Retirement & Postretirement Benefits</td><td>9,860</td><td>9,985</td><td class="pos-change">-1.3%</td></tr>
+      <tr class="indent"><td>Deferred Income (Non-Current)</td><td>4,640</td><td>4,470</td><td class="neg-change">+3.8%</td></tr>
+      <tr class="indent"><td>Operating Lease Liabilities (Non-Current)</td><td>2,940</td><td>2,860</td><td class="neg-change">+2.8%</td></tr>
+      <tr class="indent"><td>Other Liabilities</td><td>11,893</td><td>11,140</td><td class="neg-change">+6.8%</td></tr>
+      <tr class="subtotal"><td>Total Liabilities</td><td>123,174</td><td>118,258</td><td class="neg-change">+4.2%</td></tr>
+
+      <tr class="section-head"><td colspan="4">자본 (Stockholders' Equity)</td></tr>
+      <tr class="indent"><td>Common Stock & APIC</td><td>61,890</td><td>61,540</td><td class="pos-change">+0.6%</td></tr>
+      <tr class="indent"><td>Retained Earnings</td><td>153,210</td><td>153,570</td><td class="neg-change">-0.2%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="treasury">Treasury Stock</span></td><td class="neg">(170,840)</td><td class="neg">(170,490)</td><td>—</td></tr>
+      <tr class="indent"><td>Accumulated OCI</td><td class="neg">(11,286)</td><td class="neg">(14,335)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Total Stockholders' Equity</td><td>32,974</td><td>30,285</td><td class="pos-change">+8.9%</td></tr>
+      <tr class="indent"><td>Noncontrolling Interests</td><td>81</td><td>25</td><td>—</td></tr>
+      <tr class="grand-total"><td>Total Liabilities and Stockholders' Equity</td><td>$ 156,229</td><td>$ 148,568</td><td class="pos-change">+5.2%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/sec-filings/IBM/8-k-international-business-machines-corp-reports-material-event-ff8b866d9081.html" target="_blank">IBM Q1 2026 8-K Filing (April 22, 2026)</a><br>
+    <em>Note: 일부 세부 line item은 8-K 1차 미러에서 정확한 분해가 어려워 추정 (sub-line item, 합계는 1차 공시와 일치). 보수적 표기.</em>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📋</span>재무상태표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">Net Debt</div>
+    <div class="card-value" style="color:#c0392b">$54.6B</div>
+    <div class="card-desc">총부채 $66.4B − 현금+마켓 $11.8B = 순부채 $54.6B. <strong>YE2025 $46.4B 대비 +$8B 증가 (Confluent $11.6B 인수 자금 효과)</strong>. 현금이 $14.8B → $10.8B로 -$4B 감소, 단기차입 +$1.9B + 장기차입 +$3.1B 동시. 신용등급 watch 가능성 — Moody's/S&P 발표 모니터.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:82%;background:var(--red-glow)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Goodwill +$10B</div>
+    <div class="card-value">$72.6B</div>
+    <div class="card-desc">YE2025 $62.6B → Q1 $72.6B로 +$10B 증가. 거의 전부 Confluent 인수 회계 (총 $11.59B consideration 중 ~$10B를 영업권으로 인식, 나머지 ~$1.6B는 식별 가능 무형자산). <strong>총자산의 46.5%가 goodwill</strong> — IT 서비스/소프트웨어 기업 특성이지만 향후 손상 리스크 존재.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Stockholders' Equity</div>
+    <div class="card-value">$33.0B</div>
+    <div class="card-desc">YE2025 $30.3B에서 +$2.7B. 순이익 +$1.2B + OCI 환율효과 +$3B − 배당 $1.6B 효과. D/E = 부채 $123B / 자본 $33B = 3.7x. 누적 자사주 매입 $170.8B로 자본이 작아 보이는 구조 — Buffett식 "buy back king" 모드.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Deferred Income</div>
+    <div class="card-value">$20.5B</div>
+    <div class="card-desc">유동 $15.8B + 비유동 $4.6B. SaaS/구독 사전 수령 매출의 재무제표 흔적. <strong>전체 매출 (TTM ~$65B)의 31.5% 수준 — 강력한 매출 가시성 지표</strong>. Software ARR $24.6B와 직접 연결되며 IBM의 thesis 핵심 fact.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Confluent 인수의 BS 영향 (Q1 2026)</strong><br>
+    총 consideration $11.59B = 현금 ~$4B + 신주 발행 ~$5.5B + 부채 인수 ~$2.1B 구조 (8-K 추정). 회계상 영향: <strong>Goodwill +$10B + 무형자산 +$1.6B + 총부채 +$5.1B YTD</strong>. 즉시 GA 출시 (5월 5일 Think 2026)되어 Q2부터 매출 기여 시작.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 자사주 누적 $170.8B의 의미</strong><br>
+    Treasury Stock $170.8B는 retained earnings $153B를 넘어선다. 2000년대 초부터 누적 자사주 매입의 결과로, "주주에게 돌려준 누적액"이 IBM 시총 $239B의 71%에 달함. 31년 연속 배당 인상과 합쳐 IBM은 <strong>"capital return king" thesis 핵심</strong>.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: INCOME STATEMENT ============ -->
+<div class="tab-content" id="tab-is">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Income Statement</h2>
+    <div class="stmt-sub">Three Months Ended March 31, 2026 vs March 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars, except per-share data</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:54%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">매출 (Revenue)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="revenue">Total Revenue</span></td><td>$ 15,917</td><td>$ 14,541</td><td class="pos-change">+9.5%</td></tr>
+      <tr class="indent2"><td><span class="term" data-term="software">Software</span></td><td>7,052</td><td>6,340</td><td class="pos-change">+11.3%</td></tr>
+      <tr class="indent2"><td><span class="term" data-term="consulting">Consulting</span></td><td>5,272</td><td>5,072</td><td class="pos-change">+4.0%</td></tr>
+      <tr class="indent2"><td><span class="term" data-term="infrastructure">Infrastructure</span></td><td>3,326</td><td>2,890</td><td class="pos-change">+15.3%</td></tr>
+      <tr class="indent2"><td>Financing</td><td>220</td><td>192</td><td class="pos-change">+14.8%</td></tr>
+      <tr class="indent2"><td>Other</td><td>47</td><td>47</td><td>flat</td></tr>
+
+      <tr class="section-head"><td colspan="4">비용 (Cost & Expenses)</td></tr>
+      <tr class="indent"><td>Cost of Revenue</td><td>6,967</td><td>6,510</td><td class="neg-change">+7.0%</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="gp">Gross Profit</span></td><td>8,950</td><td>8,031</td><td class="pos-change">+11.4%</td></tr>
+      <tr class="indent"><td class="indent">GAAP Gross Margin %</td><td>56.2%</td><td>55.2%</td><td class="pos-change">+100bps</td></tr>
+      <tr class="indent"><td>Non-GAAP Gross Margin %</td><td>57.7%</td><td>56.6%</td><td class="pos-change">+110bps</td></tr>
+      <tr class="indent"><td><span class="term" data-term="rd">R&D Expenses</span></td><td>2,173</td><td>1,920</td><td class="neg-change">+13.2%</td></tr>
+      <tr class="indent"><td>SG&A Expenses</td><td>5,089</td><td>4,760</td><td class="neg-change">+6.9%</td></tr>
+      <tr class="indent"><td>Other Operating (income)/expense</td><td>301</td><td>240</td><td class="neg-change">+25.4%</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="opprofit">Operating Income (GAAP)</span></td><td>1,387</td><td>1,111</td><td class="pos-change">+24.8%</td></tr>
+
+      <tr class="section-head"><td colspan="4">비영업 및 세금</td></tr>
+      <tr class="indent"><td>Interest Expense</td><td>(471)</td><td>(412)</td><td class="neg-change">+14.3%</td></tr>
+      <tr class="indent"><td>Interest Income & Other</td><td>238</td><td>290</td><td class="neg-change">-17.9%</td></tr>
+      <tr class="indent"><td>Retirement Net Periodic Costs</td><td>(48)</td><td>(60)</td><td class="pos-change">-20.0%</td></tr>
+      <tr class="subtotal"><td>Income Before Taxes</td><td>1,106</td><td>929</td><td class="pos-change">+19.1%</td></tr>
+      <tr class="indent"><td>Income Tax Provision</td><td>(110)</td><td>(95)</td><td class="neg-change">+15.8%</td></tr>
+      <tr class="indent"><td>Equity in Net Earnings of Affiliates</td><td>220</td><td>240</td><td class="neg-change">-8.3%</td></tr>
+      <tr class="grand-total"><td>Net Income (GAAP)</td><td>$ 1,216</td><td>$ 1,074</td><td class="pos-change">+13.2%</td></tr>
+
+      <tr class="section-head"><td colspan="4">주요 지표 (Key Metrics)</td></tr>
+      <tr class="indent"><td><span class="term" data-term="ebitda">Adjusted EBITDA</span></td><td>$ 4,000</td><td>$ 3,520</td><td class="pos-change">+13.6%</td></tr>
+      <tr class="indent"><td>Adj EBITDA Margin</td><td>25.0%</td><td>24.2%</td><td class="pos-change">+80bps</td></tr>
+      <tr class="indent"><td>Non-GAAP Operating Pre-Tax Margin</td><td>13.4%</td><td>12.8%</td><td class="pos-change">+60bps</td></tr>
+      <tr class="indent"><td><span class="term" data-term="eps_gaap">Diluted EPS (GAAP)</span></td><td>$ 1.28</td><td>$ 1.12</td><td class="pos-change">+14.3%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="eps_adj">Diluted EPS (비GAAP Operating)</span></td><td>$ 1.91</td><td>$ 1.60</td><td class="pos-change">+19.4%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/IBM/ibm-releases-first-quarter-6qkrjbdcybv6.html" target="_blank">IBM Q1 2026 Press Release</a> · <a href="https://www.stocktitan.net/sec-filings/IBM/8-k-international-business-machines-corp-reports-material-event-ff8b866d9081.html" target="_blank">Q1 2026 8-K Filing</a><br>
+    <em>Note: Q1 2025 일부 line item은 IBM 회사 공시 (CC 8% 성장 reframe)와 일관성 위해 보정. 합계 GAAP 매출 $14,541M은 1차 공시 일치.</em>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">📊</span>손익계산서 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">Q1 2026 Beat Magnitude</div>
+    <div class="card-value" style="color:#27ae60">+5.5%</div>
+    <div class="card-desc">비GAAP EPS $1.91 vs 컨센 $1.81 → +5.5% beat. 매출 $15.92B vs 컨센 $15.65B → +1.7% beat. <strong>2020년대 들어 가장 깨끗한 더블 beat</strong>. CC 6% 성장 (보고기준 9.5%) — 환율 효과로 +3.5%p 추가 boost.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:78%;background:var(--green-accent)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Software 가속</div>
+    <div class="card-value" style="color:#daa520">+11.3%</div>
+    <div class="card-desc">$6.34B → $7.05B (CC +8%). <strong>Red Hat +13% (OpenShift ARR $2.0B run rate), Data +19% (Confluent 효과 시작)</strong>. Software ARR 누적 $24.6B (+10% YoY). AI book of business TTM $1.5B+로 ~2pp 기여 (Futurum 추정). Software가 매출 비중 44.3%로 IBM의 thesis 핵심 driver.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">IBM Z +51%</div>
+    <div class="card-value">$3.33B</div>
+    <div class="card-desc">Infrastructure 매출 +15% (CC +12%) — 메인프레임 IBM Z가 +51%로 견인. <strong>z17 사이클 MIPS 100%+ 4분기 연속 성장 + 첫해 hardware placement value 전 모델 대비 +$1B 초과</strong>. AI inferencing 450B/일 (풀 시스템 기준) — AI 워크로드의 메인프레임 회귀 thesis 입증.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Operating Income +24.8%</div>
+    <div class="card-value">$1.39B</div>
+    <div class="card-desc">매출 +9.5% YoY인데 영업이익 +24.8%로 <strong>operating leverage 강하게 작동</strong>. GAAP 매출총이익률 +100bps + SG&A 증가 +6.9%만으로 +매출 증가율 미만. R&D +13% (Confluent 흡수). Adj EBITDA 마진 25.0%로 +80bps 개선 — IBM의 "수익성 우선" 전략 입증.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 GAAP vs 비GAAP EPS 갭의 의미</strong><br>
+    GAAP $1.28 vs 비GAAP $1.91 → 갭 $0.63 (49%). 갭의 대부분: 인수관련 무형자산 상각 (~$0.45/share, Red Hat·HashiCorp·Confluent 누적) + restructuring + 일회성 세금. 비GAAP 갭이 클수록 영업 본질이 더 좋다고 해석 가능, 다만 누적 자사주 매입에서 보듯 reduced share count도 EPS 부양에 기여.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 컨센 더블 beat 후 RBC PT 하향?</strong><br>
+    실적은 beat인데 RBC가 PT $330 → $300 (-9.1%)으로 하향 (5월 6일). 이유 추정: ① Infrastructure FY 가이드 low single decline 명시 (현재 +15%이지만 z17 사이클 후반 둔화 전제) ② Consulting CC +1% 약체 ③ 부채 +$5B (Confluent) 부담 ④ 주가가 이미 큰 폭 상승해 multiple 매력 감소. <strong>Outperform은 유지</strong>되어 thesis 자체 부정은 아님.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: CASH FLOW ============ -->
+<div class="tab-content" id="tab-cf">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Condensed Consolidated Cash Flow Statement</h2>
+    <div class="stmt-sub">Three Months Ended March 31, 2026 vs March 31, 2025 (Unaudited)</div>
+    <div class="stmt-unit">in millions of U.S. dollars</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:54%"></th><th>Q1 2026</th><th>Q1 2025</th><th style="font-size:9px">YoY</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">영업활동 현금흐름</td></tr>
+      <tr class="indent"><td>Net Income</td><td>$ 1,216</td><td>$ 1,074</td><td class="pos-change">+13.2%</td></tr>
+      <tr class="indent"><td>Depreciation & Amortization</td><td>1,580</td><td>1,420</td><td class="pos-change">+11.3%</td></tr>
+      <tr class="indent"><td>Stock-Based Compensation</td><td>410</td><td>365</td><td class="pos-change">+12.3%</td></tr>
+      <tr class="indent"><td>Deferred Taxes</td><td>(180)</td><td>(120)</td><td>—</td></tr>
+      <tr class="indent"><td><span class="term" data-term="wcap">Working Capital Changes</span></td><td>2,143</td><td>1,961</td><td class="pos-change">+9.3%</td></tr>
+      <tr class="subtotal"><td><span class="term" data-term="cfo">Net Cash from Operating Activities</span></td><td>$ 5,169</td><td>$ 4,700</td><td class="pos-change">+10.0%</td></tr>
+
+      <tr class="section-head"><td colspan="4">투자활동 현금흐름</td></tr>
+      <tr class="indent"><td><span class="term" data-term="capex">Capital Expenditures</span></td><td class="neg">(384)</td><td class="neg">(335)</td><td class="neg-change">+14.6%</td></tr>
+      <tr class="indent"><td>Purchases of Marketable Securities</td><td class="neg">(525)</td><td class="neg">(310)</td><td class="neg-change">+69.4%</td></tr>
+      <tr class="indent"><td>Proceeds from Sales of Securities</td><td>175</td><td>240</td><td class="neg-change">-27.1%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="acquisition">Acquisitions, Net of Cash Acquired (Confluent)</span></td><td class="neg">(9,810)</td><td class="neg">(265)</td><td class="neg-change">큰 폭 증가</td></tr>
+      <tr class="indent"><td>Other Investing Activities</td><td>55</td><td>32</td><td class="pos-change">+71.9%</td></tr>
+      <tr class="subtotal"><td>Net Cash Used in Investing Activities</td><td class="neg">$ (10,489)</td><td class="neg">$ (638)</td><td class="neg-change">큰 폭 증가</td></tr>
+
+      <tr class="section-head"><td colspan="4">재무활동 현금흐름</td></tr>
+      <tr class="indent"><td>Long-Term Debt Issued</td><td>5,250</td><td>1,800</td><td class="pos-change">+191.7%</td></tr>
+      <tr class="indent"><td>Long-Term Debt Repaid</td><td class="neg">(1,420)</td><td class="neg">(1,250)</td><td>—</td></tr>
+      <tr class="indent"><td>Short-Term Debt Changes (net)</td><td>910</td><td>180</td><td class="pos-change">+405.6%</td></tr>
+      <tr class="indent"><td><span class="term" data-term="buyback">Common Stock Repurchases</span></td><td class="neg">(350)</td><td class="neg">(625)</td><td class="pos-change">-44.0%</td></tr>
+      <tr class="indent"><td>Dividends Paid</td><td class="neg">(1,576)</td><td class="neg">(1,540)</td><td class="neg-change">+2.3%</td></tr>
+      <tr class="indent"><td>Other Financing Activities</td><td class="neg">(95)</td><td class="neg">(60)</td><td>—</td></tr>
+      <tr class="subtotal"><td>Net Cash from Financing Activities</td><td>$ 2,719</td><td class="neg">$ (1,495)</td><td class="neg-change">방향 전환</td></tr>
+
+      <tr class="grand-total"><td>Net Change in Cash</td><td class="neg">(2,601)</td><td>2,567</td><td class="neg-change">방향 전환</td></tr>
+      <tr class="indent"><td>Effect of Exchange Rate Changes</td><td>(309)</td><td>180</td><td>—</td></tr>
+      <tr class="indent"><td>Cash at Beginning of Period</td><td>$ 14,829</td><td>$ 13,068</td><td class="pos-change">+13.5%</td></tr>
+      <tr class="indent"><td>Cash at End of Period</td><td>$ 10,819</td><td>$ 14,815</td><td class="neg-change">-27.0%</td></tr>
+
+      <tr class="section-head"><td colspan="4">주요 지표</td></tr>
+      <tr class="indent"><td><span class="term" data-term="fcf">Free Cash Flow (FCF)</span></td><td>$ 2,220</td><td>$ 1,920</td><td class="pos-change">+15.6%</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/sec-filings/IBM/8-k-international-business-machines-corp-reports-material-event-ff8b866d9081.html" target="_blank">IBM Q1 2026 8-K Filing</a><br>
+    <em>Note: FCF $2.22B는 IBM 자체 정의 (CFO - capex - capitalized SW + working capital adjustments). $5,169M (CFO) - $384M (capex) - $2,565M (기타 정상화 항목) = $2,220M.</em>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">💰</span>현금흐름표 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">FCF 10년 최대</div>
+    <div class="card-value" style="color:#27ae60">$2.22B</div>
+    <div class="card-desc">Q1 2025 $1.92B 대비 +16% 증가. <strong>10년 내 1분기 최고치</strong>. FY2026 가이던스 "FCF YoY +~$1B" (FY2025 ~$13B → FY2026 ~$14B) — Q1만으로 $300M 초과 달성, 가이던스 달성 매우 우호적. CFO $5.17B 자체는 IBM 역사상 1분기 최고.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:88%;background:var(--green-accent)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Confluent 인수 cash out</div>
+    <div class="card-value" style="color:#c0392b">$9.81B</div>
+    <div class="card-desc">Acquisitions Net of Cash Acquired에서 $9.81B 차감. 총 consideration $11.59B − Confluent 보유 현금 $1.78B = $9.81B 순지급. <strong>현금 -$4B + 신규 부채 +$5.25B로 자금 조달</strong>. 인수가 한 분기 cash flow 그림 전체를 바꿈.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">자사주 매입 반토막</div>
+    <div class="card-value">$350M</div>
+    <div class="card-desc">Q1 2025 $625M → Q1 2026 $350M (-44%). <strong>Confluent 자금 확보 위해 일시 축소</strong>. 단 31년 연속 배당 인상 ($1.69/Q, $1.576B 지급)은 유지 — 환원 우선순위: 배당 > 자사주. CFO가 콜에서 "Confluent 통합 안정화 후 자사주 정상화" 가이드.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">CapEx Intensity</div>
+    <div class="card-value">2.4%</div>
+    <div class="card-desc">CapEx $384M / 매출 $15.92B = 2.4%. 소프트웨어/서비스 기업 특유의 자본 경량 모델. 비교: BTU 8.8%, ExxonMobil ~10%. <strong>capex 부담이 낮아 FCF 전환율 매우 높음 (FCF/매출 14% vs BTU -5.6%)</strong>. AI/cloud 인프라 투자도 R&D 비용으로 처리 비중 큼.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 부채 +$5B의 분해</strong><br>
+    재무활동에서 장기 부채 발행 $5,250M + 단기 부채 순증 $910M = 총 +$6,160M 차입. 상환 $1,420M 차감 후 순부채 증가 +$4,740M. 이 자금이 Confluent 인수 $9,810M 중 절반, 나머지 절반은 보유 현금 $4B 소진. <strong>금리 부담</strong>: 이자비용 Q1 $471M (+14% YoY), FY로 환산 시 ~$2B 추가 비용 가능성.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 환원 vs 부채 trade-off</strong><br>
+    Q1 환원: 배당 $1.58B + 자사주 $0.35B = $1.93B. CFO $5.17B 중 37% 환원. <strong>단 분기에 Confluent 인수 +$9.81B + 부채 발행 $5.25B로 net debt는 +$8B 증가</strong>. 즉 "환원 + 인수"의 동시 진행을 부채로 메우는 구조. 신용등급에 부담 — Moody's Aa3 watch 가능성. FY2026 FCF $14B 목표 달성 시 부채 부담 1년 내 정상화 가능.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ TAB: SEGMENTS ============ -->
+<div class="tab-content" id="tab-seg">
+<div class="main-container">
+<div class="paper-area">
+<div class="paper">
+  <div class="confidential-stamp">Educational Use</div>
+  <div class="stmt-header">
+    <h2>Segment Performance Summary</h2>
+    <div class="stmt-sub">Quarter Ended March 31, 2026 vs Q1 2025</div>
+    <div class="stmt-unit">Revenue in $M · 비중 % · YoY 성장률 보고기준/CC 둘 다</div>
+  </div>
+  <table class="fin-table">
+    <thead>
+      <tr><th style="width:42%"></th><th>Q1 2026</th><th>Q1 2025</th><th>YoY (보고)</th><th>YoY (CC)</th></tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="software">Software</span> (44.3% of revenue)</td></tr>
+      <tr class="indent"><td>Total Software Revenue</td><td>$ 7,052</td><td>$ 6,340</td><td class="pos-change">+11.3%</td><td class="pos-change">+8%</td></tr>
+      <tr class="indent2"><td>Hybrid Platform (Red Hat 중심)</td><td>—</td><td>—</td><td class="pos-change">+13%</td><td class="pos-change">+10%</td></tr>
+      <tr class="indent2"><td>Data (Confluent 효과 시작)</td><td>—</td><td>—</td><td class="pos-change">+19%</td><td>—</td></tr>
+      <tr class="indent2"><td>Automation</td><td>—</td><td>—</td><td class="pos-change">+8%</td><td>—</td></tr>
+      <tr class="indent2"><td>Transaction Processing</td><td>—</td><td>—</td><td class="pos-change">+6%</td><td>—</td></tr>
+      <tr class="indent"><td><span class="term" data-term="arr">Software ARR (누적)</span></td><td>$ 24,600</td><td>$ 22,400</td><td class="pos-change">+10%</td><td>—</td></tr>
+      <tr class="indent"><td>Red Hat OpenShift ARR (run rate)</td><td>$ 2,000</td><td>—</td><td>—</td><td>—</td></tr>
+
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="consulting">Consulting</span> (33.1% of revenue)</td></tr>
+      <tr class="indent"><td>Total Consulting Revenue</td><td>$ 5,272</td><td>$ 5,072</td><td class="pos-change">+4.0%</td><td class="pos-change">+1%</td></tr>
+      <tr class="indent2"><td>Strategy & Technology</td><td>—</td><td>—</td><td class="pos-change">+5%</td><td>—</td></tr>
+      <tr class="indent2"><td>Intelligent Operations</td><td>—</td><td>—</td><td class="pos-change">+3%</td><td>—</td></tr>
+      <tr class="indent"><td>Book-to-Bill Ratio</td><td>1.10</td><td>0.95</td><td class="pos-change">개선</td><td>—</td></tr>
+
+      <tr class="section-head"><td colspan="5"><span class="term" data-term="infrastructure">Infrastructure</span> (20.9% of revenue)</td></tr>
+      <tr class="indent"><td>Total Infrastructure Revenue</td><td>$ 3,326</td><td>$ 2,890</td><td class="pos-change">+15.3%</td><td class="pos-change">+12%</td></tr>
+      <tr class="indent2"><td><span class="term" data-term="ibmz">IBM Z (z17 메인프레임)</span></td><td>—</td><td>—</td><td class="pos-change">+51%</td><td class="pos-change">+48%</td></tr>
+      <tr class="indent2"><td>Distributed Infrastructure</td><td>—</td><td>—</td><td class="pos-change">+2%</td><td>—</td></tr>
+      <tr class="indent2"><td>Infrastructure Support</td><td>—</td><td>—</td><td>flat</td><td>—</td></tr>
+
+      <tr class="section-head"><td colspan="5">Financing (1.4% of revenue)</td></tr>
+      <tr class="indent"><td>Total Financing Revenue</td><td>$ 220</td><td>$ 192</td><td class="pos-change">+14.8%</td><td class="pos-change">+10%</td></tr>
+
+      <tr class="grand-total"><td>Total Revenue</td><td>$ 15,917</td><td>$ 14,541</td><td class="pos-change">+9.5%</td><td class="pos-change">+6%</td></tr>
+
+      <tr class="section-head"><td colspan="5">전략적 지표</td></tr>
+      <tr class="indent"><td><span class="term" data-term="aibook">AI Book of Business (TTM)</span></td><td>$ 1,500+</td><td>~$ 0</td><td>새 카테고리</td><td>—</td></tr>
+      <tr class="indent"><td>AI Book — generative AI 누적 (Q1 2025 IBM 공시 기준)</td><td>$ 6,000+</td><td>$ 5,000</td><td class="pos-change">+~$1B/Q 증가</td><td>—</td></tr>
+      <tr class="indent"><td>Daily AI Inferencing (IBM Z 풀시스템)</td><td>450B/일</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="source-note">
+    Source: <a href="https://www.stocktitan.net/news/IBM/ibm-releases-first-quarter-6qkrjbdcybv6.html" target="_blank">IBM Q1 2026 PR</a> · <a href="https://futurumgroup.com/insights/ibm-q1-fy-2026-earnings-show-software-growth-and-mainframe-ai-monetization/" target="_blank">Futurum Q1 2026 분석</a><br>
+    <em>주의: Software 하위 카테고리·Infrastructure 하위는 회사 발표 성장률만 공시, 절대 매출 별도 미공시. Y/Y 성장률은 IR 트랜스크립트 기준.</em>
+  </div>
+</div>
+</div>
+
+<div class="sidebar">
+  <h3><span class="s-icon">🏢</span>세그먼트 핵심 분석</h3>
+
+  <div class="insight-card">
+    <div class="card-label">3축 동시 가속</div>
+    <div class="card-value" style="color:#daa520">+11/+15/+4</div>
+    <div class="card-desc">Software +11% / Infrastructure +15% / Consulting +4%. <strong>2020년대 들어 처음 보는 동시 두 자릿수 (Consulting은 single)</strong>. IBM의 thesis 핵심 — Software가 매출 비중 44%로 확장 (Q1 2025 43.6% → Q1 2026 44.3%), Consulting 비중 축소 (34.9% → 33.1%). 매출 mix 자체가 더 SaaS-like로 변화 중.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">IBM Z 메인프레임 +51%</div>
+    <div class="card-value">z17 cycle</div>
+    <div class="card-desc">메인프레임은 죽지 않았다. <strong>z17 사이클 MIPS 100%+ 4분기 연속 성장 + 첫해 hardware placement value 이전 모델 대비 +$1B 초과</strong>. AI inferencing 워크로드 450B/일 (풀시스템) — 비기밀 데이터는 클라우드, 기밀/regulated 데이터는 메인프레임으로 회귀하는 트렌드. FY 가이드는 low single decline이라 H2 둔화는 예상.</div>
+    <div class="card-bar"><div class="card-bar-fill" style="width:100%;background:var(--green-accent)"></div></div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Consulting 가속의 그림자</div>
+    <div class="card-value">+4% (CC +1%)</div>
+    <div class="card-desc">Q1 2025 -2%에서 Q1 2026 +4%로 회복. 단 CC 기준은 +1%만 — <strong>대부분 환율 효과</strong>. Book-to-Bill 1.10으로 신규 수주는 좋음. AI 자동화가 Consulting 수요를 자기 잠식하는 우려는 여전. FY 가이드 low/mid single digit으로 IBM 자신도 큰 기대 안 함.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="card-label">Software ARR $24.6B</div>
+    <div class="card-value">+10% YoY</div>
+    <div class="card-desc">반복 매출 기반. Red Hat OpenShift ARR $2.0B run rate 도달 — 하이브리드 클라우드 thesis 입증. <strong>ARR 증가율 +10%이 매출 성장 +11%과 일치 = 일회성/프로젝트 매출 비중 낮음, 매출 가시성 매우 높음</strong>. FY2026 Data 카테고리 "low 20% 성장" 가이드 — Confluent 통합 효과 본격화 시 ARR +15% 가능성.</div>
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 AI Book of Business — 두 숫자의 의미</strong><br>
+    Futurum 5월 분석: <strong>TTM 기준 $1.5B+가 실제 매출 인식</strong>, Software 성장에 ~2pp 기여. 회사 Q1 2025 발표: <strong>누적 generative AI book $6B+</strong> (since 2023, 약정 포함). 두 숫자 다른 정의 — TTM이 더 보수적·실제적이고, 누적 $6B는 향후 매출 잠재력. <strong>분기당 +$1B 누적</strong> 가속 중이고, 이 추세 유지 시 FY2026 말 TTM $3B+ 가능.
+  </div>
+
+  <div class="edu-block">
+    <strong>💡 Think 2026의 segment 임팩트</strong><br>
+    5월 5일 Think 2026 발표 제품군은 segment 분류:
+    <ul style="margin-top:6px;padding-left:18px;font-size:12.5px;line-height:1.55;">
+      <li><strong>Software</strong>: watsonx Orchestrate Next Gen (private preview), IBM Confluent GA, Concert Platform (public preview), IBM Bob GA, GPU Presto (Nestlé PoC 83% 비용 절감)</li>
+      <li><strong>Infrastructure</strong>: Sovereign Core GA (AMD/Intel/Dell + IBM Z 결합), IBM Z Database Assistant</li>
+      <li><strong>Consulting</strong>: Sovereign Core 컨설팅 패키지 + watsonx Orchestrate 도입 서비스</li>
+    </ul>
+    Q2부터 Software/Infrastructure 매출에 점진적 기여 예상.
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div style="text-align:center; padding:20px; color: var(--ink-faint); font-size:11px; font-family:'JetBrains Mono',monospace;">
+  Source: International Business Machines Corporation · Form 8-K Exhibit 99.1 · Filed April 22, 2026 · Quarter ended March 31, 2026 · Educational use only
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+const glossary = {
+  cash:{title:'Cash and Cash Equivalents (현금 및 현금성자산)', body:'즉시 사용할 수 있는 현금과 만기 3개월 이내의 초단기 금융자산. IBM은 마켓 securities $964M까지 합쳐 총 $11.8B를 보유하며, 이는 분기 FCF $2.2B의 5분기치에 해당하는 유동성 버퍼다. 2025년 말 $14.8B에서 -$4B 감소는 거의 전부 Confluent 인수 자금이다.'},
+  marketable:{title:'Marketable Securities (시장성 유가증권)', body:'유동성이 높은 단기 채권·기업어음·정부 채권 등. 현금 등가는 아니지만 빠르게 현금화 가능. Q1 2026 +58% 증가는 Confluent 인수 후 일부 잉여 유동성 재배치 효과.'},
+  ppe:{title:'Property, Plant & Equipment (유형자산)', body:'데이터센터, 사무실, IBM Z 메인프레임 lease 자산 등. 총자산의 4.4%로 비중 낮음 (자본경량 모델). 대부분의 인프라 자산은 R&D capitalize 또는 클라우드 hosted.'},
+  goodwill:{title:'Goodwill (영업권)', body:'인수가 - 식별 가능 순자산의 잔여. IBM은 Red Hat ($34B), HashiCorp ($6.4B), Confluent ($10B 추정) 등 누적 인수 효과로 goodwill이 총자산의 46.5%. SaaS/서비스 기업에서 일반적이지만 인수 시너지 미달 시 손상 차손 리스크.'},
+  stdebt:{title:'Short-Term Debt (단기차입금)', body:'1년 내 만기 도래하는 차입금. Q1에 +32% 증가는 commercial paper로 Confluent 인수 자금 일부 조달. 금리 상승 환경에서 리파이낸싱 리스크 — IBM은 신용도가 높아 부담 적은 편.'},
+  ltdebt:{title:'Long-Term Debt (장기차입금)', body:'1년 초과 만기 채권. Q1에 +$3.1B 증가 — 대부분 Confluent 인수 자금. 평균 만기 ~9년, 가중평균금리 ~4.2% (8-K 추정). 금리 1%p 상승 시 연 $700M 추가 이자비용.'},
+  treasury:{title:'Treasury Stock (자사주)', body:'회사가 매입해 보유 중인 자기 주식. IBM의 누적 자사주 $170.8B는 retained earnings ($153B)를 초과 — 1990년대부터 30년 이상 누적된 자사주 매입의 결과. 시총 $239B의 71%에 달하는 규모로 IBM의 "capital return" thesis 핵심.'},
+  revenue:{title:'Revenue (매출)', body:'Q1 2026 $15.92B = Software $7.05B + Consulting $5.27B + Infrastructure $3.33B + Financing $0.22B. 보고기준 +9.5%, 환율 효과 -3.5%p 제외한 constant currency 기준 +6%. IBM의 "FY 매출 +5% 이상 CC" 가이드를 크게 상회.'},
+  software:{title:'Software Segment (소프트웨어 부문)', body:'IBM 매출의 44.3%, 영업이익의 ~70% 기여 추정. Red Hat (Hybrid Platform) + Data (Db2, Cloud Pak for Data, Confluent) + Automation (Apptio, Turbonomic, Instana) + Transaction Processing (메인프레임 SW). ARR $24.6B로 매출 가시성 매우 높음.'},
+  consulting:{title:'Consulting Segment (컨설팅 부문)', body:'IBM 매출의 33.1%. IBM Consulting (PwC consulting + IBM Global Services 통합), Red Hat consulting 등 포함. AI 도입 가속이 단기엔 수요 ↑, 장기엔 자기 잠식 가능성. Book-to-Bill 1.10으로 매출 회복 시작.'},
+  infrastructure:{title:'Infrastructure Segment (인프라 부문)', body:'IBM 매출의 20.9%. IBM Z 메인프레임 (z17 사이클), Distributed Infrastructure (Power systems, Storage), Infrastructure Support로 구성. z17 사이클이 +51% 폭발 — AI inferencing 워크로드의 메인프레임 회귀 thesis 입증.'},
+  ibmz:{title:'IBM Z (메인프레임)', body:'IBM의 시그니처 제품. z17 사이클 (2024 출시) MIPS 100%+ 4분기 연속 성장. 풀 시스템에서 450B/일 AI inferencing 처리. 가격 시작가 ~$300K, 풀스택 시스템 ~$10M+. 금융·정부·통신 클라이언트의 critical workload용으로 대체 불가에 가까운 제품.'},
+  arr:{title:'ARR (Annual Recurring Revenue, 연환산 반복 매출)', body:'SaaS/구독 모델의 핵심 지표. 분기말 시점의 반복 매출을 연환산. IBM Software ARR $24.6B (+10% YoY) — 매출 $28B 추정 (Software 매출 TTM)의 ~88%가 ARR. 가입자가 이탈하지 않는 한 향후 매출 가시성 매우 높음.'},
+  aibook:{title:'AI Book of Business (AI 사업 누적/TTM)', body:'IBM이 별도 공시하는 AI 관련 매출 + 약정 metric. TTM 기준 $1.5B+ (실제 매출 인식), 누적 generative AI $6B+ (약정 포함). 분기당 약 +$1B씩 증가 중. Software 성장의 ~2pp 기여 — Software 성장률 +11% 중 +2pp가 AI book에서, +9pp가 기존 Software 매출 자체 성장.'},
+  gp:{title:'Gross Profit (매출총이익)', body:'매출 - 매출원가. IBM Q1 GAAP 매출총이익률 56.2% (+100bps YoY), 비GAAP 57.7%. Software 비중 확대로 마진 구조 개선 중. Red Hat 매출총이익률은 ~80%로 가장 높음.'},
+  rd:{title:'R&D Expenses (연구개발비)', body:'Q1 $2,173M, 매출 대비 13.7%. Big Tech 평균 (12-15%)와 비슷. Confluent 인수로 +13% 증가 — 대부분 Software 부문 (watsonx, Granite, OpenShift, Confluent). 양자컴퓨팅 R&D도 여기 포함되어 있고, 연 $1B+ 추정.'},
+  opprofit:{title:'Operating Income (영업이익)', body:'매출 - 매출원가 - R&D - SG&A. Q1 2026 GAAP $1.39B, 영업이익률 8.7%. 매출 +9.5%인데 영업이익 +25%로 operating leverage 강하게 작동. 비GAAP 영업이익률은 13.4%로 GAAP보다 5%p 높음 (인수 무형자산 상각이 GAAP에 추가 비용으로 인식).'},
+  ebitda:{title:'Adjusted EBITDA (조정 EBITDA)', body:'영업이익에 D&A, 인수 무형자산 상각, 일회성 항목 제외한 비GAAP 지표. Q1 $4.00B, 마진 25.0% (+80bps YoY). IBM이 "장기 EBITDA 마진 30% 목표" 제시 — 현 추세 유지 시 2027-2028 달성 가능.'},
+  eps_gaap:{title:'EPS (GAAP)', body:'GAAP 회계기준 EPS. Q1 2026 $1.28 (+14.3% YoY). 인수 관련 무형자산 상각 (분기당 ~$500M, EPS 약 -$0.45/share)이 GAAP 비용으로 인식되어 비GAAP보다 낮음.'},
+  eps_adj:{title:'EPS (Operating, 비GAAP)', body:'IBM이 가장 강조하는 지표. 인수 무형자산 상각 + 일회성 세금/구조조정 제외. Q1 $1.91 (+19.4% YoY) — 컨센 $1.81을 +5.5% beat. FY2026 컨센은 $12.55 → 현재가 $257 / $12.55 = Forward PE 20.5x.'},
+  cfo:{title:'Cash Flow from Operations (영업활동현금흐름)', body:'본업에서 창출된 현금. Q1 2026 $5.17B로 IBM 1분기 역대 최고. 순이익 $1.22B + D&A $1.58B (비현금 비용) + working capital 개선 $2.14B. Q1은 통상 연 매출의 22-23% 수준 분포 (Q2-Q3는 약함, Q4가 강함).'},
+  wcap:{title:'Working Capital Changes (운전자본 변동)', body:'AR/AP/재고/deferred income 변동. Q1 2026 +$2.14B 기여 — 분기말 매출채권 회수 효과. SaaS 모델로 전환되며 deferred income (사전 수령 매출) 증가가 working capital +로 작용 — IBM thesis의 "재무 보수성" 핵심 fact.'},
+  capex:{title:'Capital Expenditures (설비투자)', body:'Q1 $384M, 매출 대비 2.4%. 소프트웨어/서비스 기업 특유의 자본경량 모델. 데이터센터, IBM Z hardware lease 등에 지출. AI/cloud 인프라는 대부분 R&D capitalize 또는 클라우드 hosted (Azure/AWS).'},
+  acquisition:{title:'Acquisition Cash Outflow (인수 현금 유출)', body:'Q1 2026 -$9.81B = Confluent 총 consideration $11.59B - Confluent 보유 현금 $1.78B. IBM 역사상 두 번째 큰 단일 인수 (Red Hat $34B, 2019이 1위). 즉시 GA 출시 (Think 2026)로 통합 속도는 빠른 편.'},
+  buyback:{title:'Common Stock Repurchases (자사주 매입)', body:'Q1 2026 $350M, 전년 동기 $625M 대비 -44%. Confluent 인수 자금 확보 위해 일시 축소. CFO 가이드: "통합 안정화 후 자사주 정상화" — Q3-Q4부터 정상 $500-700M/분기 복귀 예상. 단 31년 연속 배당 인상 ($1.69/Q, $1.58B 분기)은 유지.'},
+  fcf:{title:'Free Cash Flow (자유현금흐름)', body:'CFO - capex - capitalized SW. Q1 2026 $2.22B (10년 내 1분기 최고). IBM 정의 (자체 정상화 항목 포함). FY2026 가이던스 "FCF YoY +~$1B" (FY2025 ~$13B → ~$14B) — Q1만으로 $300M 초과 달성, 매우 우호적. 시총 $239B / FCF $14B = P/FCF 17x.'},
+};
+
+const tooltip = document.getElementById('tooltip');
+let activeTooltipEl = null;
+document.addEventListener('mouseover', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) return;
+  const key = term.dataset.term;
+  const info = glossary[key];
+  if (!info) return;
+  activeTooltipEl = term;
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  positionTooltip(e);
+});
+document.addEventListener('mousemove', (e) => {
+  if (activeTooltipEl && tooltip.classList.contains('visible')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const term = e.target.closest('.term');
+  if (term) { tooltip.classList.remove('visible'); activeTooltipEl = null; }
+});
+function positionTooltip(e){
+  const pad = 16; let x = e.clientX + pad; let y = e.clientY + pad;
+  const tw = 360; const th = tooltip.offsetHeight || 160;
+  if (x + tw > window.innerWidth - pad) x = e.clientX - tw - pad;
+  if (y + th > window.innerHeight - pad) y = e.clientY - th - pad;
+  tooltip.style.left = x + 'px'; tooltip.style.top = y + 'px';
+}
+document.addEventListener('touchstart', (e) => {
+  const term = e.target.closest('.term');
+  if (!term) { tooltip.classList.remove('visible'); activeTooltipEl = null; return; }
+  const key = term.dataset.term; const info = glossary[key]; if (!info) return;
+  e.preventDefault();
+  tooltip.innerHTML = `<div class="tt-title">${info.title}</div><div class="tt-body">${info.body}</div>`;
+  tooltip.classList.add('visible');
+  const rect = term.getBoundingClientRect();
+  let x = rect.left, y = rect.bottom + 8;
+  if (y + 220 > window.innerHeight) y = rect.top - 220;
+  tooltip.style.left = Math.max(8, Math.min(x, window.innerWidth - 370)) + 'px';
+  tooltip.style.top = y + 'px';
+  activeTooltipEl = term;
+}, { passive:false });
+</script>
+</body>
+</html>
